@@ -1,0 +1,417 @@
+<!-- Questionnaire citoyen pour Drancy Insoumise -->
+
+<form id="questionnaire-form" action="https://formspree.io/votre-email@example.com" method="POST">
+  <h1>Consultation citoyenne : Ensemble, transformons Drancy !</h1>
+  <p class="intro">Votre avis compte pour construire une ville plus juste, écologique et solidaire. Merci de prendre quelques minutes pour partager votre vision de Drancy.</p>
+  
+  <div class="form-group">
+    <label for="nom">Nom :</label>
+    <input type="text" id="nom" name="nom" class="form-control" required>
+  </div>
+  
+  <div class="form-group">
+    <label for="email">Email (pour recevoir nos informations) :</label>
+    <input type="email" id="email" name="email" class="form-control">
+  </div>
+  
+  <div class="form-group">
+    <label for="quartier">Votre quartier à Drancy :</label>
+    <select id="quartier" name="quartier" class="form-control">
+      <option value="">-- Sélectionnez votre quartier --</option>
+      <option value="Centre-Ville">Centre-Ville</option>
+      <option value="Petit Drancy">Petit Drancy</option>
+      <option value="Paris Campagne">Paris Campagne</option>
+      <option value="Village Parisien">Village Parisien</option>
+      <option value="Economie">Économie</option>
+      <option value="Avenir Parisien">Avenir Parisien</option>
+      <option value="La Mare">La Mare</option>
+      <option value="La Muette-Quatre Routes">La Muette-Quatre Routes</option>
+      <option value="Les Oiseaux">Les Oiseaux</option>
+    </select>
+  </div>
+  
+  <fieldset class="form-group">
+    <legend>1. Justice sociale et services publics</legend>
+    
+    <div class="question">
+      <p>Comment jugez-vous l'accès aux services publics à Drancy ?</p>
+      <div class="radio-group">
+        <input type="radio" id="services-tres-satisfaisant" name="services_publics" value="Très satisfaisant">
+        <label for="services-tres-satisfaisant">Très satisfaisant</label>
+      </div>
+      <div class="radio-group">
+        <input type="radio" id="services-satisfaisant" name="services_publics" value="Satisfaisant">
+        <label for="services-satisfaisant">Satisfaisant</label>
+      </div>
+      <div class="radio-group">
+        <input type="radio" id="services-moyen" name="services_publics" value="Moyen">
+        <label for="services-moyen">Moyen</label>
+      </div>
+      <div class="radio-group">
+        <input type="radio" id="services-insuffisant" name="services_publics" value="Insuffisant">
+        <label for="services-insuffisant">Insuffisant</label>
+      </div>
+      <div class="radio-group">
+        <input type="radio" id="services-tres-insuffisant" name="services_publics" value="Très insuffisant">
+        <label for="services-tres-insuffisant">Très insuffisant</label>
+      </div>
+    </div>
+    
+    <div class="question">
+      <p>Quels services publics devraient être prioritairement développés à Drancy ?</p>
+      <div class="checkbox-group">
+        <input type="checkbox" id="services-sante" name="services_prioritaires" value="Santé">
+        <label for="services-sante">Centre de santé municipal</label>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="services-creches" name="services_prioritaires" value="Crèches">
+        <label for="services-creches">Crèches et structures petite enfance</label>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="services-education" name="services_prioritaires" value="Éducation">
+        <label for="services-education">Soutien scolaire et éducatif</label>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="services-culture" name="services_prioritaires" value="Culture">
+        <label for="services-culture">Équipements culturels accessibles</label>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="services-sport" name="services_prioritaires" value="Sport">
+        <label for="services-sport">Installations sportives gratuites</label>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="services-aide" name="services_prioritaires" value="Aide sociale">
+        <label for="services-aide">Services d'aide sociale et solidarité</label>
+      </div>
+      <div class="form-group">
+        <label for="services-autre">Autre (précisez) :</label>
+        <input type="text" id="services-autre" name="services_autres" class="form-control">
+      </div>
+    </div>
+  </fieldset>
+  
+  <fieldset class="form-group">
+    <legend>2. Écologie et cadre de vie</legend>
+    
+    <div class="question">
+      <p>Quelles mesures écologiques seraient prioritaires pour Drancy selon vous ?</p>
+      <div class="checkbox-group">
+        <input type="checkbox" id="eco-espaces-verts" name="mesures_ecologiques" value="Espaces verts">
+        <label for="eco-espaces-verts">Création de nouveaux espaces verts et jardins partagés</label>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="eco-mobilite" name="mesures_ecologiques" value="Mobilité douce">
+        <label for="eco-mobilite">Développement des pistes cyclables et mobilités douces</label>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="eco-renovation" name="mesures_ecologiques" value="Rénovation thermique">
+        <label for="eco-renovation">Programme de rénovation thermique des logements</label>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="eco-cantine" name="mesures_ecologiques" value="Cantine bio">
+        <label for="eco-cantine">Cantine scolaire 100% bio et locale</label>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="eco-pollution" name="mesures_ecologiques" value="Lutte pollution">
+        <label for="eco-pollution">Lutte contre la pollution de l'air</label>
+      </div>
+      <div class="form-group">
+        <label for="eco-autre">Autre (précisez) :</label>
+        <input type="text" id="eco-autre" name="eco_autres" class="form-control">
+      </div>
+    </div>
+    
+    <div class="question">
+      <p>Que pensez-vous de la qualité de l'environnement à Drancy ?</p>
+      <div class="radio-group">
+        <input type="radio" id="env-tres-satisfaisant" name="environnement" value="Très satisfaisant">
+        <label for="env-tres-satisfaisant">Très satisfaisant</label>
+      </div>
+      <div class="radio-group">
+        <input type="radio" id="env-satisfaisant" name="environnement" value="Satisfaisant">
+        <label for="env-satisfaisant">Satisfaisant</label>
+      </div>
+      <div class="radio-group">
+        <input type="radio" id="env-moyen" name="environnement" value="Moyen">
+        <label for="env-moyen">Moyen</label>
+      </div>
+      <div class="radio-group">
+        <input type="radio" id="env-insuffisant" name="environnement" value="Insuffisant">
+        <label for="env-insuffisant">Insuffisant</label>
+      </div>
+      <div class="radio-group">
+        <input type="radio" id="env-tres-insuffisant" name="environnement" value="Très insuffisant">
+        <label for="env-tres-insuffisant">Très insuffisant</label>
+      </div>
+    </div>
+  </fieldset>
+  
+  <fieldset class="form-group">
+    <legend>3. Logement et urbanisme</legend>
+    
+    <div class="question">
+      <p>Comment évaluez-vous la situation du logement à Drancy ?</p>
+      <div class="radio-group">
+        <input type="radio" id="logement-tres-satisfaisant" name="situation_logement" value="Très satisfaisant">
+        <label for="logement-tres-satisfaisant">Très satisfaisant</label>
+      </div>
+      <div class="radio-group">
+        <input type="radio" id="logement-satisfaisant" name="situation_logement" value="Satisfaisant">
+        <label for="logement-satisfaisant">Satisfaisant</label>
+      </div>
+      <div class="radio-group">
+        <input type="radio" id="logement-moyen" name="situation_logement" value="Moyen">
+        <label for="logement-moyen">Moyen</label>
+      </div>
+      <div class="radio-group">
+        <input type="radio" id="logement-insuffisant" name="situation_logement" value="Insuffisant">
+        <label for="logement-insuffisant">Insuffisant</label>
+      </div>
+      <div class="radio-group">
+        <input type="radio" id="logement-tres-insuffisant" name="situation_logement" value="Très insuffisant">
+        <label for="logement-tres-insuffisant">Très insuffisant</label>
+      </div>
+    </div>
+    
+    <div class="question">
+      <p>Quelles mesures devraient être prises en priorité concernant le logement ?</p>
+      <div class="checkbox-group">
+        <input type="checkbox" id="logement-social" name="mesures_logement" value="Logement social">
+        <label for="logement-social">Augmentation du nombre de logements sociaux</label>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="logement-encadrement" name="mesures_logement" value="Encadrement loyers">
+        <label for="logement-encadrement">Encadrement des loyers</label>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="logement-renovation" name="mesures_logement" value="Rénovation">
+        <label for="logement-renovation">Rénovation des logements anciens</label>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="logement-precaire" name="mesures_logement" value="Habitat précaire">
+        <label for="logement-precaire">Lutte contre l'habitat indigne et précaire</label>
+      </div>
+      <div class="form-group">
+        <label for="logement-autre">Autre (précisez) :</label>
+        <input type="text" id="logement-autre" name="logement_autres" class="form-control">
+      </div>
+    </div>
+  </fieldset>
+  
+  <fieldset class="form-group">
+    <legend>4. Démocratie locale et participation citoyenne</legend>
+    
+    <div class="question">
+      <p>Estimez-vous être suffisamment informé(e) et consulté(e) sur les décisions concernant votre ville ?</p>
+      <div class="radio-group">
+        <input type="radio" id="participation-oui" name="consultation_citoyenne" value="Oui">
+        <label for="participation-oui">Oui, tout à fait</label>
+      </div>
+      <div class="radio-group">
+        <input type="radio" id="participation-plutot" name="consultation_citoyenne" value="Plutôt oui">
+        <label for="participation-plutot">Plutôt oui</label>
+      </div>
+      <div class="radio-group">
+        <input type="radio" id="participation-moyen" name="consultation_citoyenne" value="Moyennement">
+        <label for="participation-moyen">Moyennement</label>
+      </div>
+      <div class="radio-group">
+        <input type="radio" id="participation-peu" name="consultation_citoyenne" value="Peu">
+        <label for="participation-peu">Peu</label>
+      </div>
+      <div class="radio-group">
+        <input type="radio" id="participation-pas" name="consultation_citoyenne" value="Pas du tout">
+        <label for="participation-pas">Pas du tout</label>
+      </div>
+    </div>
+    
+    <div class="question">
+      <p>Quels dispositifs de démocratie locale souhaiteriez-vous voir développés à Drancy ?</p>
+      <div class="checkbox-group">
+        <input type="checkbox" id="demo-budget" name="democratie_locale" value="Budget participatif">
+        <label for="demo-budget">Budget participatif</label>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="demo-referendum" name="democratie_locale" value="Référendum local">
+        <label for="demo-referendum">Référendum d'initiative locale</label>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="demo-conseil" name="democratie_locale" value="Conseil citoyen">
+        <label for="demo-conseil">Conseils citoyens de quartier</label>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="demo-consultation" name="democratie_locale" value="Consultation">
+        <label for="demo-consultation">Consultations régulières sur les grands projets</label>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="demo-transparence" name="democratie_locale" value="Transparence">
+        <label for="demo-transparence">Plus de transparence des décisions municipales</label>
+      </div>
+      <div class="form-group">
+        <label for="demo-autre">Autre (précisez) :</label>
+        <input type="text" id="demo-autre" name="demo_autres" class="form-control">
+      </div>
+    </div>
+  </fieldset>
+  
+  <fieldset class="form-group">
+    <legend>5. Vos priorités pour Drancy</legend>
+    
+    <div class="question">
+      <p>Selon vous, quelles devraient être les trois priorités pour améliorer la vie à Drancy ?</p>
+      <div class="form-group">
+        <label for="priorite1">Priorité 1 :</label>
+        <input type="text" id="priorite1" name="priorite1" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="priorite2">Priorité 2 :</label>
+        <input type="text" id="priorite2" name="priorite2" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="priorite3">Priorité 3 :</label>
+        <input type="text" id="priorite3" name="priorite3" class="form-control">
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="commentaire">Avez-vous d'autres commentaires ou suggestions pour améliorer Drancy ?</label>
+      <textarea id="commentaire" name="commentaire" rows="4" class="form-control"></textarea>
+    </div>
+  </fieldset>
+  
+  <div class="form-group engagement">
+    <p>Souhaitez-vous être contacté(e) par Drancy Insoumise ?</p>
+    <div class="checkbox-group">
+      <input type="checkbox" id="contact-info" name="contact" value="Informations">
+      <label for="contact-info">Oui, pour recevoir des informations</label>
+    </div>
+    <div class="checkbox-group">
+      <input type="checkbox" id="contact-participation" name="contact" value="Participation">
+      <label for="contact-participation">Oui, pour participer aux actions</label>
+    </div>
+    <div class="checkbox-group">
+      <input type="checkbox" id="contact-non" name="contact" value="Non">
+      <label for="contact-non">Non</label>
+    </div>
+  </div>
+  
+  <button type="submit" class="btn">Envoyer ma contribution</button>
+</form>
+
+<style>
+  #questionnaire-form {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  h1 {
+    color: #c9211e;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 28px;
+  }
+  
+  .intro {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 30px;
+    color: #444;
+  }
+  
+  fieldset {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 5px;
+  }
+  
+  legend {
+    color: #c9211e;
+    font-weight: bold;
+    padding: 0 10px;
+    font-size: 18px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .question {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed #eaeaea;
+  }
+  
+  .question p {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 15px;
+  }
+  
+  .radio-group, .checkbox-group {
+    margin: 8px 0;
+  }
+  
+  .radio-group label, .checkbox-group label {
+    margin-left: 5px;
+    color: #333;
+  }
+  
+  .btn {
+    background-color: #c9211e;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    display: block;
+    margin: 20px auto 0;
+    transition: background-color 0.3s;
+  }
+  
+  .btn:hover {
+    background-color: #a61c1a;
+  }
+  
+  .engagement {
+    background-color: #f1f1f1;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 30px;
+  }
+  
+  .engagement p {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    #questionnaire-form {
+      padding: 15px;
+    }
+    
+    fieldset {
+      padding: 10px;
+    }
+    
+    .btn {
+      width: 100%;
+    }
+  }
+</style>

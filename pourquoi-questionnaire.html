@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pourquoi ce questionnaire ?</title>
+    <style>
+        :root {
+            --fi-red: #C9462C;
+            --fi-dark-red: #A6341D;
+            --fi-blue: #0098B6;
+            --fi-dark-blue: #007A91;
+            --fi-light-gray: #F2F2F2;
+            --fi-dark-gray: #333333;
+            --fi-purple: #75185B;
+        }
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: var(--fi-light-gray);
+            color: var(--fi-dark-gray);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 40px 30px 30px 30px;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo img {
+            max-height: 80px;
+        }
+        h1 {
+            color: var(--fi-red);
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+        h2 {
+            color: var(--fi-purple);
+            margin-top: 30px;
+        }
+        .concepts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            justify-content: center;
+            margin: 32px 0;
+        }
+        .concept {
+            flex: 1 1 220px;
+            background: var(--fi-light-gray);
+            border-left: 6px solid var(--fi-red);
+            border-radius: 6px;
+            padding: 18px 20px;
+            min-width: 220px;
+        }
+        .concept h3 {
+            color: var(--fi-blue);
+            margin-top: 0;
+        }
+        .btn-link {
+            display: inline-block;
+            margin: 32px auto 0 auto;
+            background: var(--fi-red);
+            color: #fff;
+            padding: 14px 32px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            letter-spacing: 1px;
+            transition: background 0.2s;
+            text-align: center;
+        }
+        .btn-link:hover {
+            background: var(--fi-dark-red);
+        }
+        @media (max-width: 600px) {
+            .container { padding: 18px 6px; }
+            .concepts { flex-direction: column; gap: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="/api/placeholder/180/80" alt="Logo La France Insoumise">
+        </div>
+        <h1>Pourquoi ce questionnaire ?</h1>
+        <p style="font-size:1.15em; text-align:center; margin-bottom:32px;">
+            La France Insoumise lance ce questionnaire pour donner la parole à toutes et tous. Nous croyons que la transformation de la société doit partir de vos besoins, de vos idées et de vos expériences. Votre avis compte pour construire ensemble un avenir plus juste, plus écologique et plus démocratique.
+        </p>
+        <div class="concepts">
+            <div class="concept">
+                <h3>Justice sociale</h3>
+                <p>
+                    Parce que chacun·e doit pouvoir vivre dignement, nous voulons identifier les inégalités et les difficultés rencontrées au quotidien. Vos réponses nous aideront à défendre des politiques publiques qui garantissent l’égalité réelle et la solidarité.
+                </p>
+            </div>
+            <div class="concept">
+                <h3>Écologie</h3>
+                <p>
+                    Face à l’urgence climatique, il est essentiel de repenser nos modes de vie et de production. Ce questionnaire permet de recueillir vos attentes et vos propositions pour une transition écologique ambitieuse et respectueuse de toutes et tous.
+                </p>
+            </div>
+            <div class="concept">
+                <h3>Démocratie citoyenne</h3>
+                <p>
+                    Nous croyons en une démocratie vivante, où chaque citoyen·ne peut s’exprimer et participer aux décisions. Ce questionnaire est un outil pour renforcer la participation populaire et faire entendre votre voix dans l’élaboration des choix collectifs.
+                </p>
+            </div>
+        </div>
+        <div style="text-align:center;">
+            <a class="btn-link" href="questionnaire-dynamique.html">Accéder au questionnaire</a>
+        </div>
+    </div>
+</body>
+</html>

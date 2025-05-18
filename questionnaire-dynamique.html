@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaire Dynamique</title>
+    <style>
+        /* Charte graphique La France Insoumise */
+        :root {
+            --fi-red: #C9462C;
+            --fi-dark-red: #A6341D;
+            --fi-blue: #0098B6;
+            --fi-dark-blue: #007A91;
+            --fi-light-gray: #F2F2F2;
+            --fi-dark-gray: #333333;
+            --fi-purple: #75185B;
+        }
+        
+        @font-face {
+            font-family: 'Roboto';
+            src: url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--fi-light-gray);
+            color: var(--fi-dark-gray);
+        }
+        
+        h1 {
+            text-align: center;
+            color: var(--fi-red);
+            margin-bottom: 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        
+        h2, h3 {
+            color: var(--fi-purple);
+        }
+        
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        select, input, button {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        button {
+            background-color: var(--fi-red);
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+            text-transform: uppercase;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+        
+        button:hover {
+            background-color: var(--fi-dark-red);
+        }
+        
+        button.secondary {
+            background-color: var(--fi-blue);
+        }
+        
+        button.secondary:hover {
+            background-color: var(--fi-dark-blue);
+        }
+        
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: var(--fi-light-gray);
+            border-radius: 4px;
+            border-left: 4px solid var(--fi-red);
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: var(--fi-light-gray);
+            border-radius: 4px;
+            text-align: center;
+        }
+        
+        .progress-container {
+            margin: 20px 0;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            height: 8px;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            border-radius: 4px;
+            background-color: var(--fi-red);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+        }
+        
+        .radio-option input {
+            width: auto;
+            margin-right: 10px;
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo img {
+            max-height: 80px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="/api/placeholder/180/80" alt="Logo La France Insoumise">
+        </div>
+        <h1>Questionnaire Citoyen</h1>
+        
+        <div id="initial-form">
+            <div class="form-group">
+                <label for="nom">Votre nom :</label>
+                <input type="text" id="nom" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Votre adresse email :</label>
+                <input type="email" id="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="age">Votre âge :</label>
+                <input type="number" id="age" min="17" max="80" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="genre">Votre genre :</label>
+                <select id="genre" required>
+                    <option value="">Sélectionnez votre genre</option>
+                    <option value="homme">Homme</option>
+                    <option value="femme">Femme</option>
+                    <option value="autre">Autre</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="quartier">Votre quartier :</label>
+                <select id="quartier" required>
+                    <option value="">Sélectionnez votre quartier</option>
+                    <option value="avenir parisien">Avenir Parisien</option>
+                    <option value="centre ville">Centre Ville</option>
+                    <option value="economie">Economie</option>
+                    <option value="la mare">La Mare</option>
+                    <option value="la muette-quatre routes">La Muette-Quatre Routes</option>
+                    <option value="les oiseaux">Les Oiseaux</option>
+                    <option value="paris campagne">Paris Campagne</option>
+                    <option value="petit drancy">Petit Drancy</option>
+                    <option value="village parisien">Village Parisien</option>
+                </select>
+            </div>
+            
+            <div class="form-group" style="background:#f9f9f9; border-left:4px solid #C9462C; padding:12px; margin-bottom:16px;">
+                <strong>Protection des données personnelles :</strong>
+                <p>
+                    Les informations recueillies dans ce questionnaire sont enregistrées par Drancy Insoumise pour analyse statistique et prise de contact si vous l’acceptez.<br>
+                    Elles sont conservées pendant 1 an.<br>
+                    Conformément à la loi « informatique et libertés » et au RGPD, vous pouvez exercer vos droits d’accès, de rectification ou de suppression des données vous concernant en contactant : <a href="mailto:contact@drancyinsoumise.org">contact@drancyinsoumise.org</a>.
+                </p>
+                <label>
+                    <input type="checkbox" id="rgpd-consent" required>
+                    J’ai lu et j’accepte la politique de confidentialité et le traitement de mes données personnelles.
+                </label>
+            </div>
+            
+            <button id="start-questionnaire">Commencer le questionnaire</button>
+        </div>
+        
+        <div id="questionnaire" class="hidden">
+            <div class="progress-container">
+                <div class="progress-bar" id="progress"></div>
+            </div>
+            
+            <div id="question-container"></div>
+            
+            <div class="form-group">
+                <button id="next-question">Suivant</button>
+                <button id="prev-question" class="hidden">Précédent</button>
+                <button id="submit-questionnaire" class="hidden">Terminer</button>
+            </div>
+        </div>
+        
+        <div id="result-container" class="hidden result">
+            <h2>Merci d'avoir complété le questionnaire !</h2>
+            <p>Vos réponses ont été enregistrées.</p>
+            
+            <div class="form-group">
+                <label for="contact-consent">
+                    <input type="checkbox" id="contact-consent"> Souhaitez-vous être contacté(e) pour recevoir plus d'informations ?
+                </label>
+            </div>
+            
+            <button id="submit-final" class="secondary">Envoyer</button>
+            <button id="restart">Recommencer</button>
+        </div>
+    </div>
+    
+    <script>
+        // Définir les questions pour chaque catégorie
+        const questions = {
+            // Questions pour les jeunes hommes (17-25)
+            jeunes_hommes: [
+                {
+                    id: "jh1",
+                    question: "Quelles sont vos principales préoccupations concernant votre avenir professionnel ?",
+                    type: "radio",
+                    options: [
+                        "Trouver un emploi stable",
+                        "Poursuivre des études supérieures",
+                        "Créer ma propre entreprise",
+                        "Incertitude concernant ma carrière"
+                    ]
+                },
+                {
+                    id: "jh2",
+                    question: "Comment décririez-vous votre rapport aux réseaux sociaux ?",
+                    type: "radio",
+                    options: [
+                        "Indispensables à ma vie quotidienne",
+                        "Utiles mais je limite mon temps d'utilisation",
+                        "Je les utilise principalement pour rester en contact avec mes amis",
+                        "Je suis peu présent sur les réseaux sociaux"
+                    ]
+                },
+                {
+                    id: "jh3",
+                    question: "Quels sont vos loisirs préférés ?",
+                    type: "radio",
+                    options: [
+                        "Jeux vidéo et technologie",
+                        "Sport et activités physiques",
+                        "Sorties entre amis",
+                        "Activités culturelles (cinéma, musique, lecture)"
+                    ]
+                },
+                {
+                    id: "jh4",
+                    question: "Quelle est votre préoccupation principale concernant la société actuelle ?",
+                    type: "radio",
+                    options: [
+                        "L'environnement et le changement climatique",
+                        "L'emploi et la situation économique",
+                        "Les inégalités sociales",
+                        "La politique et les tensions internationales"
+                    ]
+                },
+                {
+                    id: "jh5",
+                    question: "Comment envisagez-vous votre vie dans 5 ans ?",
+                    type: "radio",
+                    options: [
+                        "Avoir un emploi stable et bien rémunéré",
+                        "Être indépendant financièrement",
+                        "Voyager et découvrir le monde",
+                        "Fonder une famille"
+                    ]
+                }
+            ],
+            
+            // Questions pour les jeunes femmes (17-25)
+            jeunes_femmes: [
+                {
+                    id: "jf1",
+                    question: "Quelles sont vos principales préoccupations concernant votre avenir professionnel ?",
+                    type: "radio",
+                    options: [
+                        "Trouver un équilibre entre vie professionnelle et personnelle",
+                        "Poursuivre des études supérieures",
+                        "Créer ma propre entreprise",
+                        "Surmonter les inégalités de genre dans le milieu professionnel"
+                    ]
+                },
+                {
+                    id: "jf2",
+                    question: "Comment décririez-vous votre rapport aux réseaux sociaux ?",
+                    type: "radio",
+                    options: [
+                        "Indispensables à ma vie quotidienne",
+                        "Utiles mais je me préoccupe de l'image que j'y projette",
+                        "Je les utilise principalement pour rester en contact avec mes amis",
+                        "Je suis préoccupée par leur impact sur la santé mentale"
+                    ]
+                },
+                {
+                    id: "jf3",
+                    question: "Quels sont vos loisirs préférés ?",
+                    type: "radio",
+                    options: [
+                        "Arts créatifs (dessin, écriture, photographie)",
+                        "Sport et activités physiques",
+                        "Sorties entre amis",
+                        "Activités culturelles (cinéma, musique, lecture)"
+                    ]
+                },
+                {
+                    id: "jf4",
+                    question: "Quelle est votre préoccupation principale concernant la société actuelle ?",
+                    type: "radio",
+                    options: [
+                        "L'environnement et le changement climatique",
+                        "L'égalité des genres",
+                        "Les inégalités sociales",
+                        "La santé et le bien-être mental"
+                    ]
+                },
+                {
+                    id: "jf5",
+                    question: "Comment envisagez-vous votre vie dans 5 ans ?",
+                    type: "radio",
+                    options: [
+                        "Avoir un emploi épanouissant",
+                        "Être indépendante financièrement",
+                        "Voyager et découvrir le monde",
+                        "Trouver un équilibre entre vie personnelle et professionnelle"
+                    ]
+                }
+            ],
+            
+            // Questions pour les jeunes autres genres (17-25)
+            jeunes_autres: [
+                {
+                    id: "ja1",
+                    question: "Quelles sont vos principales préoccupations concernant votre avenir professionnel ?",
+                    type: "radio",
+                    options: [
+                        "Trouver un environnement de travail inclusif",
+                        "Poursuivre des études supérieures",
+                        "Créer ma propre entreprise",
+                        "Contribuer à une société plus inclusive"
+                    ]
+                },
+                {
+                    id: "ja2",
+                    question: "Comment décririez-vous votre rapport aux réseaux sociaux ?",
+                    type: "radio",
+                    options: [
+                        "Un espace d'expression et de communauté",
+                        "Utiles mais je me préoccupe de l'image que j'y projette",
+                        "Je les utilise principalement pour rester en contact avec mes amis",
+                        "Je suis préoccupé·e par leur impact sur la santé mentale"
+                    ]
+                },
+                {
+                    id: "ja3",
+                    question: "Quels sont vos loisirs préférés ?",
+                    type: "radio",
+                    options: [
+                        "Arts créatifs et expression personnelle",
+                        "Sport et activités physiques",
+                        "Engagement dans des communautés ou associations",
+                        "Activités culturelles (cinéma, musique, lecture)"
+                    ]
+                },
+                {
+                    id: "ja4",
+                    question: "Quelle est votre préoccupation principale concernant la société actuelle ?",
+                    type: "radio",
+                    options: [
+                        "L'environnement et le changement climatique",
+                        "L'inclusion et la diversité",
+                        "Les inégalités sociales",
+                        "La santé mentale et le bien-être"
+                    ]
+                },
+                {
+                    id: "ja5",
+                    question: "Comment envisagez-vous votre vie dans 5 ans ?",
+                    type: "radio",
+                    options: [
+                        "Avoir un emploi épanouissant dans un environnement inclusif",
+                        "Être indépendant·e financièrement",
+                        "Voyager et découvrir le monde",
+                        "Contribuer à des changements sociaux positifs"
+                    ]
+                }
+            ],
+            
+            // Questions pour les adultes hommes (26-80)
+            adultes_hommes: [
+                {
+                    id: "ah1",
+                    question: "Quelle est votre situation professionnelle actuelle ?",
+                    type: "radio",
+                    options: [
+                        "Employé à temps plein",
+                        "Employé à temps partiel",
+                        "Entrepreneur / Indépendant",
+                        "Retraité",
+                        "En recherche d'emploi"
+                    ]
+                },
+                {
+                    id: "ah2",
+                    question: "Quelles sont vos principales préoccupations financières ?",
+                    type: "radio",
+                    options: [
+                        "Remboursement de dettes/crédits",
+                        "Épargne pour la retraite",
+                        "Investissements",
+                        "Gestion du budget quotidien",
+                        "Préparation de l'avenir de mes enfants"
+                    ]
+                },
+                {
+                    id: "ah3",
+                    question: "Comment évaluez-vous votre équilibre vie professionnelle/vie personnelle ?",
+                    type: "radio",
+                    options: [
+                        "Très satisfaisant",
+                        "Satisfaisant mais pourrait être amélioré",
+                        "Difficile à maintenir",
+                        "Insatisfaisant",
+                        "Je travaille activement à l'améliorer"
+                    ]
+                },
+                {
+                    id: "ah4",
+                    question: "Quelles sont vos principales préoccupations concernant la santé ?",
+                    type: "radio",
+                    options: [
+                        "Maintenir une bonne condition physique",
+                        "Gérer le stress et la santé mentale",
+                        "Problèmes de santé chroniques",
+                        "Prévention des maladies liées à l'âge",
+                        "Accès aux soins de santé"
+                    ]
+                },
+                {
+                    id: "ah5",
+                    question: "Quels sont vos projets pour les 10 prochaines années ?",
+                    type: "radio",
+                    options: [
+                        "Évolution de carrière",
+                        "Préparer la retraite",
+                        "Voyages et loisirs",
+                        "Investir dans l'immobilier ou d'autres actifs",
+                        "Me consacrer davantage à ma famille"
+                    ]
+                }
+            ],
+            
+            // Questions pour les adultes femmes (26-80)
+            adultes_femmes: [
+                {
+                    id: "af1",
+                    question: "Quelle est votre situation professionnelle actuelle ?",
+                    type: "radio",
+                    options: [
+                        "Employée à temps plein",
+                        "Employée à temps partiel",
+                        "Entrepreneure / Indépendante",
+                        "Retraitée",
+                        "En recherche d'emploi ou en pause carrière"
+                    ]
+                },
+                {
+                    id: "af2",
+                    question: "Quelles sont vos principales préoccupations financières ?",
+                    type: "radio",
+                    options: [
+                        "Indépendance financière",
+                        "Épargne pour la retraite",
+                        "Gestion du budget familial",
+                        "Investissements et patrimoine",
+                        "Préparation de l'avenir de mes enfants"
+                    ]
+                },
+                {
+                    id: "af3",
+                    question: "Comment évaluez-vous votre équilibre vie professionnelle/vie personnelle ?",
+                    type: "radio",
+                    options: [
+                        "Très satisfaisant",
+                        "Satisfaisant mais difficile à maintenir",
+                        "Difficile en raison des responsabilités familiales",
+                        "Insatisfaisant",
+                        "Je travaille activement à l'améliorer"
+                    ]
+                },
+                {
+                    id: "af4",
+                    question: "Quelles sont vos principales préoccupations concernant la santé ?",
+                    type: "radio",
+                    options: [
+                        "Maintenir une bonne condition physique",
+                        "Santé hormonale et reproductive",
+                        "Gérer le stress et la santé mentale",
+                        "Prévention des maladies liées à l'âge",
+                        "Accès à des soins de santé adaptés"
+                    ]
+                },
+                {
+                    id: "af5",
+                    question: "Quels sont vos projets pour les 10 prochaines années ?",
+                    type: "radio",
+                    options: [
+                        "Évolution de carrière ou reconversion",
+                        "Préparer la retraite",
+                        "Développement personnel et bien-être",
+                        "Voyages et loisirs",
+                        "Me consacrer davantage à ma famille ou à des projets personnels"
+                    ]
+                }
+            ],
+            
+            // Questions pour les adultes autres genres (26-80)
+            adultes_autres: [
+                {
+                    id: "aa1",
+                    question: "Quelle est votre situation professionnelle actuelle ?",
+                    type: "radio",
+                    options: [
+                        "Employé·e à temps plein",
+                        "Employé·e à temps partiel",
+                        "Entrepreneur·e / Indépendant·e",
+                        "Retraité·e",
+                        "En recherche d'emploi"
+                    ]
+                },
+                {
+                    id: "aa2",
+                    question: "Quelles sont vos principales préoccupations financières ?",
+                    type: "radio",
+                    options: [
+                        "Indépendance financière",
+                        "Épargne pour la retraite",
+                        "Accès aux services financiers sans discrimination",
+                        "Investissements et patrimoine",
+                        "Sécurité financière à long terme"
+                    ]
+                },
+                {
+                    id: "aa3",
+                    question: "Comment évaluez-vous votre équilibre vie professionnelle/vie personnelle ?",
+                    type: "radio",
+                    options: [
+                        "Très satisfaisant",
+                        "Satisfaisant mais pourrait être amélioré",
+                        "Difficile à maintenir",
+                        "Insatisfaisant",
+                        "Je travaille activement à créer un environnement équilibré"
+                    ]
+                },
+                {
+                    id: "aa4",
+                    question: "Quelles sont vos principales préoccupations concernant la santé ?",
+                    type: "radio",
+                    options: [
+                        "Accès à des soins de santé adaptés et inclusifs",
+                        "Santé mentale et bien-être psychologique",
+                        "Maintenir une bonne condition physique",
+                        "Prévention des maladies liées à l'âge",
+                        "Accès aux traitements spécifiques"
+                    ]
+                },
+                {
+                    id: "aa5",
+                    question: "Quels sont vos projets pour les 10 prochaines années ?",
+                    type: "radio",
+                    options: [
+                        "Épanouissement dans un environnement inclusif",
+                        "Préparer la retraite",
+                        "Développement personnel et bien-être",
+                        "Voyages et loisirs",
+                        "Contribuer à une société plus inclusive"
+                    ]
+                }
+            ]
+        };
+        
+        // Variables globales
+        let currentCategory = "";
+        let currentQuestionIndex = 0;
+        let userResponses = {};
+        let userData = {
+            nom: "",
+            email: "",
+            age: null,
+            genre: "",
+            quartier: "",
+            contactConsent: false
+        };
+        
+        // Éléments du DOM
+        const initialForm = document.getElementById('initial-form');
+        const questionnaireSection = document.getElementById('questionnaire');
+        const questionContainer = document.getElementById('question-container');
+        const nextButton = document.getElementById('next-question');
+        const prevButton = document.getElementById('prev-question');
+        const submitButton = document.getElementById('submit-questionnaire');
+        const resultContainer = document.getElementById('result-container');
+        const progressBar = document.getElementById('progress');
+        
+        // Démarrer le questionnaire
+        document.getElementById('start-questionnaire').addEventListener('click', function() {
+            const nom = document.getElementById('nom').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const age = parseInt(document.getElementById('age').value);
+            const genre = document.getElementById('genre').value;
+            const quartier = document.getElementById('quartier').value;
+            
+            if (!nom || !email || !age || !genre || !quartier) {
+                alert("Veuillez remplir tous les champs.");
+                return;
+            }
+            
+            if (!document.getElementById('rgpd-consent').checked) {
+                alert("Vous devez accepter la politique de confidentialité pour continuer.");
+                return;
+            }
+            
+            // Validation de l'email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert("Veuillez entrer une adresse email valide.");
+                return;
+            }
+            
+            if (age < 17 || age > 80) {
+                alert("L'âge doit être compris entre 17 et 80 ans.");
+                return;
+            }
+            
+            // Enregistrer les données utilisateur
+            userData.nom = nom;
+            userData.email = email;
+            userData.age = age;
+            userData.genre = genre;
+            userData.quartier = quartier;
+            
+            // Déterminer la catégorie
+            const ageGroup = age <= 25 ? "jeunes" : "adultes";
+            const genreKey = genre === "homme" ? "hommes" : genre === "femme" ? "femmes" : "autres";
+            currentCategory = `${ageGroup}_${genreKey}`;
+            
+            // Cacher le formulaire initial et afficher le questionnaire
+            initialForm.classList.add('hidden');
+            questionnaireSection.classList.remove('hidden');
+            
+            // Afficher la première question
+            displayQuestion(0);
+        });
+        
+        // Afficher une question
+        function displayQuestion(index) {
+            // Mise à jour de l'index de la question courante
+            currentQuestionIndex = index;
+            
+            // Vérifier si nous avons des questions pour cette catégorie
+            if (!questions[currentCategory] || !questions[currentCategory][index]) {
+                console.error(`Pas de questions pour la catégorie ${currentCategory} à l'index ${index}`);
+                return;
+            }
+            
+            // Récupérer la question
+            const question = questions[currentCategory][index];
+            
+            // Créer l'élément HTML pour la question
+            let questionHTML = `
+                <div class="question">
+                    <h3>${index + 1}. ${question.question}</h3>
+            `;
+            
+            // Ajouter les options selon le type de question
+            if (question.type === "radio") {
+                questionHTML += `<div class="radio-group">`;
+                question.options.forEach((option, i) => {
+                    const checked = userResponses[question.id] === option ? "checked" : "";
+                    questionHTML += `
+                        <div class="radio-option">
+                            <input type="radio" id="${question.id}_${i}" name="${question.id}" value="${option}" ${checked}>
+                            <label for="${question.id}_${i}">${option}</label>
+                        </div>
+                    `;
+                });
+                questionHTML += `</div>`;
+            }
+            
+            questionHTML += `</div>`;
+            
+            // Mettre à jour le contenu
+            questionContainer.innerHTML = questionHTML;
+            
+            // Mettre à jour la progression
+            updateProgress();
+            
+            // Mettre à jour les boutons
+            updateButtons();
+        }
+        
+        // Mettre à jour la barre de progression
+        function updateProgress() {
+            const totalQuestions = questions[currentCategory].length;
+            const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+        
+        // Mettre à jour l'état des boutons
+        function updateButtons() {
+            const totalQuestions = questions[currentCategory].length;
+            
+            // Bouton précédent
+            if (currentQuestionIndex > 0) {
+                prevButton.classList.remove('hidden');
+            } else {
+                prevButton.classList.add('hidden');
+            }
+            
+            // Bouton suivant et terminer
+            if (currentQuestionIndex === totalQuestions - 1) {
+                nextButton.classList.add('hidden');
+                submitButton.classList.remove('hidden');
+            } else {
+                nextButton.classList.remove('hidden');
+                submitButton.classList.add('hidden');
+            }
+        }
+        
+        // Sauvegarder la réponse actuelle
+        function saveCurrentResponse() {
+            const currentQuestion = questions[currentCategory][currentQuestionIndex];
+            
+            if (currentQuestion.type === "radio") {
+                const selectedOption = document.querySelector(`input[name="${currentQuestion.id}"]:checked`);
+                if (selectedOption) {
+                    userResponses[currentQuestion.id] = selectedOption.value;
+                }
+            }
+        }
+        
+        // Événement pour le bouton suivant
+        nextButton.addEventListener('click', function() {
+            saveCurrentResponse();
+            
+            const currentQuestion = questions[currentCategory][currentQuestionIndex];
+            if (currentQuestion.type === "radio" && !userResponses[currentQuestion.id]) {
+                alert("Veuillez sélectionner une réponse avant de continuer.");
+                return;
+            }
+            
+            displayQuestion(currentQuestionIndex + 1);
+        });
+        
+        // Événement pour le bouton précédent
+        prevButton.addEventListener('click', function() {
+            saveCurrentResponse();
+            displayQuestion(currentQuestionIndex - 1);
+        });
+        
+        // Événement pour le bouton terminer
+        submitButton.addEventListener('click', function() {
+            saveCurrentResponse();
+            
+            const currentQuestion = questions[currentCategory][currentQuestionIndex];
+            if (currentQuestion.type === "radio" && !userResponses[currentQuestion.id]) {
+                alert("Veuillez sélectionner une réponse avant de terminer.");
+                return;
+            }
+            
+            // Afficher le résultat
+            questionnaireSection.classList.add('hidden');
+            resultContainer.classList.remove('hidden');
+            
+            // Ici, vous pourriez envoyer les données à un serveur
+            console.log("Informations utilisateur:", userData);
+            console.log("Réponses de l'utilisateur:", userResponses);
+        });
+        
+        // Événement pour envoyer les données finales
+        document.getElementById('submit-final').addEventListener('click', function() {
+            // Récupérer le consentement
+            userData.contactConsent = document.getElementById('contact-consent').checked;
+
+            // Construire les données à envoyer
+            const formData = {
+                nom: userData.nom,
+                email: userData.email,
+                age: userData.age,
+                genre: userData.genre,
+                quartier: userData.quartier,
+                contactConsent: userData.contactConsent ? "Oui" : "Non",
+                ...userResponses
+            };
+
+            // Envoi à Formspree
+            fetch('https://formspree.io/f/mblopyro/', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("Vos réponses ont été envoyées. Merci de votre participation !");
+                } else {
+                    alert("Une erreur est survenue lors de l'envoi. Merci de réessayer.");
+                }
+            })
+            .catch(() => {
+                alert("Une erreur réseau est survenue.");
+            });
+        });
+        
+        // Événement pour recommencer
+        document.getElementById('restart').addEventListener('click', function() {
+            // Réinitialiser les variables
+            currentCategory = "";
+            currentQuestionIndex = 0;
+            userResponses = {};
+            userData = {
+                nom: "",
+                email: "",
+                age: null,
+                genre: "",
+                quartier: "",
+                contactConsent: false
+            };
+            
+            // Réinitialiser l'interface
+            resultContainer.classList.add('hidden');
+            initialForm.classList.remove('hidden');
+            document.getElementById('nom').value = "";
+            document.getElementById('email').value = "";
+            document.getElementById('age').value = "";
+            document.getElementById('genre').value = "";
+            document.getElementById('quartier').value = "";
+            document.getElementById('contact-consent').checked = false;
+        });
+    </script>
+</body>
+</html>
