@@ -393,25 +393,43 @@
         
         // Afficher une question
         function displayQuestion(index) {
-            // Mise à jour de l'index de la question courante
             currentQuestionIndex = index;
-            
-            // Vérifier si nous avons des questions pour cette catégorie
+
             if (!questions[currentCategory] || !questions[currentCategory][index]) {
                 console.error(`Pas de questions pour la catégorie ${currentCategory} à l'index ${index}`);
                 return;
             }
-            
+
             // Récupérer la question
             const question = questions[currentCategory][index];
-            
-            // Créer l'élément HTML pour la question
-            let questionHTML = `
+
+            // Déterminer la section (justice sociale, écologie, démocratie populaire)
+            let sectionTitle = "";
+            if (question.id.startsWith("js")) sectionTitle = "Justice sociale";
+            else if (question.id.startsWith("eco")) sectionTitle = "Écologie";
+            else if (question.id.startsWith("dp")) sectionTitle = "Démocratie participative";
+
+            // Afficher le titre de section uniquement pour la première question de chaque bloc
+            let showSectionTitle = false;
+            if (
+                (question.id === "js1") ||
+                (question.id === "eco1") ||
+                (question.id === "dp1")
+            ) {
+                showSectionTitle = true;
+            }
+
+            let questionHTML = "";
+
+            if (showSectionTitle) {
+                questionHTML += `<h2 style="color:var(--fi-purple);margin-bottom:10px;">${sectionTitle}</h2>`;
+            }
+
+            questionHTML += `
                 <div class="question">
                     <h3>${index + 1}. ${question.question}</h3>
             `;
-            
-            // Ajouter les options selon le type de question
+
             if (question.type === "radio") {
                 questionHTML += `<div class="radio-group">`;
                 question.options.forEach((option, i) => {
@@ -425,16 +443,11 @@
                 });
                 questionHTML += `</div>`;
             }
-            
+
             questionHTML += `</div>`;
-            
-            // Mettre à jour le contenu
+
             questionContainer.innerHTML = questionHTML;
-            
-            // Mettre à jour la progression
             updateProgress();
-            
-            // Mettre à jour les boutons
             updateButtons();
         }
         
