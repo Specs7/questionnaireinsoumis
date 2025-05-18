@@ -180,7 +180,7 @@
             
             <div class="form-group">
                 <label for="age">Votre âge :</label>
-                <input type="number" id="age" min="17" max="80" required>
+                <input type="number" id="age" min="18" max="120" required>
             </div>
             
             <div class="form-group">
@@ -257,376 +257,63 @@
     <script>
         // Définir les questions pour chaque catégorie
         const questions = {
-            // Questions pour les jeunes hommes (17-25)
-            jeunes_hommes: [
-                {
-                    id: "jh1",
-                    question: "Quelles sont vos principales préoccupations concernant votre avenir professionnel ?",
-                    type: "radio",
-                    options: [
-                        "Trouver un emploi stable",
-                        "Poursuivre des études supérieures",
-                        "Créer ma propre entreprise",
-                        "Incertitude concernant ma carrière"
-                    ]
-                },
-                {
-                    id: "jh2",
-                    question: "Comment décririez-vous votre rapport aux réseaux sociaux ?",
-                    type: "radio",
-                    options: [
-                        "Indispensables à ma vie quotidienne",
-                        "Utiles mais je limite mon temps d'utilisation",
-                        "Je les utilise principalement pour rester en contact avec mes amis",
-                        "Je suis peu présent sur les réseaux sociaux"
-                    ]
-                },
-                {
-                    id: "jh3",
-                    question: "Quels sont vos loisirs préférés ?",
-                    type: "radio",
-                    options: [
-                        "Jeux vidéo et technologie",
-                        "Sport et activités physiques",
-                        "Sorties entre amis",
-                        "Activités culturelles (cinéma, musique, lecture)"
-                    ]
-                },
-                {
-                    id: "jh4",
-                    question: "Quelle est votre préoccupation principale concernant la société actuelle ?",
-                    type: "radio",
-                    options: [
-                        "L'environnement et le changement climatique",
-                        "L'emploi et la situation économique",
-                        "Les inégalités sociales",
-                        "La politique et les tensions internationales"
-                    ]
-                },
-                {
-                    id: "jh5",
-                    question: "Comment envisagez-vous votre vie dans 5 ans ?",
-                    type: "radio",
-                    options: [
-                        "Avoir un emploi stable et bien rémunéré",
-                        "Être indépendant financièrement",
-                        "Voyager et découvrir le monde",
-                        "Fonder une famille"
-                    ]
-                }
+            "18_25": [
+                // Justice sociale
+                { id: "js1", question: "Avez-vous rencontré des difficultés pour accéder à un emploi ou à une formation ?", type: "radio", options: ["Oui", "Non", "Ne sait pas"] },
+                { id: "js2", question: "Pensez-vous que les aides sociales sont suffisantes pour les jeunes ?", type: "radio", options: ["Oui", "Non", "Ne sait pas"] },
+                // Écologie
+                { id: "eco1", question: "Seriez-vous favorable à plus d’espaces verts et de transports écologiques dans votre ville ?", type: "radio", options: ["Oui", "Non", "Sans avis"] },
+                { id: "eco2", question: "Êtes-vous prêt·e à participer à des actions collectives pour l’écologie (nettoyage, plantations, etc.) ?", type: "radio", options: ["Oui", "Non", "Peut-être"] },
+                // Démocratie populaire
+                { id: "dp1", question: "Aimeriez-vous que les jeunes soient davantage consultés sur les décisions locales ?", type: "radio", options: ["Oui", "Non", "Sans avis"] },
+                { id: "dp2", question: "Seriez-vous intéressé·e par des assemblées citoyennes pour débattre des projets de la ville ?", type: "radio", options: ["Oui", "Non", "Peut-être"] }
             ],
-            
-            // Questions pour les jeunes femmes (17-25)
-            jeunes_femmes: [
-                {
-                    id: "jf1",
-                    question: "Quelles sont vos principales préoccupations concernant votre avenir professionnel ?",
-                    type: "radio",
-                    options: [
-                        "Trouver un équilibre entre vie professionnelle et personnelle",
-                        "Poursuivre des études supérieures",
-                        "Créer ma propre entreprise",
-                        "Surmonter les inégalités de genre dans le milieu professionnel"
-                    ]
-                },
-                {
-                    id: "jf2",
-                    question: "Comment décririez-vous votre rapport aux réseaux sociaux ?",
-                    type: "radio",
-                    options: [
-                        "Indispensables à ma vie quotidienne",
-                        "Utiles mais je me préoccupe de l'image que j'y projette",
-                        "Je les utilise principalement pour rester en contact avec mes amis",
-                        "Je suis préoccupée par leur impact sur la santé mentale"
-                    ]
-                },
-                {
-                    id: "jf3",
-                    question: "Quels sont vos loisirs préférés ?",
-                    type: "radio",
-                    options: [
-                        "Arts créatifs (dessin, écriture, photographie)",
-                        "Sport et activités physiques",
-                        "Sorties entre amis",
-                        "Activités culturelles (cinéma, musique, lecture)"
-                    ]
-                },
-                {
-                    id: "jf4",
-                    question: "Quelle est votre préoccupation principale concernant la société actuelle ?",
-                    type: "radio",
-                    options: [
-                        "L'environnement et le changement climatique",
-                        "L'égalité des genres",
-                        "Les inégalités sociales",
-                        "La santé et le bien-être mental"
-                    ]
-                },
-                {
-                    id: "jf5",
-                    question: "Comment envisagez-vous votre vie dans 5 ans ?",
-                    type: "radio",
-                    options: [
-                        "Avoir un emploi épanouissant",
-                        "Être indépendante financièrement",
-                        "Voyager et découvrir le monde",
-                        "Trouver un équilibre entre vie personnelle et professionnelle"
-                    ]
-                }
+            "26_35": [
+                // Justice sociale
+                { id: "js1", question: "Avez-vous rencontré des obstacles pour accéder au logement ou à l’emploi stable ?", type: "radio", options: ["Oui", "Non", "Ne sait pas"] },
+                { id: "js2", question: "Les services publics (santé, crèche, école) répondent-ils à vos besoins ?", type: "radio", options: ["Oui", "Non", "Partiellement"] },
+                // Écologie
+                { id: "eco1", question: "Seriez-vous favorable à des mesures ambitieuses pour réduire la pollution dans votre quartier ?", type: "radio", options: ["Oui", "Non", "Sans avis"] },
+                { id: "eco2", question: "Seriez-vous prêt·e à privilégier les mobilités douces (vélo, marche, transports en commun) ?", type: "radio", options: ["Oui", "Non", "Déjà fait"] },
+                // Démocratie populaire
+                { id: "dp1", question: "Souhaitez-vous participer à des consultations citoyennes sur les projets municipaux ?", type: "radio", options: ["Oui", "Non", "Peut-être"] },
+                { id: "dp2", question: "Pensez-vous que la démocratie locale devrait être renforcée (référendums, budgets participatifs) ?", type: "radio", options: ["Oui", "Non", "Sans avis"] }
             ],
-            
-            // Questions pour les jeunes autres genres (17-25)
-            jeunes_autres: [
-                {
-                    id: "ja1",
-                    question: "Quelles sont vos principales préoccupations concernant votre avenir professionnel ?",
-                    type: "radio",
-                    options: [
-                        "Trouver un environnement de travail inclusif",
-                        "Poursuivre des études supérieures",
-                        "Créer ma propre entreprise",
-                        "Contribuer à une société plus inclusive"
-                    ]
-                },
-                {
-                    id: "ja2",
-                    question: "Comment décririez-vous votre rapport aux réseaux sociaux ?",
-                    type: "radio",
-                    options: [
-                        "Un espace d'expression et de communauté",
-                        "Utiles mais je me préoccupe de l'image que j'y projette",
-                        "Je les utilise principalement pour rester en contact avec mes amis",
-                        "Je suis préoccupé·e par leur impact sur la santé mentale"
-                    ]
-                },
-                {
-                    id: "ja3",
-                    question: "Quels sont vos loisirs préférés ?",
-                    type: "radio",
-                    options: [
-                        "Arts créatifs et expression personnelle",
-                        "Sport et activités physiques",
-                        "Engagement dans des communautés ou associations",
-                        "Activités culturelles (cinéma, musique, lecture)"
-                    ]
-                },
-                {
-                    id: "ja4",
-                    question: "Quelle est votre préoccupation principale concernant la société actuelle ?",
-                    type: "radio",
-                    options: [
-                        "L'environnement et le changement climatique",
-                        "L'inclusion et la diversité",
-                        "Les inégalités sociales",
-                        "La santé mentale et le bien-être"
-                    ]
-                },
-                {
-                    id: "ja5",
-                    question: "Comment envisagez-vous votre vie dans 5 ans ?",
-                    type: "radio",
-                    options: [
-                        "Avoir un emploi épanouissant dans un environnement inclusif",
-                        "Être indépendant·e financièrement",
-                        "Voyager et découvrir le monde",
-                        "Contribuer à des changements sociaux positifs"
-                    ]
-                }
+            "36_50": [
+                // Justice sociale
+                { id: "js1", question: "Avez-vous constaté des inégalités d’accès aux soins ou à l’éducation dans votre entourage ?", type: "radio", options: ["Oui", "Non", "Ne sait pas"] },
+                { id: "js2", question: "Les politiques sociales actuelles protègent-elles suffisamment les familles ?", type: "radio", options: ["Oui", "Non", "Partiellement"] },
+                // Écologie
+                { id: "eco1", question: "Faut-il renforcer la lutte contre les pollutions industrielles et urbaines ?", type: "radio", options: ["Oui", "Non", "Sans avis"] },
+                { id: "eco2", question: "Seriez-vous prêt·e à soutenir des initiatives locales pour la transition écologique ?", type: "radio", options: ["Oui", "Non", "Peut-être"] },
+                // Démocratie populaire
+                { id: "dp1", question: "Pensez-vous que les citoyens devraient pouvoir proposer des lois localement ?", type: "radio", options: ["Oui", "Non", "Sans avis"] },
+                { id: "dp2", question: "Aimeriez-vous participer à des réunions publiques pour débattre des choix municipaux ?", type: "radio", options: ["Oui", "Non", "Peut-être"] }
             ],
-            
-            // Questions pour les adultes hommes (26-80)
-            adultes_hommes: [
-                {
-                    id: "ah1",
-                    question: "Quelle est votre situation professionnelle actuelle ?",
-                    type: "radio",
-                    options: [
-                        "Employé à temps plein",
-                        "Employé à temps partiel",
-                        "Entrepreneur / Indépendant",
-                        "Retraité",
-                        "En recherche d'emploi"
-                    ]
-                },
-                {
-                    id: "ah2",
-                    question: "Quelles sont vos principales préoccupations financières ?",
-                    type: "radio",
-                    options: [
-                        "Remboursement de dettes/crédits",
-                        "Épargne pour la retraite",
-                        "Investissements",
-                        "Gestion du budget quotidien",
-                        "Préparation de l'avenir de mes enfants"
-                    ]
-                },
-                {
-                    id: "ah3",
-                    question: "Comment évaluez-vous votre équilibre vie professionnelle/vie personnelle ?",
-                    type: "radio",
-                    options: [
-                        "Très satisfaisant",
-                        "Satisfaisant mais pourrait être amélioré",
-                        "Difficile à maintenir",
-                        "Insatisfaisant",
-                        "Je travaille activement à l'améliorer"
-                    ]
-                },
-                {
-                    id: "ah4",
-                    question: "Quelles sont vos principales préoccupations concernant la santé ?",
-                    type: "radio",
-                    options: [
-                        "Maintenir une bonne condition physique",
-                        "Gérer le stress et la santé mentale",
-                        "Problèmes de santé chroniques",
-                        "Prévention des maladies liées à l'âge",
-                        "Accès aux soins de santé"
-                    ]
-                },
-                {
-                    id: "ah5",
-                    question: "Quels sont vos projets pour les 10 prochaines années ?",
-                    type: "radio",
-                    options: [
-                        "Évolution de carrière",
-                        "Préparer la retraite",
-                        "Voyages et loisirs",
-                        "Investir dans l'immobilier ou d'autres actifs",
-                        "Me consacrer davantage à ma famille"
-                    ]
-                }
+            "51_60": [
+                // Justice sociale
+                { id: "js1", question: "Avez-vous rencontré des difficultés dans l’accès à la santé ou à la retraite ?", type: "radio", options: ["Oui", "Non", "Ne sait pas"] },
+                { id: "js2", question: "Les dispositifs de solidarité sont-ils adaptés aux besoins des personnes de votre âge ?", type: "radio", options: ["Oui", "Non", "Partiellement"] },
+                // Écologie
+                { id: "eco1", question: "Faut-il investir davantage dans la rénovation énergétique des logements ?", type: "radio", options: ["Oui", "Non", "Sans avis"] },
+                { id: "eco2", question: "Seriez-vous prêt·e à participer à des démarches collectives pour l’écologie (jardins partagés, recyclage, etc.) ?", type: "radio", options: ["Oui", "Non", "Peut-être"] },
+                // Démocratie populaire
+                { id: "dp1", question: "Souhaitez-vous être davantage consulté·e sur les politiques locales concernant les seniors ?", type: "radio", options: ["Oui", "Non", "Sans avis"] },
+                { id: "dp2", question: "Pensez-vous que la démocratie participative peut améliorer la vie locale ?", type: "radio", options: ["Oui", "Non", "Sans avis"] }
             ],
-            
-            // Questions pour les adultes femmes (26-80)
-            adultes_femmes: [
-                {
-                    id: "af1",
-                    question: "Quelle est votre situation professionnelle actuelle ?",
-                    type: "radio",
-                    options: [
-                        "Employée à temps plein",
-                        "Employée à temps partiel",
-                        "Entrepreneure / Indépendante",
-                        "Retraitée",
-                        "En recherche d'emploi ou en pause carrière"
-                    ]
-                },
-                {
-                    id: "af2",
-                    question: "Quelles sont vos principales préoccupations financières ?",
-                    type: "radio",
-                    options: [
-                        "Indépendance financière",
-                        "Épargne pour la retraite",
-                        "Gestion du budget familial",
-                        "Investissements et patrimoine",
-                        "Préparation de l'avenir de mes enfants"
-                    ]
-                },
-                {
-                    id: "af3",
-                    question: "Comment évaluez-vous votre équilibre vie professionnelle/vie personnelle ?",
-                    type: "radio",
-                    options: [
-                        "Très satisfaisant",
-                        "Satisfaisant mais difficile à maintenir",
-                        "Difficile en raison des responsabilités familiales",
-                        "Insatisfaisant",
-                        "Je travaille activement à l'améliorer"
-                    ]
-                },
-                {
-                    id: "af4",
-                    question: "Quelles sont vos principales préoccupations concernant la santé ?",
-                    type: "radio",
-                    options: [
-                        "Maintenir une bonne condition physique",
-                        "Santé hormonale et reproductive",
-                        "Gérer le stress et la santé mentale",
-                        "Prévention des maladies liées à l'âge",
-                        "Accès à des soins de santé adaptés"
-                    ]
-                },
-                {
-                    id: "af5",
-                    question: "Quels sont vos projets pour les 10 prochaines années ?",
-                    type: "radio",
-                    options: [
-                        "Évolution de carrière ou reconversion",
-                        "Préparer la retraite",
-                        "Développement personnel et bien-être",
-                        "Voyages et loisirs",
-                        "Me consacrer davantage à ma famille ou à des projets personnels"
-                    ]
-                }
-            ],
-            
-            // Questions pour les adultes autres genres (26-80)
-            adultes_autres: [
-                {
-                    id: "aa1",
-                    question: "Quelle est votre situation professionnelle actuelle ?",
-                    type: "radio",
-                    options: [
-                        "Employé·e à temps plein",
-                        "Employé·e à temps partiel",
-                        "Entrepreneur·e / Indépendant·e",
-                        "Retraité·e",
-                        "En recherche d'emploi"
-                    ]
-                },
-                {
-                    id: "aa2",
-                    question: "Quelles sont vos principales préoccupations financières ?",
-                    type: "radio",
-                    options: [
-                        "Indépendance financière",
-                        "Épargne pour la retraite",
-                        "Accès aux services financiers sans discrimination",
-                        "Investissements et patrimoine",
-                        "Sécurité financière à long terme"
-                    ]
-                },
-                {
-                    id: "aa3",
-                    question: "Comment évaluez-vous votre équilibre vie professionnelle/vie personnelle ?",
-                    type: "radio",
-                    options: [
-                        "Très satisfaisant",
-                        "Satisfaisant mais pourrait être amélioré",
-                        "Difficile à maintenir",
-                        "Insatisfaisant",
-                        "Je travaille activement à créer un environnement équilibré"
-                    ]
-                },
-                {
-                    id: "aa4",
-                    question: "Quelles sont vos principales préoccupations concernant la santé ?",
-                    type: "radio",
-                    options: [
-                        "Accès à des soins de santé adaptés et inclusifs",
-                        "Santé mentale et bien-être psychologique",
-                        "Maintenir une bonne condition physique",
-                        "Prévention des maladies liées à l'âge",
-                        "Accès aux traitements spécifiques"
-                    ]
-                },
-                {
-                    id: "aa5",
-                    question: "Quels sont vos projets pour les 10 prochaines années ?",
-                    type: "radio",
-                    options: [
-                        "Épanouissement dans un environnement inclusif",
-                        "Préparer la retraite",
-                        "Développement personnel et bien-être",
-                        "Voyages et loisirs",
-                        "Contribuer à une société plus inclusive"
-                    ]
-                }
+            "60_plus": [
+                // Justice sociale
+                { id: "js1", question: "Avez-vous accès facilement aux soins et aux services publics ?", type: "radio", options: ["Oui", "Non", "Partiellement"] },
+                { id: "js2", question: "Les pensions de retraite vous semblent-elles suffisantes pour vivre dignement ?", type: "radio", options: ["Oui", "Non", "Sans avis"] },
+                // Écologie
+                { id: "eco1", question: "Faut-il renforcer les actions pour préserver l’environnement pour les générations futures ?", type: "radio", options: ["Oui", "Non", "Sans avis"] },
+                { id: "eco2", question: "Seriez-vous prêt·e à soutenir des projets écologiques portés par la commune ?", type: "radio", options: ["Oui", "Non", "Peut-être"] },
+                // Démocratie populaire
+                { id: "dp1", question: "Souhaitez-vous participer à des conseils de quartier ou des assemblées citoyennes ?", type: "radio", options: ["Oui", "Non", "Peut-être"] },
+                { id: "dp2", question: "Pensez-vous que les élus locaux sont à l’écoute des habitants ?", type: "radio", options: ["Oui", "Non", "Parfois"] }
             ]
         };
-        
+
         // Variables globales
         let currentCategory = "";
         let currentQuestionIndex = 0;
@@ -675,8 +362,8 @@
                 return;
             }
             
-            if (age < 17 || age > 80) {
-                alert("L'âge doit être compris entre 17 et 80 ans.");
+            if (age < 18 || age > 120) {
+                alert("L'âge doit être compris entre 18 et 120 ans.");
                 return;
             }
             
@@ -688,9 +375,13 @@
             userData.quartier = quartier;
             
             // Déterminer la catégorie
-            const ageGroup = age <= 25 ? "jeunes" : "adultes";
-            const genreKey = genre === "homme" ? "hommes" : genre === "femme" ? "femmes" : "autres";
-            currentCategory = `${ageGroup}_${genreKey}`;
+            let ageGroup = "";
+            if (age >= 18 && age <= 25) ageGroup = "18_25";
+            else if (age >= 26 && age <= 35) ageGroup = "26_35";
+            else if (age >= 36 && age <= 50) ageGroup = "36_50";
+            else if (age >= 51 && age <= 60) ageGroup = "51_60";
+            else if (age > 60) ageGroup = "60_plus";
+            currentCategory = ageGroup;
             
             // Cacher le formulaire initial et afficher le questionnaire
             initialForm.classList.add('hidden');
