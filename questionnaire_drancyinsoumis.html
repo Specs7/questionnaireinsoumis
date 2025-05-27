@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaire - Ville de Drancy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #CC2443 0%, #8B0000 100%);
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 40px 30px;
+        }
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h1, h2, h3, h4 {
+            color: #C9462C;
+            text-align: center;
+        }
+        .section {
+            display: none;
+        }
+        .section.active {
+            display: block;
+        }
+        .question-group {
+            margin-bottom: 24px;
+        }
+        .radio-group, .checkbox-group {
+            margin: 10px 0;
+        }
+        .radio-item, .checkbox-item {
+            margin-bottom: 6px;
+        }
+        label {
+            margin-left: 6px;
+        }
+        textarea, input[type="text"], input[type="email"] {
+            width: 100%;
+            min-height: 32px;
+            margin-top: 6px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            padding: 6px;
+            font-size: 1em;
+        }
+        .navigation {
+            text-align: center;
+            margin: 24px 0;
+        }
+        .btn, input[type="submit"] {
+            background: #C9462C;
+            color: #fff;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 0 8px;
+        }
+        .btn-secondary {
+            background: #888;
+        }
+        .progress-bar {
+            width: 100%;
+            background: #eee;
+            border-radius: 6px;
+            height: 10px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #C9462C;
+            width: 0;
+            transition: width 0.3s;
+        }
+        .required {
+            color: #C9462C;
+        }
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Questionnaire Citoyen</h1>
+            <p class="subtitle">Ville de Drancy - Ensemble pour l'avenir</p>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <form id="questionnaire" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <!-- Section 1: Informations générales -->
+            <div class="section active" id="section1">
+                <h2>Informations Générales</h2>
+                <div class="question-group">
+                    <h4>1. Quel âge avez-vous ? <span class="required">*</span></h4>
+                    <div class="radio-group">
+                        <div class="radio-item"><input type="radio" id="age1" name="age" value="15-17" required><label for="age1">15-17 ans</label></div>
+                        <div class="radio-item"><input type="radio" id="age2" name="age" value="18-25"><label for="age2">18-25 ans</label></div>
+                        <div class="radio-item"><input type="radio" id="age3" name="age" value="26-50"><label for="age3">26-50 ans</label></div>
+                        <div class="radio-item"><input type="radio" id="age4" name="age" value="51-65"><label for="age4">51-65 ans</label></div>
+                        <div class="radio-item"><input type="radio" id="age5" name="age" value="66+"><label for="age5">66 ans et plus</label></div>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <h4>2. Dans quel quartier vivez-vous ?</h4>
+                    <div class="radio-group">
+                        <div class="radio-item"><input type="radio" id="q1" name="quartier" value="Avenir Parisien"><label for="q1">Avenir Parisien</label></div>
+                        <div class="radio-item"><input type="radio" id="q2" name="quartier" value="Centre-ville"><label for="q2">Centre-ville</label></div>
+                        <div class="radio-item"><input type="radio" id="q3" name="quartier" value="Économie"><label for="q3">Économie</label></div>
+                        <div class="radio-item"><input type="radio" id="q4" name="quartier" value="La Mare"><label for="q4">La Mare</label></div>
+                        <div class="radio-item"><input type="radio" id="q5" name="quartier" value="La Muette-Quatre routes"><label for="q5">La Muette-Quatre routes</label></div>
+                        <div class="radio-item"><input type="radio" id="q6" name="quartier" value="Les Oiseaux"><label for="q6">Les Oiseaux</label></div>
+                        <div class="radio-item"><input type="radio" id="q7" name="quartier" value="Paris campagne"><label for="q7">Paris campagne</label></div>
+                        <div class="radio-item"><input type="radio" id="q8" name="quartier" value="Petit Drancy"><label for="q8">Petit Drancy</label></div>
+                        <div class="radio-item"><input type="radio" id="q9" name="quartier" value="Village Parisien"><label for="q9">Village Parisien</label></div>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <h4>3. Genre <span class="required">*</span></h4>
+                    <div class="radio-group">
+                        <div class="radio-item"><input type="radio" id="femme" name="genre" value="Femme" required><label for="femme">Femme</label></div>
+                        <div class="radio-item"><input type="radio" id="homme" name="genre" value="Homme"><label for="homme">Homme</label></div>
+                    </div>
+                </div>
+                <div class="navigation">
+                    <button type="button" class="btn" onclick="nextSection()">Suivant →</button>
+                </div>
+            </div>
+
+            <!-- Section 2: Questions spécifiques par âge -->
+            <div class="section" id="section2">
+                <div id="ageSpecificContent"></div>
+                <div class="navigation">
+                    <button type="button" class="btn btn-secondary" onclick="prevSection()">← Précédent</button>
+                    <button type="button" class="btn" onclick="nextSection()">Suivant →</button>
+                </div>
+            </div>
+
+            <!-- Section 3: Questions spécifiques par genre -->
+            <div class="section" id="section3">
+                <div id="genderSpecificContent"></div>
+                <div class="navigation">
+                    <button type="button" class="btn btn-secondary" onclick="prevSection()">← Précédent</button>
+                    <button type="button" class="btn" onclick="nextSection()">Suivant →</button>
+                </div>
+            </div>
+
+            <!-- Section 4: Priorités et coordonnées -->
+            <div class="section" id="section4">
+                <h2>Priorités et Vision d'Avenir</h2>
+                <div class="question-group">
+                    <h4>Vos 3 priorités pour la commune :</h4>
+                    <input type="text" name="priorite_1" placeholder="1. Première priorité" required>
+                    <input type="text" name="priorite_2" placeholder="2. Deuxième priorité" required>
+                    <input type="text" name="priorite_3" placeholder="3. Troisième priorité" required>
+                </div>
+                <div class="question-group">
+                    <h4>Seriez-vous prêt(e) à vous engager davantage dans la vie locale ?</h4>
+                    <div class="radio-group">
+                        <div class="radio-item"><input type="radio" id="eng1" name="engagement" value="Oui, très intéressé(e)"><label for="eng1">Oui, très intéressé(e)</label></div>
+                        <div class="radio-item"><input type="radio" id="eng2" name="engagement" value="Oui, selon mes disponibilités"><label for="eng2">Oui, selon mes disponibilités</label></div>
+                        <div class="radio-item"><input type="radio" id="eng3" name="engagement" value="Peut-être, selon les projets"><label for="eng3">Peut-être, selon les projets</label></div>
+                        <div class="radio-item"><input type="radio" id="eng4" name="engagement" value="Non, pas le temps"><label for="eng4">Non, pas le temps</label></div>
+                        <div class="radio-item"><input type="radio" id="eng5" name="engagement" value="Non, pas intéressé(e)"><label for="eng5">Non, pas intéressé(e)</label></div>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <h4>Coordonnées (facultatif) :</h4>
+                    <input type="text" name="nom" placeholder="Nom">
+                    <input type="text" name="prenom" placeholder="Prénom">
+                    <input type="email" name="email" placeholder="Email">
+                </div>
+                <div class="question-group">
+                    <h4>Comment avez-vous connu cette enquête ?</h4>
+                    <input type="text" name="connaissance_enquete" placeholder="Votre réponse">
+                </div>
+                <div class="navigation">
+                    <button type="button" class="btn btn-secondary" onclick="prevSection()">← Précédent</button>
+                    <button type="submit" class="btn" id="submitBtn">📤 Envoyer le questionnaire</button>
+                </div>
+            </div>
+        </form>
+        <div id="merci" class="hidden" style="text-align:center;">
+            <h2>Merci pour votre participation !</h2>
+            <p>Vos réponses ont été transmises.</p>
+        </div>
+    </div>
+    <script>
+        let currentSection = 1;
+        const totalSections = 4;
+
+        function nextSection() {
+            if (validateCurrentSection()) {
+                hideSection(currentSection);
+                currentSection++;
+                if (currentSection === 2) generateAgeSpecificContent();
+                if (currentSection === 3) generateGenderSpecificContent();
+                showSection(currentSection);
+                updateProgress();
+            }
+        }
+        function prevSection() {
+            hideSection(currentSection);
+            currentSection--;
+            showSection(currentSection);
+            updateProgress();
+        }
+        function showSection(sectionNum) {
+            document.getElementById('section' + sectionNum).classList.add('active');
+        }
+        function hideSection(sectionNum) {
+            document.getElementById('section' + sectionNum).classList.remove('active');
+        }
+        function updateProgress() {
+            const progress = (currentSection / totalSections) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+        function validateCurrentSection() {
+            const currentSectionElement = document.getElementById('section' + currentSection);
+            const requiredInputs = currentSectionElement.querySelectorAll('input[required], select[required]');
+            for (let input of requiredInputs) {
+                if (input.type === 'radio') {
+                    const radioGroup = currentSectionElement.querySelectorAll(`input[name="${input.name}"]`);
+                    const isChecked = Array.from(radioGroup).some(radio => radio.checked);
+                    if (!isChecked) {
+                        alert('Veuillez répondre à toutes les questions obligatoires.');
+                        return false;
+                    }
+                } else if (!input.value.trim()) {
+                    alert('Veuillez répondre à toutes les questions obligatoires.');
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // Génération dynamique des questions par âge
+        function generateAgeSpecificContent() {
+            const ageValue = document.querySelector('input[name="age"]:checked')?.value;
+            let content = '';
+            if (ageValue === "15-17") {
+                content = `
+                    <h2>15-17 ans - Jeunes lycéens</h2>
+                    <div class="question-group"><h4>Éducation et Orientation</h4>
+                        <input type="text" name="etablissement" placeholder="Dans quel établissement scolaire êtes-vous actuellement ?">
+                        <input type="text" name="orientation" placeholder="Vous sentez-vous bien accompagné(e) dans votre orientation scolaire ?">
+                        <input type="text" name="espace_calme" placeholder="Avez-vous accès à un espace calme pour réviser chez vous ?">
+                    </div>
+                    <div class="question-group"><h4>Vie Sociale et Loisirs</h4>
+                        <input type="text" name="activites" placeholder="Participez-vous à des activités périscolaires ou extrascolaires ?">
+                        <input type="text" name="equipements_jeunes" placeholder="Quels équipements manque-t-il pour les jeunes dans votre quartier ?">
+                        <input type="text" name="maison_jeunes" placeholder="Est-ce que vous fréquentez une maison des jeunes ou un centre d'animation ?">
+                        <input type="text" name="activites_sportives" placeholder="Y a-t-il suffisamment d'activités sportives pour les jeunes ?">
+                        <input type="text" name="ennui_commune" placeholder="Vous arrive-t-il de vous ennuyer dans votre commune ?">
+                    </div>
+                    <div class="question-group"><h4>Sécurité et Bien-être</h4>
+                        <input type="text" name="securite_etab" placeholder="Vous sentez-vous en sécurité aux abords de votre établissement scolaire ?">
+                        <input type="text" name="violence_harcelement" placeholder="Avez-vous déjà été confronté(e) à des violences ou harcèlements (école, transport, rue) ?">
+                    </div>
+                    <div class="question-group"><h4>Santé et Information</h4>
+                        <input type="text" name="info_sante" placeholder="Êtes-vous suffisamment informé(e) sur la santé (sexualité, prévention, etc.) ?">
+                        <input type="text" name="sante_jeunes" placeholder="Avez-vous accès à des services de santé adaptés aux jeunes ?">
+                    </div>
+                    <div class="question-group"><h4>Formation et Numérique</h4>
+                        <input type="text" name="formation_numerique" placeholder="Êtes-vous intéressé(e) par des formations au numérique ou à la citoyenneté ?">
+                    </div>
+                    <div class="question-group"><h4>Mobilité et Participation</h4>
+                        <input type="text" name="mobilite" placeholder="Vos déplacements en ville sont-ils simples à organiser ?">
+                        <input type="text" name="avis_decisions" placeholder="Avez-vous votre mot à dire dans les décisions de la commune ?">
+                        <input type="text" name="vie_associative" placeholder="Participez-vous à la vie associative ou bénévole ?">
+                        <input type="text" name="conseil_jeunes" placeholder="Aimeriez-vous qu'on vous propose un Conseil des Jeunes ?">
+                    </div>
+                    <div class="question-group"><h4>Environnement et Attentes</h4>
+                        <input type="text" name="environnement" placeholder="Que pensez-vous de l'environnement dans votre quartier (propreté, espaces verts) ?">
+                        <input type="text" name="attente_maire" placeholder="Qu'attendez-vous d'un(e) futur(e) maire pour les jeunes ?">
+                    </div>
+                `;
+            } else if (ageValue === "18-25") {
+                content = `
+                    <h2>18-25 ans - Jeunes adultes</h2>
+                    <div class="question-group"><h4>Situation et Insertion Professionnelle</h4>
+                        <input type="text" name="situation" placeholder="Étudiez-vous, travaillez-vous ou êtes-vous en recherche d'emploi ?">
+                        <input type="text" name="insertion" placeholder="Avez-vous accès à des services pour l'insertion professionnelle ?">
+                        <input type="text" name="dispositifs_aide" placeholder="Connaissez-vous des dispositifs d'aide municipale aux jeunes (bourses, emplois municipaux, logement...) ?">
+                        <input type="text" name="soutien_initiatives" placeholder="La ville soutient-elle suffisamment les initiatives jeunes ?">
+                    </div>
+                    <div class="question-group"><h4>Logement et Cadre de Vie</h4>
+                        <input type="text" name="difficulte_logement" placeholder="Avez-vous rencontré des difficultés pour trouver un logement ?">
+                        <input type="text" name="loyers_abordables" placeholder="Les loyers sont-ils abordables pour les jeunes dans votre ville ?">
+                        <input type="text" name="lieux_etudier" placeholder="Trouvez-vous des lieux pour étudier ou travailler en dehors de chez vous ?">
+                    </div>
+                    <div class="question-group"><h4>Culture et Loisirs</h4>
+                        <input type="text" name="offre_culturelle" placeholder="Est-ce que l'offre culturelle de la ville vous parle ?">
+                        <input type="text" name="offre_loisirs" placeholder="L'offre de loisirs est-elle adaptée à vos goûts ?">
+                    </div>
+                    <div class="question-group"><h4>Mobilité et Sécurité</h4>
+                        <input type="text" name="transports" placeholder="Utilisez-vous les transports en commun ? Sont-ils adaptés ?">
+                        <input type="text" name="securite_nuit" placeholder="Vous sentez-vous en sécurité la nuit ?">
+                    </div>
+                    <div class="question-group"><h4>Discriminations et Inclusion</h4>
+                        <input type="text" name="discrimination" placeholder="Avez-vous déjà subi une discrimination liée à votre âge ou à votre genre ?">
+                        <input type="text" name="place_femmes" placeholder="Que pensez-vous de la place des femmes dans l'espace public ?">
+                        <input type="text" name="inclusion_lgbt" placeholder="Que manque-t-il pour améliorer l'inclusion des personnes LGBTQIA+ ?">
+                    </div>
+                    <div class="question-group"><h4>Santé et Information</h4>
+                        <input type="text" name="services_sante" placeholder="Connaissez-vous les services de santé sexuelle, psychologique ou généraliste locaux ?">
+                        <input type="text" name="info_droits" placeholder="Vous sentez-vous bien informé(e) sur vos droits ?">
+                    </div>
+                    <div class="question-group"><h4>Engagement et Participation Citoyenne</h4>
+                        <input type="text" name="evenements_citoyens" placeholder="Participez-vous à des événements citoyens ou des associations ?">
+                        <input type="text" name="engagement_projet" placeholder="Seriez-vous prêt(e) à vous engager dans un projet citoyen ?">
+                        <input type="text" name="consultation_municipale" placeholder="Avez-vous déjà été consulté(e) pour un projet municipal ?">
+                        <input type="text" name="freins_engagement" placeholder="Quels sont, selon vous, les freins à l'engagement des jeunes dans votre ville ?">
+                    </div>
+                `;
+            } else if (ageValue === "26-50") {
+                content = `
+                    <h2>26-50 ans - Actifs et parents</h2>
+                    <div class="question-group"><h4>Vie Familiale et Éducation</h4>
+                        <input type="text" name="enfants" placeholder="Avez-vous des enfants ? Sont-ils bien accueillis en crèche ou à l'école ?">
+                        <input type="text" name="equilibre_vie" placeholder="Trouvez-vous facilement un équilibre entre vie professionnelle et vie familiale ?">
+                        <input type="text" name="infrastructures_scolaires" placeholder="Que pensez-vous des infrastructures scolaires locales ?">
+                    </div>
+                    <div class="question-group"><h4>Économie Familiale et Coût de la Vie</h4>
+                        <input type="text" name="cout_vie" placeholder="Le coût de la vie (logement, services, alimentation) est-il un problème ?">
+                        <input type="text" name="travail_commune" placeholder="Travaillez-vous dans la commune ? Si non, pourquoi ?">
+                        <input type="text" name="dispositifs_emploi" placeholder="Connaissez-vous les dispositifs municipaux pour l'emploi ?">
+                    </div>
+                    <div class="question-group"><h4>Santé et Services Publics</h4>
+                        <input type="text" name="sante" placeholder="Avez-vous accès à une offre de santé satisfaisante ?">
+                        <input type="text" name="besoins_specifiques" placeholder="Avez-vous des besoins spécifiques en lien avec un handicap ou une maladie ?">
+                    </div>
+                    <div class="question-group"><h4>Mobilité et Sécurité</h4>
+                        <input type="text" name="transports_quotidiens" placeholder="Est-ce que les transports répondent à vos besoins quotidiens ?">
+                        <input type="text" name="securite_quartier" placeholder="Que pensez-vous de la sécurité dans votre quartier ?">
+                    </div>
+                    <div class="question-group"><h4>Loisirs et Culture</h4>
+                        <input type="text" name="loisirs_adultes" placeholder="Êtes-vous satisfait(e) des loisirs pour adultes ?">
+                        <input type="text" name="sport_municipal" placeholder="Faites-vous du sport dans les équipements municipaux ?">
+                        <input type="text" name="culture" placeholder="Avez-vous accès à une offre culturelle intéressante ?">
+                    </div>
+                    <div class="question-group"><h4>Environnement et Cadre de Vie</h4>
+                        <input type="text" name="environnement" placeholder="L'environnement vous semble-t-il préservé ?">
+                    </div>
+                    <div class="question-group"><h4>Engagement et Participation</h4>
+                        <input type="text" name="vie_associative" placeholder="Êtes-vous impliqué(e) dans la vie associative ou scolaire ?">
+                        <input type="text" name="engagement_local" placeholder="Seriez-vous prêt(e) à vous engager dans la vie politique ou associative locale ?">
+                    </div>
+                    <div class="question-group"><h4>Égalité et Mixité</h4>
+                        <input type="text" name="egalite" placeholder="Les femmes et les hommes sont-ils traités de manière équitable dans la vie publique locale ?">
+                        <input type="text" name="mixite" placeholder="Êtes-vous favorable à plus de mixité dans les instances municipales ?">
+                    </div>
+                    <div class="question-group"><h4>Évaluation de la Gestion Municipale</h4>
+                        <input type="text" name="gestion_municipale" placeholder="Êtes-vous satisfait(e) de la gestion municipale actuelle ?">
+                        <input type="text" name="changement_priorite" placeholder="Que changeriez-vous en priorité dans votre ville ?">
+                    </div>
+                `;
+            } else if (ageValue === "51-65") {
+                content = `
+                    <h2>51-65 ans - Seniors actifs et préparation à la retraite</h2>
+                    <div class="question-group"><h4>Situation Professionnelle et Fin de Carrière</h4>
+                        <input type="text" name="situation" placeholder="Êtes-vous encore en activité ou déjà à la retraite ?">
+                        <input type="text" name="conditions_travail" placeholder="Comment jugez-vous vos conditions de travail ou votre fin de carrière ?">
+                        <input type="text" name="droits_retraite" placeholder="Connaissez-vous les droits liés à la retraite et leur accès local ?">
+                    </div>
+                    <div class="question-group"><h4>Santé et Bien-être</h4>
+                        <input type="text" name="problemes_sante" placeholder="Avez-vous des problèmes de santé qui nécessitent un accompagnement ?">
+                        <input type="text" name="acces_soins" placeholder="Êtes-vous satisfait(e) de l'accès aux soins dans votre ville ?">
+                        <input type="text" name="prevention_sante" placeholder="Que pensez-vous de la prévention santé pour les plus de 50 ans ?">
+                    </div>
+                    <div class="question-group"><h4>Activités et Loisirs</h4>
+                        <input type="text" name="activites" placeholder="Participez-vous à des activités culturelles ou sportives ?">
+                        <input type="text" name="activites_age" placeholder="Trouvez-vous des activités adaptées à votre âge ?">
+                    </div>
+                    <div class="question-group"><h4>Vie Familiale et Solidarité</h4>
+                        <input type="text" name="famille" placeholder="Avez-vous des enfants ou petits-enfants qui habitent avec vous ?">
+                        <input type="text" name="aidants" placeholder="Y a-t-il assez de services pour les aidants familiaux ?">
+                    </div>
+                    <div class="question-group"><h4>Reconnaissance et Valorisation</h4>
+                        <input type="text" name="valorisation" placeholder="Vous sentez-vous valorisé(e) par les politiques municipales ?">
+                        <input type="text" name="role_seniors" placeholder="Que pensez-vous du rôle des seniors dans la vie citoyenne ?">
+                    </div>
+                    <div class="question-group"><h4>Numérique et Formation</h4>
+                        <input type="text" name="numerique" placeholder="Que pensez-vous du numérique dans les services municipaux ?">
+                        <input type="text" name="formations" placeholder="Souhaitez-vous suivre des formations (informatique, langue, etc.) ?">
+                    </div>
+                    <div class="question-group"><h4>Égalité et Sécurité</h4>
+                        <input type="text" name="egalite" placeholder="Est-ce que l'égalité femmes-hommes est respectée à votre âge ?">
+                        <input type="text" name="securite" placeholder="Vous sentez-vous en sécurité à pied ou chez vous ?">
+                    </div>
+                    <div class="question-group"><h4>Lien Social et Isolement</h4>
+                        <input type="text" name="isolement" placeholder="Êtes-vous isolé(e) socialement ?">
+                        <input type="text" name="intergenerationnel" placeholder="Soutenez-vous des démarches intergénérationnelles dans la ville ?">
+                    </div>
+                    <div class="question-group"><h4>Engagement et Participation</h4>
+                        <input type="text" name="temps_local" placeholder="Avez-vous du temps à donner pour la vie locale ?">
+                        <input type="text" name="propositions" placeholder="Quelles propositions aimeriez-vous voir dans le programme municipal ?">
+                    </div>
+                `;
+            } else if (ageValue === "66+") {
+                content = `
+                    <h2>66 ans et plus - Retraités et seniors</h2>
+                    <div class="question-group"><h4>Santé et Accès aux Soins</h4>
+                        <input type="text" name="medecin" placeholder="Avez-vous accès facilement à un médecin généraliste ?">
+                        <input type="text" name="services_domicile" placeholder="Utilisez-vous des services à domicile ?">
+                        <input type="text" name="droits_sante" placeholder="Êtes-vous informé(e) des droits en matière de santé et de fin de vie ?">
+                    </div>
+                    <div class="question-group"><h4>Logement et Autonomie</h4>
+                        <input type="text" name="logement" placeholder="Habitez-vous seul(e) ou en famille ?">
+                        <input type="text" name="logement_adapte" placeholder="Est-ce que votre logement est adapté à votre âge ou à une éventuelle perte d'autonomie ?">
+                        <input type="text" name="espaces_publics" placeholder="Les espaces publics sont-ils accessibles et sécurisés ?">
+                    </div>
+                    <div class="question-group"><h4>Lien Social et Isolement</h4>
+                        <input type="text" name="isolement" placeholder="Avez-vous déjà ressenti un isolement social ?">
+                        <input type="text" name="contact_famille" placeholder="Êtes-vous en contact régulier avec votre famille ?">
+                        <input type="text" name="lieux_rencontre" placeholder="Souhaitez-vous des lieux de rencontre entre seniors ?">
+                    </div>
+                    <div class="question-group"><h4>Activités et Participation Sociale</h4>
+                        <input type="text" name="offre_senior" placeholder="Que pensez-vous de l'offre culturelle et sociale pour les seniors ?">
+                        <input type="text" name="activite_mairie" placeholder="Avez-vous participé à une activité organisée par la mairie ?">
+                        <input type="text" name="clubs_associations" placeholder="Participez-vous à des clubs ou associations ?">
+                    </div>
+                    <div class="question-group"><h4>Accompagnement et Services Municipaux</h4>
+                        <input type="text" name="aides_municipales" placeholder="Connaissez-vous les aides municipales pour les personnes âgées ?">
+                        <input type="text" name="accompagnement_admin" placeholder="Bénéficiez-vous d'un accompagnement pour les démarches administratives ?">
+                        <input type="text" name="qualite_maison_retraite" placeholder="Que pensez-vous de la qualité de l'accompagnement en maison de retraite ?">
+                    </div>
+                    <div class="question-group"><h4>Situation Économique et Sécurité</h4>
+                        <input type="text" name="revenus" placeholder="Est-ce que vos revenus suffisent à couvrir vos besoins ?">
+                        <input type="text" name="arnaque" placeholder="Avez-vous déjà été victime d'une arnaque ou abus de faiblesse ?">
+                    </div>
+                    <div class="question-group"><h4>Numérique et Accessibilité</h4>
+                        <input type="text" name="numerique" placeholder="Le numérique est-il une barrière pour vous ?">
+                    </div>
+                    <div class="question-group"><h4>Reconnaissance et Engagement</h4>
+                        <input type="text" name="respect" placeholder="Vous sentez-vous respecté(e) dans la société actuelle ?">
+                        <input type="text" name="role_local" placeholder="Quel rôle souhaitez-vous jouer dans la vie locale ?">
+                    </div>
+                `;
+            }
+            document.getElementById('ageSpecificContent').innerHTML = content;
+        }
+
+        // Génération dynamique des questions par genre
+        function generateGenderSpecificContent() {
+            const genreValue = document.querySelector('input[name="genre"]:checked')?.value;
+            let content = '';
+            if (genreValue === "Femme") {
+                content = `
+                    <h2>Questions spécifiques aux femmes</h2>
+                    <input type="text" name="securite_femme" placeholder="Vous sentez-vous en sécurité dans l'espace public, notamment le soir ?">
+                    <input type="text" name="egalite_femme" placeholder="L'égalité femmes-hommes est-elle respectée dans votre commune ?">
+                    <input type="text" name="services_femmes" placeholder="Y a-t-il suffisamment de services d'accompagnement pour les femmes ?">
+                    <input type="text" name="conciliation" placeholder="La conciliation vie professionnelle/vie familiale est-elle facilitée ?">
+                `;
+            } else if (genreValue === "Homme") {
+                content = `
+                    <h2>Questions spécifiques aux hommes</h2>
+                    <input type="text" name="implication_homme" placeholder="Vous impliquez-vous dans l'éducation de vos enfants ?">
+                    <input type="text" name="taches_domestiques" placeholder="Participez-vous aux tâches domestiques et familiales ?">
+                    <input type="text" name="role_masculin" placeholder="Comment vivez-vous les évolutions du rôle masculin dans la société ?">
+                `;
+            }
+            document.getElementById('genderSpecificContent').innerHTML = content;
+        }
+
+        // Envoi du formulaire
+        document.getElementById('questionnaire').onsubmit = function(e) {
+            e.preventDefault();
+            // Ici, tu peux ajouter l'envoi AJAX si tu veux, sinon laisse le submit classique
+            this.classList.add('hidden');
+            document.getElementById('merci').classList.remove('hidden');
+        };
+    </script>
+</body>
+</html>

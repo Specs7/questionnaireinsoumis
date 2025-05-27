@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Questionnaire Dynamique</title>
     <style>
-        /* Charte graphique La France Insoumise */
         :root {
             --fi-red: #C9462C;
             --fi-dark-red: #A6341D;
@@ -15,14 +14,8 @@
             --fi-dark-gray: #333333;
             --fi-purple: #75185B;
         }
-        
-        @font-face {
-            font-family: 'Roboto';
-            src: url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-        }
-        
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Roboto', Arial, sans-serif;
             line-height: 1.6;
             max-width: 800px;
             margin: 0 auto;
@@ -30,7 +23,6 @@
             background-color: var(--fi-light-gray);
             color: var(--fi-dark-gray);
         }
-        
         h1 {
             text-align: center;
             color: var(--fi-red);
@@ -38,37 +30,35 @@
             font-weight: 700;
             text-transform: uppercase;
         }
-        
         h2, h3 {
             color: var(--fi-purple);
         }
-        
         .container {
             background-color: white;
             padding: 30px;
             border-radius: 4px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        
         .form-group {
             margin-bottom: 20px;
         }
-        
         label {
             display: block;
             margin-bottom: 8px;
             font-weight: bold;
         }
-        
-        select, input, button {
+        select, input, button, textarea {
             width: 100%;
             padding: 12px;
             border: 1px solid #ddd;
             border-radius: 4px;
             font-size: 16px;
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Roboto', Arial, sans-serif;
         }
-        
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
         button {
             background-color: var(--fi-red);
             color: white;
@@ -80,19 +70,15 @@
             font-weight: 500;
             letter-spacing: 1px;
         }
-        
         button:hover {
             background-color: var(--fi-dark-red);
         }
-        
         button.secondary {
             background-color: var(--fi-blue);
         }
-        
         button.secondary:hover {
             background-color: var(--fi-dark-blue);
         }
-        
         .question {
             margin-bottom: 20px;
             padding: 15px;
@@ -100,11 +86,9 @@
             border-radius: 4px;
             border-left: 4px solid var(--fi-red);
         }
-        
         .hidden {
             display: none;
         }
-        
         .result {
             margin-top: 30px;
             padding: 20px;
@@ -112,14 +96,12 @@
             border-radius: 4px;
             text-align: center;
         }
-        
         .progress-container {
             margin: 20px 0;
             background-color: #e0e0e0;
             border-radius: 4px;
             height: 8px;
         }
-        
         .progress-bar {
             height: 8px;
             border-radius: 4px;
@@ -127,28 +109,24 @@
             width: 0%;
             transition: width 0.3s ease;
         }
-        
-        .radio-group {
+        .radio-group, .checkbox-group {
             display: flex;
             flex-direction: column;
             gap: 12px;
+            margin-top: 10px;
         }
-        
-        .radio-option {
+        .radio-option, .checkbox-option {
             display: flex;
             align-items: center;
         }
-        
-        .radio-option input {
+        .radio-option input, .checkbox-option input {
             width: auto;
             margin-right: 10px;
         }
-        
         .logo {
             text-align: center;
             margin-bottom: 20px;
         }
-        
         .logo img {
             max-height: 80px;
         }
@@ -163,36 +141,30 @@
     </nav>
     <div class="container">
         <div class="logo">
-            <img src="/api/placeholder/180/80" alt="Logo La France Insoumise">
+            <!-- <img src="/api/placeholder/180/80" alt="Logo La France Insoumise"> -->
         </div>
         <h1>Questionnaire Citoyen</h1>
         
         <div id="initial-form">
             <div class="form-group">
-                <label for="nom">Votre nom :</label>
-                <input type="text" id="nom" required>
+                <label for="nom">Votre nom (facultatif) :</label>
+                <input type="text" id="nom">
             </div>
-            
             <div class="form-group">
-                <label for="email">Votre adresse email :</label>
-                <input type="email" id="email" required>
+                <label for="email">Votre adresse email (facultatif) :</label>
+                <input type="email" id="email">
             </div>
-            
             <div class="form-group">
                 <label for="age">Votre âge :</label>
-                <input type="number" id="age" min="18" max="120" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="genre">Votre genre :</label>
-                <select id="genre" required>
-                    <option value="">Sélectionnez votre genre</option>
-                    <option value="homme">Homme</option>
-                    <option value="femme">Femme</option>
-                    <option value="autre">Autre</option>
+                <select id="age" required>
+                    <option value="">Sélectionnez votre tranche d'âge</option>
+                    <option value="15_17">15-17 ans</option>
+                    <option value="18_25">18-25 ans</option>
+                    <option value="26_50">26-50 ans</option>
+                    <option value="51_65">51-65 ans</option>
+                    <option value="66_plus">66 ans et plus</option>
                 </select>
             </div>
-            
             <div class="form-group">
                 <label for="quartier">Votre quartier :</label>
                 <select id="quartier" required>
@@ -208,7 +180,6 @@
                     <option value="village parisien">Village Parisien</option>
                 </select>
             </div>
-            
             <div class="form-group" style="background:#f9f9f9; border-left:4px solid #C9462C; padding:12px; margin-bottom:16px;">
                 <strong>Protection des données personnelles :</strong>
                 <p>
@@ -221,376 +192,617 @@
                     J’ai lu et j’accepte la politique de confidentialité et le traitement de mes données personnelles.
                 </label>
             </div>
-            
-            <button id="start-questionnaire">Commencer le questionnaire</button>
+            <button id="start-questionnaire" aria-label="Commencer le questionnaire">Commencer le questionnaire</button>
         </div>
         
         <div id="questionnaire" class="hidden">
             <div class="progress-container">
                 <div class="progress-bar" id="progress"></div>
             </div>
-            
             <div id="question-container"></div>
-            
             <div class="form-group">
-                <button id="next-question">Suivant</button>
-                <button id="prev-question" class="hidden">Précédent</button>
-                <button id="submit-questionnaire" class="hidden">Terminer</button>
+                <button id="next-question" aria-label="Question suivante">Suivant</button>
+                <button id="prev-question" class="hidden" aria-label="Question précédente">Précédent</button>
+                <button id="submit-questionnaire" class="hidden" aria-label="Terminer le questionnaire">Terminer</button>
             </div>
         </div>
         
-        <div id="result-container" class="hidden result">
-            <h2>Merci d'avoir complété le questionnaire !</h2>
-            <p>Vos réponses ont été enregistrées.</p>
-            
-            <div class="form-group">
-                <label for="contact-consent">
-                    <input type="checkbox" id="contact-consent"> Souhaitez-vous être contacté(e) pour recevoir plus d'informations ?
-                </label>
-            </div>
-            
-            <button id="submit-final" class="secondary">Envoyer</button>
-            <button id="restart">Recommencer</button>
-        </div>
+        <div id="result-container" class="hidden result"></div>
     </div>
     
     <script>
         // Définir les questions pour chaque catégorie
         const questions = {
+            // ... autres catégories ...
+            "15_17": [
+                // Informations personnelles
+                { id: "genre_15_17", question: "Genre :", type: "radio", options: [
+                    "Féminin", "Masculin", "Non-binaire", "Préfère ne pas répondre"
+                ]},
+
+                // Scolarité et Formation
+                { id: "etablissement", question: "Dans quel établissement scolaire êtes-vous actuellement ?", type: "radio", options: [
+                    "Collège (3ème)", "Lycée général", "Lycée technologique", "Lycée professionnel", "CFA (Centre de Formation d'Apprentis)", "Autre"
+                ]},
+                { id: "accompagnement_orientation", question: "1. Vous sentez-vous bien accompagné(e) dans votre orientation scolaire ?", type: "radio", options: [
+                    "Très bien accompagné(e)", "Plutôt bien accompagné(e)", "Plutôt mal accompagné(e)", "Pas du tout accompagné(e)", "Sans opinion"
+                ]},
+                { id: "espace_calme", question: "2. Avez-vous accès à un espace calme pour réviser chez vous ?", type: "radio", options: [
+                    "Oui, j'ai ma propre chambre", "Oui, la plupart du temps", "Parfois, quand c'est possible", "Rarement", "Non, jamais"
+                ]},
+                { id: "formation_numerique_citoyennete", question: "3. Êtes-vous intéressé(e) par des formations au numérique ou à la citoyenneté ?", type: "radio", options: [
+                    "Très intéressé(e)", "Plutôt intéressé(e)", "Peu intéressé(e)", "Pas du tout intéressé(e)", "Je ne sais pas ce que c'est"
+                ]},
+
+                // Activités et Sorties
+                { id: "activites_periscolaires", question: "4. Participez-vous à des activités périscolaires ou extrascolaires ?", type: "radio", options: [
+                    "Oui, plusieurs activités", "Oui, une activité", "Non, mais j'aimerais bien", "Non, ça ne m'intéresse pas", "Non, mes parents ne veulent pas/peuvent pas"
+                ]},
+                { id: "maison_jeunes", question: "5. Est-ce que vous fréquentez une maison des jeunes ou un centre d'animation ?", type: "radio", options: [
+                    "Oui, souvent", "Oui, de temps en temps", "Non, mais j'aimerais bien", "Non, ça ne m'intéresse pas", "Il n'y en a pas près de chez moi"
+                ]},
+                { id: "activites_sportives", question: "7. Y a-t-il suffisamment d'activités sportives pour les jeunes ?", type: "radio", options: [
+                    "Oui, il y a plein de choix", "Oui, ça va", "Non, il n'y en a pas assez", "Non, il n'y en a presque pas", "Je ne fais pas de sport"
+                ]},
+                { id: "ennui_commune", question: "8. Vous arrive-t-il de vous ennuyer dans votre commune ?", type: "radio", options: [
+                    "Tout le temps", "Souvent", "Parfois", "Rarement", "Jamais"
+                ]},
+                { id: "vie_associative", question: "9. Participez-vous à la vie associative ou bénévole ?", type: "radio", options: [
+                    "Oui, je suis très actif/active", "Oui, de temps en temps", "Non, mais j'aimerais bien", "Non, ça ne m'intéresse pas", "Mes parents ne veulent pas"
+                ]},
+
+                // Équipements et Déplacements
+                { id: "equipements_manquants", question: "10. Quels équipements manque-t-il pour les jeunes dans votre quartier ?", type: "checkbox", options: [
+                    "Terrains de sport/skatepark", "Lieux pour se retrouver entre amis", "Cinéma/salle de spectacle", "Transports pour se déplacer", "Magasins/fast-food", "Espaces verts/parcs", "Wifi gratuit", "Autre"
+                ]},
+                { id: "deplacements_simples", question: "11. Vos déplacements en ville sont-ils simples à organiser ?", type: "radio", options: [
+                    "Très faciles (j'ai ma mobylette/voiture)", "Faciles (transports en commun)", "Compliqués (je dépends de mes parents)", "Très compliqués (pas de transport)"
+                ]},
+                { id: "environnement_quartier", question: "12. Que pensez-vous de l'environnement dans votre quartier (propreté, espaces verts) ?", type: "radio", options: [
+                    "C'est très bien", "C'est correct", "Ce n'est pas terrible", "C'est vraiment sale/moche"
+                ]},
+
+                // Sécurité et Bien-être
+                { id: "securite_etablissement", question: "13. Vous sentez-vous en sécurité aux abords de votre établissement scolaire ?", type: "radio", options: [
+                    "Toujours en sécurité", "Souvent en sécurité", "Parfois j'ai peur", "Souvent j'ai peur", "Je ne vais pas au lycée/collège"
+                ]},
+                { id: "violence_harcelement", question: "14. Avez-vous déjà été confronté(e) à des violences ou harcèlements (école, transport, rue) ?", type: "radio", options: [
+                    "Oui, plusieurs fois", "Oui, une ou deux fois", "Non, mais j'ai vu ça arriver à d'autres", "Non, jamais"
+                ]},
+
+                // Santé et Information
+                { id: "information_sante", question: "15. Êtes-vous suffisamment informé(e) sur la santé (sexualité, prévention, etc.) ?", type: "radio", options: [
+                    "Oui, très bien informé(e)", "Oui, plutôt bien", "Non, pas assez", "Non, pas du tout", "Ça me gêne d'en parler"
+                ]},
+                { id: "acces_sante_jeunes", question: "16. Avez-vous accès à des services de santé adaptés aux jeunes ?", type: "radio", options: [
+                    "Oui, facilement", "Oui, mais c'est compliqué", "Non, pas du tout", "Je ne sais pas"
+                ]},
+
+                // Participation et Citoyenneté
+                { id: "mot_a_dire", question: "17. Avez-vous votre mot à dire dans les décisions de la commune ?", type: "radio", options: [
+                    "Oui, on nous écoute", "Un peu, parfois", "Non, pas vraiment", "Non, jamais", "Je ne m'y intéresse pas"
+                ]},
+                { id: "conseil_jeunes", question: "18. Aimeriez-vous qu'on vous propose un Conseil des Jeunes ?", type: "radio", options: [
+                    "Oui, ça m'intéresserait beaucoup", "Oui, pourquoi pas", "Non, ça ne m'intéresse pas", "Je ne sais pas ce que c'est"
+                ]},
+
+                // Égalité et Attentes
+                { id: "egalite_activites", question: "19. Y a-t-il des différences de traitement entre garçons et filles dans les activités proposées ?", type: "radio", options: [
+                    "Oui, souvent", "Oui, parfois", "Non, rarement", "Non, jamais", "Je n'ai pas fait attention"
+                ]},
+                { id: "attentes_maire", question: "20. Qu'attendez-vous d'un(e) futur(e) maire pour les jeunes ?\n*Dis-nous ce qui serait important pour toi :*", type: "textarea" }
+            ],
             "18_25": [
-                // Justice sociale
-                { id: "js1", question: "Avez-vous rencontré des difficultés pour accéder à un emploi ou à une formation ?", type: "radio", options: ["Oui", "Non", "Ne sait pas"] },
-                { id: "js2", question: "Pensez-vous que les aides sociales sont suffisantes pour les jeunes ?", type: "radio", options: ["Oui", "Non", "Ne sait pas"] },
-                // Écologie
-                { id: "eco1", question: "Seriez-vous favorable à plus d’espaces verts et de transports écologiques dans votre ville ?", type: "radio", options: ["Oui", "Non", "Sans avis"] },
-                { id: "eco2", question: "Êtes-vous prêt·e à participer à des actions collectives pour l’écologie (nettoyage, plantations, etc.) ?", type: "radio", options: ["Oui", "Non", "Peut-être"] },
-                // Démocratie populaire
-                { id: "dp1", question: "Aimeriez-vous que les jeunes soient davantage consultés sur les décisions locales ?", type: "radio", options: ["Oui", "Non", "Sans avis"] },
-                { id: "dp2", question: "Seriez-vous intéressé·e par des assemblées citoyennes pour débattre des projets de la ville ?", type: "radio", options: ["Oui", "Non", "Peut-être"] }
+                // Informations personnelles
+                { id: "genre_18_25", question: "Genre :", type: "radio", options: [
+                    "Féminin", "Masculin", "Non-binaire", "Préfère ne pas répondre"
+                ]},
+
+                // Scolarité et Formation
+                { id: "etablissement_18_25", question: "Dans quel établissement scolaire êtes-vous actuellement ?", type: "radio", options: [
+                    "Lycée général", "Lycée professionnel", "Université", "École supérieure/Grande école", "Formation en apprentissage", "Formation professionnelle", "Autre", "Pas d'études actuellement"
+                ]},
+                { id: "accompagnement_orientation_18_25", question: "1. Vous sentez-vous bien accompagné(e) dans votre orientation scolaire ?", type: "radio", options: [
+                    "Très bien accompagné(e)", "Plutôt bien accompagné(e)", "Plutôt mal accompagné(e)", "Pas du tout accompagné(e)", "Sans opinion"
+                ]},
+                { id: "espace_calme_18_25", question: "2. Avez-vous accès à un espace calme pour réviser chez vous ?", type: "radio", options: [
+                    "Oui, toujours", "Oui, la plupart du temps", "Parfois", "Rarement", "Jamais"
+                ]},
+                { id: "formation_numerique_citoyennete_18_25", question: "3. Êtes-vous intéressé(e) par des formations au numérique ou à la citoyenneté ?", type: "radio", options: [
+                    "Très intéressé(e)", "Plutôt intéressé(e)", "Peu intéressé(e)", "Pas du tout intéressé(e)", "Sans opinion"
+                ]},
+
+                // Activités et Loisirs
+                { id: "activites_periscolaires_18_25", question: "4. Participez-vous à des activités périscolaires ou extrascolaires ?", type: "radio", options: [
+                    "Oui, régulièrement", "Oui, occasionnellement", "Non, mais j'aimerais", "Non, cela ne m'intéresse pas"
+                ]},
+                { id: "maison_jeunes_18_25", question: "5. Est-ce que vous fréquentez une maison des jeunes ou un centre d'animation ?", type: "radio", options: [
+                    "Oui, régulièrement", "Oui, occasionnellement", "Non, mais j'aimerais", "Non, cela ne m'intéresse pas", "Il n'y en a pas près de chez moi"
+                ]},
+                { id: "activites_sportives_18_25", question: "6. Y a-t-il suffisamment d'activités sportives pour les jeunes ?", type: "radio", options: [
+                    "Oui, largement suffisant", "Oui, plutôt suffisant", "Non, plutôt insuffisant", "Non, très insuffisant", "Sans opinion"
+                ]},
+                { id: "ennui_commune_18_25", question: "7. Vous arrive-t-il de vous ennuyer dans votre commune ?", type: "radio", options: [
+                    "Souvent", "Parfois", "Rarement", "Jamais"
+                ]},
+                { id: "vie_associative_18_25", question: "8. Participez-vous à la vie associative ou bénévole ?", type: "radio", options: [
+                    "Oui, très actif/active", "Oui, occasionnellement", "Non, mais j'aimerais", "Non, cela ne m'intéresse pas"
+                ]},
+
+                // Équipements et Infrastructures
+                { id: "equipements_manquants_18_25", question: "9. Quels équipements manque-t-il pour les jeunes dans votre quartier ?", type: "checkbox", options: [
+                    "Espaces de sport", "Lieux de rencontre/socialisation", "Espaces culturels", "Transports en commun", "Commerces de proximité", "Espaces verts", "Connexion internet/wifi public", "Autre"
+                ]},
+                { id: "deplacements_simples_18_25", question: "10. Vos déplacements en ville sont-ils simples à organiser ?", type: "radio", options: [
+                    "Très simples", "Plutôt simples", "Plutôt compliqués", "Très compliqués"
+                ]},
+                { id: "environnement_quartier_18_25", question: "11. Que pensez-vous de l'environnement dans votre quartier (propreté, espaces verts) ?", type: "radio", options: [
+                    "Très satisfaisant", "Plutôt satisfaisant", "Plutôt insatisfaisant", "Très insatisfaisant"
+                ]},
+
+                // Sécurité et Bien-être
+                { id: "securite_etablissement_18_25", question: "12. Vous sentez-vous en sécurité aux abords de votre établissement scolaire ?", type: "radio", options: [
+                    "Toujours en sécurité", "Généralement en sécurité", "Parfois en insécurité", "Souvent en insécurité", "Ne s'applique pas"
+                ]},
+                { id: "violence_harcelement_18_25", question: "13. Avez-vous déjà été confronté(e) à des violences ou harcèlements (école, transport, rue) ?", type: "radio", options: [
+                    "Oui, fréquemment", "Oui, occasionnellement", "Oui, rarement", "Non, jamais"
+                ]},
+
+                // Santé et Information
+                { id: "information_sante_18_25", question: "14. Êtes-vous suffisamment informé(e) sur la santé (sexualité, prévention, etc.) ?", type: "radio", options: [
+                    "Très bien informé(e)", "Plutôt bien informé(e)", "Plutôt mal informé(e)", "Pas du tout informé(e)"
+                ]},
+                { id: "acces_sante_jeunes_18_25", question: "15. Avez-vous accès à des services de santé adaptés aux jeunes ?", type: "radio", options: [
+                    "Oui, facilement", "Oui, mais avec des difficultés", "Non, pas du tout", "Ne sais pas"
+                ]},
+
+                // Participation Citoyenne
+                { id: "mot_a_dire_18_25", question: "16. Avez-vous votre mot à dire dans les décisions de la commune ?", type: "radio", options: [
+                    "Oui, tout à fait", "Oui, dans une certaine mesure", "Non, pas vraiment", "Non, pas du tout", "Sans opinion"
+                ]},
+                { id: "conseil_jeunes_18_25", question: "17. Aimeriez-vous qu'on vous propose un Conseil des Jeunes ?", type: "radio", options: [
+                    "Oui, je serais très intéressé(e)", "Oui, pourquoi pas", "Non, cela ne m'intéresse pas", "Je ne sais pas ce que c'est"
+                ]},
+
+                // Égalité et Attentes
+                { id: "egalite_activites_18_25", question: "18. Y a-t-il des différences de traitement entre garçons et filles dans les activités proposées ?", type: "radio", options: [
+                    "Oui, souvent", "Oui, parfois", "Non, rarement", "Non, jamais", "Je n'ai pas remarqué"
+                ]},
+                { id: "attentes_maire_18_25", question: "19. Qu'attendez-vous d'un(e) futur(e) maire pour les jeunes ?\n*Question ouverte - Exprimez-vous librement :*", type: "textarea" }
             ],
-            "26_35": [
-                // Justice sociale
-                { id: "js1", question: "Avez-vous rencontré des obstacles pour accéder au logement ou à l’emploi stable ?", type: "radio", options: ["Oui", "Non", "Ne sait pas"] },
-                { id: "js2", question: "Les services publics (santé, crèche, école) répondent-ils à vos besoins ?", type: "radio", options: ["Oui", "Non", "Partiellement"] },
-                // Écologie
-                { id: "eco1", question: "Seriez-vous favorable à des mesures ambitieuses pour réduire la pollution dans votre quartier ?", type: "radio", options: ["Oui", "Non", "Sans avis"] },
-                { id: "eco2", question: "Seriez-vous prêt·e à privilégier les mobilités douces (vélo, marche, transports en commun) ?", type: "radio", options: ["Oui", "Non", "Déjà fait"] },
-                // Démocratie populaire
-                { id: "dp1", question: "Souhaitez-vous participer à des consultations citoyennes sur les projets municipaux ?", type: "radio", options: ["Oui", "Non", "Peut-être"] },
-                { id: "dp2", question: "Pensez-vous que la démocratie locale devrait être renforcée (référendums, budgets participatifs) ?", type: "radio", options: ["Oui", "Non", "Sans avis"] }
+            "26_50": [
+                // Informations personnelles
+                { id: "genre_26_50", question: "Genre :", type: "radio", options: [
+                    "Féminin", "Masculin", "Non-binaire", "Préfère ne pas répondre"
+                ]},
+                { id: "situation_familiale_26_50", question: "Situation familiale :", type: "radio", options: [
+                    "Célibataire", "En couple", "Marié(e)/Pacsé(e)", "Divorcé(e)", "Veuf/Veuve"
+                ]},
+
+                // Famille et Enfants
+                { id: "enfants", question: "Avez-vous des enfants ?", type: "radio", options: [
+                    "Oui", "Non"
+                ]},
+                { id: "accueil_enfants", question: "Si oui : Sont-ils bien accueillis en crèche ou à l'école ?", type: "radio", options: [
+                    "Très bien accueillis", "Plutôt bien accueillis", "Plutôt mal accueillis", "Très mal accueillis", "Ne s'applique pas (enfants adultes)"
+                ]},
+                { id: "equilibre_vie", question: "1. Trouvez-vous facilement un équilibre entre vie professionnelle et vie familiale ?", type: "radio", options: [
+                    "Très facilement", "Plutôt facilement", "Plutôt difficilement", "Très difficilement", "Ne s'applique pas"
+                ]},
+                { id: "infrastructures_scolaires", question: "2. Que pensez-vous des infrastructures scolaires locales ?", type: "radio", options: [
+                    "Excellentes", "Bonnes", "Moyennes", "Insuffisantes", "Ne les connais pas"
+                ]},
+
+                // Conditions de Vie et Services
+                { id: "cout_vie", question: "3. Le coût de la vie (logement, services, alimentation) est-il un problème ?", type: "radio", options: [
+                    "Non, pas du tout", "Non, plutôt gérable", "Oui, c'est difficile", "Oui, c'est très problématique"
+                ]},
+                { id: "offre_sante", question: "4. Avez-vous accès à une offre de santé satisfaisante ?", type: "radio", options: [
+                    "Très satisfaisante", "Plutôt satisfaisante", "Plutôt insatisfaisante", "Très insatisfaisante"
+                ]},
+                { id: "transports", question: "5. Est-ce que les transports répondent à vos besoins quotidiens ?", type: "radio", options: [
+                    "Parfaitement", "Plutôt bien", "Plutôt mal", "Pas du tout"
+                ]},
+                { id: "handicap_chronique", question: "6. Avez-vous des besoins spécifiques en lien avec un handicap ou une maladie chronique ?", type: "radio", options: [
+                    "Oui, et ils sont bien pris en compte", "Oui, mais ils ne sont pas assez pris en compte", "Oui, mais ils ne sont pas du tout pris en compte", "Non, je n'ai pas de besoins spécifiques"
+                ]},
+
+                // Sécurité et Environnement
+                { id: "securite_quartier", question: "7. Que pensez-vous de la sécurité dans votre quartier ?", type: "radio", options: [
+                    "Très sécurisé", "Plutôt sécurisé", "Plutôt insécurisé", "Très insécurisé"
+                ]},
+                { id: "environnement", question: "8. L'environnement vous semble-t-il préservé ?", type: "radio", options: [
+                    "Très bien préservé", "Plutôt bien préservé", "Plutôt dégradé", "Très dégradé"
+                ]},
+
+                // Loisirs et Culture
+                { id: "loisirs_adultes", question: "9. Êtes-vous satisfait(e) des loisirs pour adultes ?", type: "radio", options: [
+                    "Très satisfait(e)", "Plutôt satisfait(e)", "Plutôt insatisfait(e)", "Très insatisfait(e)"
+                ]},
+                { id: "sport_equipements", question: "10. Faites-vous du sport dans les équipements municipaux ?", type: "radio", options: [
+                    "Oui, régulièrement", "Oui, occasionnellement", "Non, mais j'aimerais", "Non, je ne fais pas de sport", "Non, je vais ailleurs"
+                ]},
+                { id: "offre_culturelle", question: "11. Avez-vous accès à une offre culturelle intéressante ?", type: "radio", options: [
+                    "Très intéressante", "Plutôt intéressante", "Plutôt limitée", "Très limitée"
+                ]},
+
+                // Emploi et Économie Locale
+                { id: "travail_commune", question: "12. Travaillez-vous dans la commune ?", type: "radio", options: [
+                    "Oui", "Non"
+                ]},
+                { id: "raison_non_travail", question: "Si non, pourquoi ?", type: "checkbox", options: [
+                    "Pas d'emploi correspondant à mes compétences", "Salaires insuffisants", "Manque d'entreprises", "Je préfère travailler ailleurs", "Autre"
+                ]},
+                { id: "dispositifs_emploi", question: "13. Connaissez-vous les dispositifs municipaux pour l'emploi ?", type: "radio", options: [
+                    "Oui, et je les utilise", "Oui, mais je ne les utilise pas", "Non, mais ça m'intéresserait", "Non, et ça ne m'intéresse pas"
+                ]},
+
+                // Engagement et Participation
+                { id: "vie_associative_scolaire", question: "14. Êtes-vous impliqué(e) dans la vie associative ou scolaire ?", type: "radio", options: [
+                    "Très impliqué(e)", "Plutôt impliqué(e)", "Peu impliqué(e)", "Pas du tout impliqué(e)"
+                ]},
+                { id: "engagement_local", question: "15. Seriez-vous prêt(e) à vous engager dans la vie politique ou associative locale ?", type: "radio", options: [
+                    "Oui, tout à fait", "Oui, peut-être", "Non, plutôt pas", "Non, pas du tout"
+                ]},
+
+                // Égalité et Gouvernance
+                { id: "egalite_femmes_hommes", question: "16. Les femmes et les hommes sont-ils traités de manière équitable dans la vie publique locale ?", type: "radio", options: [
+                    "Oui, parfaitement équitable", "Oui, plutôt équitable", "Non, plutôt inéquitable", "Non, très inéquitable", "Sans opinion"
+                ]},
+                { id: "mixite_municipale", question: "17. Êtes-vous favorable à plus de mixité dans les instances municipales ?", type: "radio", options: [
+                    "Très favorable", "Plutôt favorable", "Plutôt défavorable", "Très défavorable", "Sans opinion"
+                ]},
+
+                // Gestion Municipale et Attentes
+                { id: "gestion_municipale", question: "18. Êtes-vous satisfait(e) de la gestion municipale actuelle ?", type: "radio", options: [
+                    "Très satisfait(e)", "Plutôt satisfait(e)", "Plutôt insatisfait(e)", "Très insatisfait(e)", "Sans opinion"
+                ]},
+                { id: "priorite_ville", question: "19. Que changeriez-vous en priorité dans votre ville ?\n*Question ouverte - Exprimez vos priorités :*", type: "textarea" }
             ],
-            "36_50": [
-                // Justice sociale
-                { id: "js1", question: "Avez-vous constaté des inégalités d’accès aux soins ou à l’éducation dans votre entourage ?", type: "radio", options: ["Oui", "Non", "Ne sait pas"] },
-                { id: "js2", question: "Les politiques sociales actuelles protègent-elles suffisamment les familles ?", type: "radio", options: ["Oui", "Non", "Partiellement"] },
-                // Écologie
-                { id: "eco1", question: "Faut-il renforcer la lutte contre les pollutions industrielles et urbaines ?", type: "radio", options: ["Oui", "Non", "Sans avis"] },
-                { id: "eco2", question: "Seriez-vous prêt·e à soutenir des initiatives locales pour la transition écologique ?", type: "radio", options: ["Oui", "Non", "Peut-être"] },
-                // Démocratie populaire
-                { id: "dp1", question: "Pensez-vous que les citoyens devraient pouvoir proposer des lois localement ?", type: "radio", options: ["Oui", "Non", "Sans avis"] },
-                { id: "dp2", question: "Aimeriez-vous participer à des réunions publiques pour débattre des choix municipaux ?", type: "radio", options: ["Oui", "Non", "Peut-être"] }
+            "51_65": [
+                { id: "genre_51_65", question: "Genre :", type: "radio", options: [
+                    "Féminin", "Masculin", "Non-binaire", "Préfère ne pas répondre"
+                ]},
+                { id: "situation_familiale_51_65", question: "Situation familiale :", type: "radio", options: [
+                    "Célibataire", "En couple", "Marié(e)/Pacsé(e)", "Divorcé(e)", "Veuf/Veuve"
+                ]},
+                { id: "acces_medecin", question: "Avez-vous accès facilement à un médecin généraliste ?", type: "radio", options: [
+                    "Oui, très facilement", "Oui, mais avec délai d'attente", "Difficilement", "Très difficilement", "Pas d'accès"
+                ]},
+                { id: "services_domicile", question: "1. Utilisez-vous des services à domicile ?", type: "radio", options: [
+                    "Oui, régulièrement (aide ménagère, soins...)", "Oui, occasionnellement", "Non, mais j'aimerais", "Non, je n'en ai pas besoin"
+                ]},
+                { id: "droits_sante_fin_vie", question: "16. Êtes-vous informé(e) des droits en matière de santé et de fin de vie ?", type: "radio", options: [
+                    "Très bien informé(e)", "Plutôt bien informé(e)", "Plutôt mal informé(e)", "Pas du tout informé(e)"
+                ]},
+                { id: "situation_logement", question: "2. Habitez-vous seul(e) ou en famille ?", type: "radio", options: [
+                    "Seul(e) à domicile", "En couple à domicile", "Avec mes enfants/famille", "En résidence senior", "En maison de retraite/EHPAD"
+                ]},
+                { id: "adaptation_logement", question: "4. Est-ce que votre logement est adapté à votre âge ou à une éventuelle perte d'autonomie ?", type: "radio", options: [
+                    "Parfaitement adapté", "Plutôt bien adapté", "Partiellement adapté", "Pas du tout adapté", "J'ai besoin d'aide pour l'adapter"
+                ]},
+                { id: "espaces_publics", question: "5. Les espaces publics sont-ils accessibles et sécurisés ?", type: "radio", options: [
+                    "Très accessibles et sécurisés", "Plutôt accessibles et sécurisés", "Peu accessibles ou sécurisés", "Pas du tout accessibles ou sécurisés"
+                ]},
+                { id: "isolement_social", question: "3. Avez-vous déjà ressenti un isolement social ?", type: "radio", options: [
+                    "Jamais", "Rarement", "Parfois", "Souvent", "Tout le temps"
+                ]},
+                { id: "lieux_rencontre", question: "12. Souhaitez-vous des lieux de rencontre entre seniors ?", type: "radio", options: [
+                    "Oui, j'en fréquente déjà", "Oui, ça m'intéresserait beaucoup", "Oui, peut-être", "Non, ça ne m'intéresse pas"
+                ]},
+                { id: "contact_famille", question: "13. Êtes-vous en contact régulier avec votre famille ?", type: "radio", options: [
+                    "Oui, très régulièrement", "Oui, assez régulièrement", "Pas assez à mon goût", "Très peu", "Je n'ai pas de famille proche"
+                ]},
+                { id: "offre_culturelle", question: "6. Que pensez-vous de l'offre culturelle et sociale pour les seniors ?", type: "radio", options: [
+                    "Très satisfaisante", "Plutôt satisfaisante", "Plutôt insuffisante", "Très insuffisante", "Je ne la connais pas"
+                ]},
+                { id: "activite_mairie", question: "7. Avez-vous participé à une activité organisée par la mairie ?", type: "radio", options: [
+                    "Oui, régulièrement", "Oui, occasionnellement", "Non, mais ça m'intéresserait", "Non, ça ne m'intéresse pas", "Je ne connais pas les activités proposées"
+                ]},
+                { id: "clubs_associations", question: "14. Participez-vous à des clubs ou associations ?", type: "radio", options: [
+                    "Oui, j'en anime un/une", "Oui, j'y participe activement", "Oui, de temps en temps", "Non, mais j'aimerais", "Non, ça ne m'intéresse pas"
+                ]},
+                { id: "aides_municipales", question: "8. Connaissez-vous les aides municipales pour les personnes âgées ?", type: "radio", options: [
+                    "Oui, et j'en bénéficie", "Oui, mais je n'en bénéficie pas", "Je les connais un peu", "Non, pas du tout"
+                ]},
+                { id: "accompagnement_demarche", question: "9. Bénéficiez-vous d'un accompagnement pour les démarches administratives ?", type: "radio", options: [
+                    "Oui, et c'est suffisant", "Oui, mais c'est insuffisant", "Non, mais j'en aurais besoin", "Non, je me débrouille seul(e)"
+                ]},
+                { id: "qualite_accompagnement", question: "15. Que pensez-vous de la qualité de l'accompagnement en maison de retraite ?", type: "radio", options: [
+                    "Très bonne qualité", "Plutôt bonne qualité", "Plutôt mauvaise qualité", "Très mauvaise qualité", "Je ne connais pas/ne suis pas concerné(e)"
+                ]},
+                { id: "revenus_suffisants", question: "10. Est-ce que vos revenus suffisent à couvrir vos besoins ?", type: "radio", options: [
+                    "Oui, largement", "Oui, juste ce qu'il faut", "Non, c'est juste", "Non, c'est insuffisant"
+                ]},
+                { id: "arnaque_abus", question: "11. Avez-vous déjà été victime d'une arnaque ou abus de faiblesse ?", type: "radio", options: [
+                    "Oui, plusieurs fois", "Oui, une fois", "Non, mais j'ai été approché(e)", "Non, jamais"
+                ]},
+                { id: "numerique_barriere", question: "17. Le numérique est-il une barrière pour vous ?", type: "radio", options: [
+                    "Non, je maîtrise bien", "Non, je me débrouille", "Oui, c'est parfois compliqué", "Oui, c'est un gros problème", "Je refuse d'utiliser le numérique"
+                ]},
+                { id: "respect_societe", question: "18. Vous sentez-vous respecté(e) dans la société actuelle ?", type: "radio", options: [
+                    "Tout à fait respecté(e)", "Plutôt respecté(e)", "Plutôt pas respecté(e)", "Pas du tout respecté(e)"
+                ]},
+                { id: "role_vie_locale", question: "19. Quel rôle souhaitez-vous encore jouer dans la vie locale ?", type: "radio", options: [
+                    "Un rôle très actif", "Un rôle modéré", "Un petit rôle selon mes possibilités", "Aucun rôle particulier", "Je souhaite me reposer"
+                ]},
+                { id: "attentes_commune", question: "Quelles sont vos principales préoccupations ou attentes vis-à-vis de votre commune ?\n*Question ouverte - Exprimez-vous librement :*", type: "textarea" }
             ],
-            "51_60": [
-                // Justice sociale
-                { id: "js1", question: "Avez-vous rencontré des difficultés dans l’accès à la santé ou à la retraite ?", type: "radio", options: ["Oui", "Non", "Ne sait pas"] },
-                { id: "js2", question: "Les dispositifs de solidarité sont-ils adaptés aux besoins des personnes de votre âge ?", type: "radio", options: ["Oui", "Non", "Partiellement"] },
-                // Écologie
-                { id: "eco1", question: "Faut-il investir davantage dans la rénovation énergétique des logements ?", type: "radio", options: ["Oui", "Non", "Sans avis"] },
-                { id: "eco2", question: "Seriez-vous prêt·e à participer à des démarches collectives pour l’écologie (jardins partagés, recyclage, etc.) ?", type: "radio", options: ["Oui", "Non", "Peut-être"] },
-                // Démocratie populaire
-                { id: "dp1", question: "Souhaitez-vous être davantage consulté·e sur les politiques locales concernant les seniors ?", type: "radio", options: ["Oui", "Non", "Sans avis"] },
-                { id: "dp2", question: "Pensez-vous que la démocratie participative peut améliorer la vie locale ?", type: "radio", options: ["Oui", "Non", "Sans avis"] }
-            ],
-            "60_plus": [
-                // Justice sociale
-                { id: "js1", question: "Avez-vous accès facilement aux soins et aux services publics ?", type: "radio", options: ["Oui", "Non", "Partiellement"] },
-                { id: "js2", question: "Les pensions de retraite vous semblent-elles suffisantes pour vivre dignement ?", type: "radio", options: ["Oui", "Non", "Sans avis"] },
-                // Écologie
-                { id: "eco1", question: "Faut-il renforcer les actions pour préserver l’environnement pour les générations futures ?", type: "radio", options: ["Oui", "Non", "Sans avis"] },
-                { id: "eco2", question: "Seriez-vous prêt·e à soutenir des projets écologiques portés par la commune ?", type: "radio", options: ["Oui", "Non", "Peut-être"] },
-                // Démocratie populaire
-                { id: "dp1", question: "Souhaitez-vous participer à des conseils de quartier ou des assemblées citoyennes ?", type: "radio", options: ["Oui", "Non", "Peut-être"] },
-                { id: "dp2", question: "Pensez-vous que les élus locaux sont à l’écoute des habitants ?", type: "radio", options: ["Oui", "Non", "Parfois"] }
+            "66_plus": [
+                { id: "genre_66_plus", question: "Genre :", type: "radio", options: [
+                    "Féminin", "Masculin", "Non-binaire", "Préfère ne pas répondre"
+                ]},
+                { id: "situation_familiale_66_plus", question: "Situation familiale :", type: "radio", options: [
+                    "Célibataire", "En couple", "Marié(e)/Pacsé(e)", "Divorcé(e)", "Veuf/Veuve"
+                ]},
+                { id: "acces_medecin", question: "Avez-vous accès facilement à un médecin généraliste ?", type: "radio", options: [
+                    "Oui, très facilement", "Oui, mais avec délai d'attente", "Difficilement", "Très difficilement", "Pas d'accès"
+                ]},
+                { id: "services_domicile", question: "1. Utilisez-vous des services à domicile ?", type: "radio", options: [
+                    "Oui, régulièrement (aide ménagère, soins...)", "Oui, occasionnellement", "Non, mais j'aimerais", "Non, je n'en ai pas besoin"
+                ]},
+                { id: "droits_sante_fin_vie", question: "16. Êtes-vous informé(e) des droits en matière de santé et de fin de vie ?", type: "radio", options: [
+                    "Très bien informé(e)", "Plutôt bien informé(e)", "Plutôt mal informé(e)", "Pas du tout informé(e)"
+                ]},
+                { id: "situation_logement", question: "2. Habitez-vous seul(e) ou en famille ?", type: "radio", options: [
+                    "Seul(e) à domicile", "En couple à domicile", "Avec mes enfants/famille", "En résidence senior", "En maison de retraite/EHPAD"
+                ]},
+                { id: "adaptation_logement", question: "4. Est-ce que votre logement est adapté à votre âge ou à une éventuelle perte d'autonomie ?", type: "radio", options: [
+                    "Parfaitement adapté", "Plutôt bien adapté", "Partiellement adapté", "Pas du tout adapté", "J'ai besoin d'aide pour l'adapter"
+                ]},
+                { id: "espaces_publics", question: "5. Les espaces publics sont-ils accessibles et sécurisés ?", type: "radio", options: [
+                    "Très accessibles et sécurisés", "Plutôt accessibles et sécurisés", "Peu accessibles ou sécurisés", "Pas du tout accessibles ou sécurisés"
+                ]},
+                { id: "isolement_social", question: "3. Avez-vous déjà ressenti un isolement social ?", type: "radio", options: [
+                    "Jamais", "Rarement", "Parfois", "Souvent", "Tout le temps"
+                ]},
+                { id: "lieux_rencontre", question: "12. Souhaitez-vous des lieux de rencontre entre seniors ?", type: "radio", options: [
+                    "Oui, j'en fréquente déjà", "Oui, ça m'intéresserait beaucoup", "Oui, peut-être", "Non, ça ne m'intéresse pas"
+                ]},
+                { id: "contact_famille", question: "13. Êtes-vous en contact régulier avec votre famille ?", type: "radio", options: [
+                    "Oui, très régulièrement", "Oui, assez régulièrement", "Pas assez à mon goût", "Très peu", "Je n'ai pas de famille proche"
+                ]},
+                { id: "offre_culturelle", question: "6. Que pensez-vous de l'offre culturelle et sociale pour les seniors ?", type: "radio", options: [
+                    "Très satisfaisante", "Plutôt satisfaisante", "Plutôt insuffisante", "Très insuffisante", "Je ne la connais pas"
+                ]},
+                { id: "activite_mairie", question: "7. Avez-vous participé à une activité organisée par la mairie ?", type: "radio", options: [
+                    "Oui, régulièrement", "Oui, occasionnellement", "Non, mais ça m'intéresserait", "Non, ça ne m'intéresse pas", "Je ne connais pas les activités proposées"
+                ]},
+                { id: "clubs_associations", question: "14. Participez-vous à des clubs ou associations ?", type: "radio", options: [
+                    "Oui, j'en anime un/une", "Oui, j'y participe activement", "Oui, de temps en temps", "Non, mais j'aimerais", "Non, ça ne m'intéresse pas"
+                ]},
+                { id: "aides_municipales", question: "8. Connaissez-vous les aides municipales pour les personnes âgées ?", type: "radio", options: [
+                    "Oui, et j'en bénéficie", "Oui, mais je n'en bénéficie pas", "Je les connais un peu", "Non, pas du tout"
+                ]},
+                { id: "accompagnement_demarche", question: "9. Bénéficiez-vous d'un accompagnement pour les démarches administratives ?", type: "radio", options: [
+                    "Oui, et c'est suffisant", "Oui, mais c'est insuffisant", "Non, mais j'en aurais besoin", "Non, je me débrouille seul(e)"
+                ]},
+                { id: "qualite_accompagnement", question: "15. Que pensez-vous de la qualité de l'accompagnement en maison de retraite ?", type: "radio", options: [
+                    "Très bonne qualité", "Plutôt bonne qualité", "Plutôt mauvaise qualité", "Très mauvaise qualité", "Je ne connais pas/ne suis pas concerné(e)"
+                ]},
+                { id: "revenus_suffisants", question: "10. Est-ce que vos revenus suffisent à couvrir vos besoins ?", type: "radio", options: [
+                    "Oui, largement", "Oui, juste ce qu'il faut", "Non, c'est juste", "Non, c'est insuffisant"
+                ]},
+                { id: "arnaque_abus", question: "11. Avez-vous déjà été victime d'une arnaque ou abus de faiblesse ?", type: "radio", options: [
+                    "Oui, plusieurs fois", "Oui, une fois", "Non, mais j'ai été approché(e)", "Non, jamais"
+                ]},
+                { id: "numerique_barriere", question: "17. Le numérique est-il une barrière pour vous ?", type: "radio", options: [
+                    "Non, je maîtrise bien", "Non, je me débrouille", "Oui, c'est parfois compliqué", "Oui, c'est un gros problème", "Je refuse d'utiliser le numérique"
+                ]},
+                { id: "respect_societe", question: "18. Vous sentez-vous respecté(e) dans la société actuelle ?", type: "radio", options: [
+                    "Tout à fait respecté(e)", "Plutôt respecté(e)", "Plutôt pas respecté(e)", "Pas du tout respecté(e)"
+                ]},
+                { id: "role_vie_locale", question: "19. Quel rôle souhaitez-vous encore jouer dans la vie locale ?", type: "radio", options: [
+                    "Un rôle très actif", "Un rôle modéré", "Un petit rôle selon mes possibilités", "Aucun rôle particulier", "Je souhaite me reposer"
+                ]},
+                { id: "attentes_commune", question: "Quelles sont vos principales préoccupations ou attentes vis-à-vis de votre commune ?\n*Question ouverte - Exprimez-vous librement :*", type: "textarea" }
             ]
         };
-
-        // Variables globales
-        let currentCategory = "";
-        let currentQuestionIndex = 0;
-        let userResponses = {};
-        let userData = {
-            nom: "",
-            email: "",
-            age: null,
-            genre: "",
-            quartier: "",
-            contactConsent: false
-        };
         
-        // Éléments du DOM
+        let currentStep = 0;
+        let currentCategory = "";
+        let userResponses = {};
+        
         const initialForm = document.getElementById('initial-form');
-        const questionnaireSection = document.getElementById('questionnaire');
-        const questionContainer = document.getElementById('question-container');
-        const nextButton = document.getElementById('next-question');
-        const prevButton = document.getElementById('prev-question');
-        const submitButton = document.getElementById('submit-questionnaire');
+        const questionnaire = document.getElementById('questionnaire');
         const resultContainer = document.getElementById('result-container');
+        const questionContainer = document.getElementById('question-container');
         const progressBar = document.getElementById('progress');
         
-        // Démarrer le questionnaire
         document.getElementById('start-questionnaire').addEventListener('click', function() {
-            const nom = document.getElementById('nom').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const age = parseInt(document.getElementById('age').value);
-            const genre = document.getElementById('genre').value;
-            const quartier = document.getElementById('quartier').value;
-            
-            if (!nom || !email || !age || !genre || !quartier) {
-                alert("Veuillez remplir tous les champs.");
+            const ageValue = document.getElementById('age').value;
+            if (!ageValue) {
+                alert("Veuillez sélectionner votre tranche d'âge.");
                 return;
             }
-            
-            if (!document.getElementById('rgpd-consent').checked) {
-                alert("Vous devez accepter la politique de confidentialité pour continuer.");
-                return;
-            }
-            
-            // Validation de l'email
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                alert("Veuillez entrer une adresse email valide.");
-                return;
-            }
-            
-            if (age < 18 || age > 120) {
-                alert("L'âge doit être compris entre 18 et 120 ans.");
-                return;
-            }
-            
-            // Enregistrer les données utilisateur
-            userData.nom = nom;
-            userData.email = email;
-            userData.age = age;
-            userData.genre = genre;
-            userData.quartier = quartier;
-            
-            // Déterminer la catégorie
-            let ageGroup = "";
-            if (age >= 18 && age <= 25) ageGroup = "18_25";
-            else if (age >= 26 && age <= 35) ageGroup = "26_35";
-            else if (age >= 36 && age <= 50) ageGroup = "36_50";
-            else if (age >= 51 && age <= 60) ageGroup = "51_60";
-            else if (age > 60) ageGroup = "60_plus";
-            currentCategory = ageGroup;
-            
-            // Cacher le formulaire initial et afficher le questionnaire
+            currentCategory = ageValue;
             initialForm.classList.add('hidden');
-            questionnaireSection.classList.remove('hidden');
-            
-            // Afficher la première question
-            displayQuestion(0);
+            questionnaire.classList.remove('hidden');
+            currentStep = 0;
+            userResponses = {};
+            showQuestion();
         });
         
-        // Afficher une question
-        function displayQuestion(index) {
-            currentQuestionIndex = index;
-
-            if (!questions[currentCategory] || !questions[currentCategory][index]) {
-                console.error(`Pas de questions pour la catégorie ${currentCategory} à l'index ${index}`);
+        document.getElementById('next-question').addEventListener('click', function() {
+            if (!validateQuestion()) {
                 return;
             }
-
-            // Récupérer la question
-            const question = questions[currentCategory][index];
-
-            // Déterminer la section (justice sociale, écologie, démocratie populaire)
-            let sectionTitle = "";
-            if (question.id.startsWith("js")) sectionTitle = "Justice sociale";
-            else if (question.id.startsWith("eco")) sectionTitle = "Écologie";
-            else if (question.id.startsWith("dp")) sectionTitle = "Démocratie participative";
-
-            // Afficher le titre de section uniquement pour la première question de chaque bloc
-            let showSectionTitle = false;
-            if (
-                (question.id === "js1") ||
-                (question.id === "eco1") ||
-                (question.id === "dp1")
-            ) {
-                showSectionTitle = true;
+            saveResponse();
+            currentStep++;
+            showQuestion();
+        });
+        
+        document.getElementById('prev-question').addEventListener('click', function() {
+            currentStep--;
+            showQuestion();
+        });
+        
+        document.getElementById('submit-questionnaire').addEventListener('click', function() {
+            if (!validateQuestion()) {
+                return;
             }
+            saveResponse();
+            showSummary();
+        });
+        
+        function showQuestion() {
+            const categoryQuestions = questions[currentCategory];
+            if (currentStep < categoryQuestions.length) {
+                const questionData = categoryQuestions[currentStep];
+                questionContainer.innerHTML = '';
+                
+                // Label pour textarea (accessibilité)
+                if (questionData.type === 'textarea') {
+                    const textareaLabel = document.createElement('label');
+                    textareaLabel.setAttribute('for', questionData.id);
+                    textareaLabel.textContent = questionData.question;
+                    questionContainer.appendChild(textareaLabel);
+                } else {
+                    const questionElement = document.createElement('div');
+                    questionElement.classList.add('question');
+                    questionElement.innerHTML = `<strong>${questionData.question}</strong>`;
+                    questionContainer.appendChild(questionElement);
+                }
+                
+                if (questionData.type === 'radio' || questionData.type === 'checkbox') {
+                    const groupClass = questionData.type === 'radio' ? 'radio-group' : 'checkbox-group';
+                    const groupDiv = document.createElement('div');
+                    groupDiv.className = groupClass;
+                    questionData.options.forEach((option, idx) => {
+                        const inputId = `${questionData.id}_${idx}`;
+                        const label = document.createElement('label');
+                        label.className = questionData.type === 'radio' ? 'radio-option' : 'checkbox-option';
+                        label.setAttribute('for', inputId);
+                        // Correction : ne pas échapper les options prédéfinies
+                        label.innerHTML = `
+                            <input type="${questionData.type}" name="${questionData.id}" id="${inputId}" value="${option}">
+                            ${option}
+                        `;
+                        groupDiv.appendChild(label);
+                    });
+                    questionContainer.appendChild(groupDiv);
+                } else if (questionData.type === 'textarea') {
+                    const textarea = document.createElement('textarea');
+                    textarea.id = questionData.id;
+                    textarea.placeholder = "Votre réponse...";
+                    questionContainer.appendChild(textarea);
+                }
+                
+                // Gestion focus accessibilité
+                setTimeout(() => {
+                    const firstInput = questionContainer.querySelector('input, textarea, select');
+                    if (firstInput) firstInput.focus();
+                }, 0);
 
-            let questionHTML = "";
-
-            if (showSectionTitle) {
-                questionHTML += `<h2 style="color:var(--fi-purple);margin-bottom:10px;">${sectionTitle}</h2>`;
+                // Gestion des boutons navigation
+                const prevBtn = document.getElementById('prev-question');
+                const nextBtn = document.getElementById('next-question');
+                const submitBtn = document.getElementById('submit-questionnaire');
+                if (currentStep === 0) {
+                    prevBtn.classList.add('hidden');
+                } else {
+                    prevBtn.classList.remove('hidden');
+                }
+                if (currentStep === categoryQuestions.length - 1) {
+                    nextBtn.classList.add('hidden');
+                    submitBtn.classList.remove('hidden');
+                } else {
+                    nextBtn.classList.remove('hidden');
+                    submitBtn.classList.add('hidden');
+                }
+                
+                updateProgress();
+            } else {
+                showSummary();
             }
+        }
+        
+        function validateQuestion() {
+            const categoryQuestions = questions[currentCategory];
+            const questionData = categoryQuestions[currentStep];
+            
+            if (questionData.type === 'radio' || questionData.type === 'checkbox') {
+                const checkedOptions = document.querySelectorAll(`input[name="${questionData.id}"]:checked`);
+                if (checkedOptions.length === 0) {
+                    alert("Veuillez répondre à la question.");
+                    return false;
+                }
+            } else if (questionData.type === 'textarea') {
+                const textareaValue = document.getElementById(questionData.id).value.trim();
+                if (textareaValue === '') {
+                    alert("Veuillez répondre à la question.");
+                    return false;
+                }
+            }
+            return true;
+        }
+        
+        function saveResponse() {
+            const categoryQuestions = questions[currentCategory];
+            const questionData = categoryQuestions[currentStep];
 
-            questionHTML += `
-                <div class="question">
-                    <h3>${index + 1}. ${question.question}</h3>
+            if (questionData.type === 'radio') {
+                const checkedOption = document.querySelector(`input[name="${questionData.id}"]:checked`);
+                userResponses[questionData.id] = checkedOption ? checkedOption.value : "";
+            } else if (questionData.type === 'checkbox') {
+                const checkedOptions = document.querySelectorAll(`input[name="${questionData.id}"]:checked`);
+                userResponses[questionData.id] = Array.from(checkedOptions).map(option => option.value);
+            } else if (questionData.type === 'textarea') {
+                const textareaValue = document.getElementById(questionData.id).value.trim();
+                userResponses[questionData.id] = textareaValue;
+            }
+        }
+        
+        function updateProgress() {
+            const categoryQuestions = questions[currentCategory];
+            const progressPercentage = ((currentStep + 1) / categoryQuestions.length) * 100;
+            progressBar.style.width = `${progressPercentage}%`;
+        }
+        
+        function showSummary() {
+            initialForm.classList.add('hidden');
+            questionnaire.classList.add('hidden');
+            resultContainer.classList.remove('hidden');
+            resultContainer.innerHTML = `
+                <h2>Merci d'avoir complété le questionnaire !</h2>
+                <p>Vos réponses ont été enregistrées.</p>
             `;
 
-            if (question.type === "radio") {
-                questionHTML += `<div class="radio-group">`;
-                question.options.forEach((option, i) => {
-                    const checked = userResponses[question.id] === option ? "checked" : "";
-                    questionHTML += `
-                        <div class="radio-option">
-                            <input type="radio" id="${question.id}_${i}" name="${question.id}" value="${option}" ${checked}>
-                            <label for="${question.id}_${i}">${option}</label>
-                        </div>
-                    `;
-                });
-                questionHTML += `</div>`;
-            }
+            const summaryHtml = Object.keys(userResponses).map(key => {
+                const questionData = questions[currentCategory].find(q => q.id === key);
+                const value = Array.isArray(userResponses[key])
+                    ? userResponses[key].map(escapeHtml).join(', ')
+                    : escapeHtml(userResponses[key]);
+                return `<p><strong>${questionData.question}</strong> ${value}</p>`;
+            }).join('');
 
-            questionHTML += `</div>`;
+            resultContainer.insertAdjacentHTML('beforeend', summaryHtml);
 
-            questionContainer.innerHTML = questionHTML;
-            updateProgress();
-            updateButtons();
-        }
-        
-        // Mettre à jour la barre de progression
-        function updateProgress() {
-            const totalQuestions = questions[currentCategory].length;
-            const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
-            progressBar.style.width = `${progress}%`;
-        }
-        
-        // Mettre à jour l'état des boutons
-        function updateButtons() {
-            const totalQuestions = questions[currentCategory].length;
-            
-            // Bouton précédent
-            if (currentQuestionIndex > 0) {
-                prevButton.classList.remove('hidden');
-            } else {
-                prevButton.classList.add('hidden');
-            }
-            
-            // Bouton suivant et terminer
-            if (currentQuestionIndex === totalQuestions - 1) {
-                nextButton.classList.add('hidden');
-                submitButton.classList.remove('hidden');
-            } else {
-                nextButton.classList.remove('hidden');
-                submitButton.classList.add('hidden');
-            }
-        }
-        
-        // Sauvegarder la réponse actuelle
-        function saveCurrentResponse() {
-            const currentQuestion = questions[currentCategory][currentQuestionIndex];
-            
-            if (currentQuestion.type === "radio") {
-                const selectedOption = document.querySelector(`input[name="${currentQuestion.id}"]:checked`);
-                if (selectedOption) {
-                    userResponses[currentQuestion.id] = selectedOption.value;
-                }
-            }
-        }
-        
-        // Événement pour le bouton suivant
-        nextButton.addEventListener('click', function() {
-            saveCurrentResponse();
-            
-            const currentQuestion = questions[currentCategory][currentQuestionIndex];
-            if (currentQuestion.type === "radio" && !userResponses[currentQuestion.id]) {
-                alert("Veuillez sélectionner une réponse avant de continuer.");
-                return;
-            }
-            
-            displayQuestion(currentQuestionIndex + 1);
-        });
-        
-        // Événement pour le bouton précédent
-        prevButton.addEventListener('click', function() {
-            saveCurrentResponse();
-            displayQuestion(currentQuestionIndex - 1);
-        });
-        
-        // Événement pour le bouton terminer
-        submitButton.addEventListener('click', function() {
-            saveCurrentResponse();
-            
-            const currentQuestion = questions[currentCategory][currentQuestionIndex];
-            if (currentQuestion.type === "radio" && !userResponses[currentQuestion.id]) {
-                alert("Veuillez sélectionner une réponse avant de terminer.");
-                return;
-            }
-            
-            // Afficher le résultat
-            questionnaireSection.classList.add('hidden');
-            resultContainer.classList.remove('hidden');
-            
-            // Ici, vous pourriez envoyer les données à un serveur
-            console.log("Informations utilisateur:", userData);
-            console.log("Réponses de l'utilisateur:", userResponses);
-        });
-        
-        // Événement pour envoyer les données finales
-        document.getElementById('submit-final').addEventListener('click', function() {
-            // Récupérer le consentement
-            userData.contactConsent = document.getElementById('contact-consent').checked;
-
-            // Construire les données à envoyer
-            const formData = {
-                nom: userData.nom,
-                email: userData.email,
-                age: userData.age,
-                genre: userData.genre,
-                quartier: userData.quartier,
-                contactConsent: userData.contactConsent ? "Oui" : "Non",
-                ...userResponses
-            };
-
-            // Envoi à Formspree
-            fetch('https://formspree.io/f/mblopyro/', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            })
-            .then(response => {
-                if (response.ok) {
-                    alert("Vos réponses ont été envoyées. Merci de votre participation !");
-                } else {
-                    alert("Une erreur est survenue lors de l'envoi. Merci de réessayer.");
-                }
-            })
-            .catch(() => {
-                alert("Une erreur réseau est survenue.");
+            // Ajoute un bouton pour recommencer
+            const restartBtn = document.createElement('button');
+            restartBtn.id = "restart";
+            restartBtn.textContent = "Recommencer";
+            restartBtn.className = "secondary";
+            restartBtn.setAttribute('aria-label', 'Recommencer le questionnaire');
+            restartBtn.addEventListener('click', function() {
+                currentStep = 0;
+                userResponses = {};
+                initialForm.classList.remove('hidden');
+                questionnaire.classList.add('hidden');
+                resultContainer.classList.add('hidden');
+                resultContainer.innerHTML = "";
             });
-        });
+            resultContainer.appendChild(restartBtn);
+        }
         
-        // Événement pour recommencer
-        document.getElementById('restart').addEventListener('click', function() {
-            // Réinitialiser les variables
-            currentCategory = "";
-            currentQuestionIndex = 0;
-            userResponses = {};
-            userData = {
-                nom: "",
-                email: "",
-                age: null,
-                genre: "",
-                quartier: "",
-                contactConsent: false
-            };
-            
-            // Réinitialiser l'interface
-            resultContainer.classList.add('hidden');
-            initialForm.classList.remove('hidden');
-            document.getElementById('nom').value = "";
-            document.getElementById('email').value = "";
-            document.getElementById('age').value = "";
-            document.getElementById('genre').value = "";
-            document.getElementById('quartier').value = "";
-            document.getElementById('contact-consent').checked = false;
-        });
+        function escapeHtml(text) {
+            return String(text)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
     </script>
 </body>
 </html>
