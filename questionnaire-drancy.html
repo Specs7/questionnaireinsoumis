@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaire Citoyen - Drancy</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f2f2f2; margin: 0; }
+        .container { max-width: 900px; margin: 40px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); padding: 40px 30px; }
+        nav ul { display: flex; gap: 20px; list-style: none; padding: 0; margin-bottom: 30px; justify-content: center; }
+        nav a { text-decoration: none; color: #C9462C; font-weight: bold; }
+        .logo { text-align: center; margin-bottom: 20px; }
+        .logo img { max-height: 80px; }
+        h1, h2 { color: #C9462C; text-align: center; }
+        .hidden { display: none; }
+        .form-group { margin-bottom: 18px; }
+        label { font-weight: bold; }
+        .section-title { color: #75185B; margin-top: 32px; margin-bottom: 10px; }
+        button, input[type="submit"] { background: #C9462C; color: #fff; border: none; padding: 10px 24px; border-radius: 4px; cursor: pointer; font-size: 1em; }
+        button:disabled { background: #ccc; }
+        .checkbox-group, .radio-group { margin-bottom: 8px; }
+        .checkbox-group label, .radio-group label { font-weight: normal; }
+        textarea { width: 100%; min-height: 40px; }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="pourquoi-questionnaire.html">Pourquoi ce questionnaire ?</a></li>
+            <li><a href="questionnaire-drancy.html">Répondre au questionnaire</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="logo">
+            <img src="logo.png" alt="Logo Drancy Insoumise">
+        </div>
+        <h1>Questionnaire Citoyen - Ville de Drancy</h1>
+        <!-- Questions générales -->
+        <form id="form-generales">
+            <h2>Informations générales</h2>
+            <div class="form-group">
+                <label>Quel âge avez-vous ?</label><br>
+                <select id="age-group" name="age-group" required>
+                    <option value="">Sélectionnez votre tranche d'âge</option>
+                    <option value="15_17">15-17 ans</option>
+                    <option value="18_25">18-25 ans</option>
+                    <option value="26_50">26-50 ans</option>
+                    <option value="51_65">51-65 ans</option>
+                    <option value="66_plus">66 ans et plus</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Dans quel quartier vivez-vous ?</label><br>
+                <select id="quartier" name="quartier" required>
+                    <option value="">Sélectionnez votre quartier</option>
+                    <option>Avenir Parisien</option>
+                    <option>Centre-ville</option>
+                    <option>Économie</option>
+                    <option>La Mare</option>
+                    <option>La Muette-Quatre routes</option>
+                    <option>Les Oiseaux</option>
+                    <option>Paris campagne</option>
+                    <option>Petit Drancy</option>
+                    <option>Village Parisien</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Genre</label><br>
+                <select id="genre" name="genre" required>
+                    <option value="">Sélectionnez votre genre</option>
+                    <option value="femme">Femme</option>
+                    <option value="homme">Homme</option>
+                    <option value="autre">Autre</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Comment évaluez-vous la qualité de vie à Drancy ?</label><br>
+                <div class="radio-group">
+                    <label><input type="radio" name="qualite_vie" value="Très bonne" required> Très bonne</label>
+                    <label><input type="radio" name="qualite_vie" value="Bonne"> Bonne</label>
+                    <label><input type="radio" name="qualite_vie" value="Moyenne"> Moyenne</label>
+                    <label><input type="radio" name="qualite_vie" value="Mauvaise"> Mauvaise</label>
+                    <label><input type="radio" name="qualite_vie" value="Très mauvaise"> Très mauvaise</label>
+                </div>
+                <textarea name="qualite_vie_pourquoi" placeholder="Pourquoi ?"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Quelles sont, selon vous, les priorités pour améliorer Drancy ?</label><br>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="priorites" value="Logement"> Logement</label>
+                    <label><input type="checkbox" name="priorites" value="Propreté"> Propreté</label>
+                    <label><input type="checkbox" name="priorites" value="Sécurité"> Sécurité</label>
+                    <label><input type="checkbox" name="priorites" value="Transports"> Transports</label>
+                    <label><input type="checkbox" name="priorites" value="Éducation"> Éducation</label>
+                    <label><input type="checkbox" name="priorites" value="Emploi"> Emploi</label>
+                    <label><input type="checkbox" name="priorites" value="Santé"> Santé</label>
+                    <label><input type="checkbox" name="priorites" value="Accès aux services publics"> Accès aux services publics</label>
+                    <label><input type="checkbox" name="priorites" value="Environnement"> Environnement</label>
+                    <label><input type="checkbox" name="priorites" value="Culture / loisirs"> Culture / loisirs</label>
+                    <label><input type="checkbox" name="priorites" value="Autre"> Autre</label>
+                </div>
+                <textarea name="priorites_autre" placeholder="Autre (précisez)"></textarea>
+            </div>
+            <div class="form-group" style="background:#f9f9f9; border-left:4px solid #C9462C; padding:12px; margin-bottom:16px;">
+                <strong>Protection des données personnelles :</strong>
+                <p>
+                    Les informations recueillies dans ce questionnaire sont enregistrées par Drancy Insoumise pour analyse statistique et prise de contact si vous l’acceptez.<br>
+                    Elles sont conservées pendant 1 an.<br>
+                    Conformément à la loi « informatique et libertés » et au RGPD, vous pouvez exercer vos droits d’accès, de rectification ou de suppression des données vous concernant en contactant : <a href="mailto:contact@drancyinsoumise.org">contact@drancyinsoumise.org</a>.
+                </p>
+                <label>
+                    <input type="checkbox" id="rgpd-consent" required>
+                    J’ai lu et j’accepte la politique de confidentialité et le traitement de mes données personnelles.
+                </label>
+            </div>
+            <div class="form-group" style="text-align:center;">
+                <button type="submit">Suivant</button>
+            </div>
+        </form>
+
+        <!-- Questions spécifiques -->
+        <form id="form-specifiques" class="hidden">
+            <div id="questions-specifiques"></div>
+            <div class="form-group" style="text-align:center;">
+                <input type="submit" value="Envoyer">
+            </div>
+        </form>
+
+        <div id="merci" class="hidden" style="text-align:center;">
+            <h2>Merci pour votre participation !</h2>
+            <p>Vos réponses ont été transmises.</p>
+        </div>
+    </div>
+    <script>
+        // Questions spécifiques par âge et genre
+        const questionsParAge = {
+            "15_17": [
+                { section: "Justice sociale", questions: [
+                    { label: "As-tu déjà rencontré des difficultés pour accéder à des activités ou services à Drancy ?", type: "radio", name: "js_difficulte_activite", options: ["Oui", "Non"] },
+                    { label: "Penses-tu que les jeunes sont suffisamment soutenus par la commune ?", type: "radio", name: "js_soutien_jeunes", options: ["Oui", "Non", "Ne sait pas"] }
+                ]},
+                { section: "Écologie", questions: [
+                    { label: "Participes-tu à des actions pour l’environnement (recyclage, nettoyage, etc.) ?", type: "radio", name: "eco_action", options: ["Oui", "Non"] },
+                    { label: "Que faudrait-il améliorer pour l’écologie à Drancy ?", type: "text", name: "eco_ameliorer" }
+                ]},
+                { section: "Démocratie participative", questions: [
+                    { label: "Aimerais-tu donner ton avis sur les projets de la ville ?", type: "radio", name: "dp_avis_projets", options: ["Oui", "Non"] },
+                    { label: "As-tu déjà participé à une réunion ou un conseil de jeunes ?", type: "radio", name: "dp_participation", options: ["Oui", "Non"] }
+                ]}
+            ],
+            "18_25": [
+                { section: "Justice sociale", questions: [
+                    { label: "As-tu rencontré des difficultés pour accéder à l’emploi ou au logement ?", type: "radio", name: "js_difficulte_emploi", options: ["Oui", "Non"] },
+                    { label: "Les aides sociales sont-elles suffisantes pour les jeunes adultes ?", type: "radio", name: "js_aides_suffisantes", options: ["Oui", "Non", "Ne sait pas"] }
+                ]},
+                { section: "Écologie", questions: [
+                    { label: "Es-tu prêt·e à changer tes habitudes pour l’écologie ?", type: "radio", name: "eco_changement", options: ["Oui", "Non", "Déjà fait"] },
+                    { label: "La ville fait-elle assez pour l’environnement ?", type: "radio", name: "eco_ville", options: ["Oui", "Non", "Ne sait pas"] }
+                ]},
+                { section: "Démocratie participative", questions: [
+                    { label: "Souhaites-tu participer à des décisions locales (budget, projets, etc.) ?", type: "radio", name: "dp_participer", options: ["Oui", "Non", "Peut-être"] },
+                    { label: "Te sens-tu écouté·e par les élus locaux ?", type: "radio", name: "dp_ecoute", options: ["Oui", "Non", "Parfois"] }
+                ]}
+            ],
+            "26_50": [
+                { section: "Justice sociale", questions: [
+                    { label: "Avez-vous constaté des inégalités d’accès aux soins ou à l’éducation ?", type: "radio", name: "js_inegalites", options: ["Oui", "Non", "Ne sait pas"] },
+                    { label: "Les politiques sociales protègent-elles suffisamment les familles ?", type: "radio", name: "js_politiques_familles", options: ["Oui", "Non", "Partiellement"] }
+                ]},
+                { section: "Écologie", questions: [
+                    { label: "Faut-il renforcer la lutte contre les pollutions à Drancy ?", type: "radio", name: "eco_pollution", options: ["Oui", "Non", "Sans avis"] },
+                    { label: "Soutenez-vous les initiatives locales pour la transition écologique ?", type: "radio", name: "eco_initiatives", options: ["Oui", "Non", "Peut-être"] }
+                ]},
+                { section: "Démocratie participative", questions: [
+                    { label: "Les citoyens devraient-ils pouvoir proposer des projets municipaux ?", type: "radio", name: "dp_proposer", options: ["Oui", "Non", "Sans avis"] },
+                    { label: "Aimeriez-vous participer à des réunions publiques ?", type: "radio", name: "dp_reunions", options: ["Oui", "Non", "Peut-être"] }
+                ]}
+            ],
+            "51_65": [
+                { section: "Justice sociale", questions: [
+                    { label: "Avez-vous rencontré des difficultés dans l’accès à la santé ou à la retraite ?", type: "radio", name: "js_sante_retraite", options: ["Oui", "Non", "Ne sait pas"] },
+                    { label: "Les dispositifs de solidarité sont-ils adaptés à vos besoins ?", type: "radio", name: "js_solidarite", options: ["Oui", "Non", "Partiellement"] }
+                ]},
+                { section: "Écologie", questions: [
+                    { label: "Faut-il investir davantage dans la rénovation énergétique des logements ?", type: "radio", name: "eco_renovation", options: ["Oui", "Non", "Sans avis"] },
+                    { label: "Participez-vous à des démarches collectives pour l’écologie ?", type: "radio", name: "eco_collectif", options: ["Oui", "Non", "Parfois"] }
+                ]},
+                { section: "Démocratie participative", questions: [
+                    { label: "Souhaitez-vous être davantage consulté·e sur les politiques locales concernant les seniors ?", type: "radio", name: "dp_seniors", options: ["Oui", "Non", "Sans avis"] },
+                    { label: "La démocratie participative peut-elle améliorer la vie locale ?", type: "radio", name: "dp_ameliorer", options: ["Oui", "Non", "Sans avis"] }
+                ]}
+            ],
+            "66_plus": [
+                { section: "Justice sociale", questions: [
+                    { label: "Avez-vous accès facilement aux soins et aux services publics ?", type: "radio", name: "js_soins_services", options: ["Oui", "Non", "Partiellement"] },
+                    { label: "Les pensions de retraite sont-elles suffisantes pour vivre dignement ?", type: "radio", name: "js_retraite", options: ["Oui", "Non", "Sans avis"] }
+                ]},
+                { section: "Écologie", questions: [
+                    { label: "Faut-il renforcer les actions pour préserver l’environnement pour les générations futures ?", type: "radio", name: "eco_futur", options: ["Oui", "Non", "Sans avis"] },
+                    { label: "Soutenez-vous les projets écologiques portés par la commune ?", type: "radio", name: "eco_commune", options: ["Oui", "Non", "Peut-être"] }
+                ]},
+                { section: "Démocratie participative", questions: [
+                    { label: "Souhaitez-vous participer à des conseils de quartier ou des assemblées citoyennes ?", type: "radio", name: "dp_quartier", options: ["Oui", "Non", "Peut-être"] },
+                    { label: "Pensez-vous que les élus locaux sont à l’écoute des habitants ?", type: "radio", name: "dp_ecoute_elus", options: ["Oui", "Non", "Parfois"] }
+                ]}
+            ]
+        };
+
+        const questionsParGenre = {
+            "femme": [
+                { section: "Questions spécifiques aux femmes", questions: [
+                    { label: "Vous sentez-vous en sécurité dans l'espace public, notamment le soir ?", type: "radio", name: "securite_femme", options: ["Oui", "Non"] },
+                    { label: "Avez-vous déjà été confrontée à des situations de sexisme à Drancy ?", type: "radio", name: "sexisme_femme", options: ["Oui", "Non"] }
+                ]}
+            ],
+            "homme": [
+                { section: "Questions spécifiques aux hommes", questions: [
+                    { label: "Vous impliquez-vous dans l'éducation de vos enfants ?", type: "radio", name: "implication_homme", options: ["Oui", "Non"] },
+                    { label: "Pensez-vous que les hommes sont suffisamment sensibilisés à l’égalité femmes-hommes ?", type: "radio", name: "egalite_homme", options: ["Oui", "Non", "Ne sait pas"] }
+                ]}
+            ],
+            "autre": [
+                { section: "Questions spécifiques", questions: [
+                    { label: "Souhaitez-vous partager une expérience ou une remarque sur votre vécu à Drancy ?", type: "text", name: "remarque_autre" }
+                ]}
+            ]
+        };
+
+        // Stocker les réponses générales
+        let reponsesGenerales = {};
+
+        // Passage aux questions spécifiques
+        document.getElementById('form-generales').onsubmit = function(e) {
+            e.preventDefault();
+            // Vérification RGPD
+            if (!document.getElementById('rgpd-consent').checked) {
+                alert("Vous devez accepter la politique de confidentialité.");
+                return;
+            }
+            // Stocker les réponses générales
+            const formData = new FormData(e.target);
+            formData.forEach((value, key) => {
+                if (reponsesGenerales[key]) {
+                    if (!Array.isArray(reponsesGenerales[key])) reponsesGenerales[key] = [reponsesGenerales[key]];
+                    reponsesGenerales[key].push(value);
+                } else {
+                    reponsesGenerales[key] = value;
+                }
+            });
+            // Générer les questions spécifiques
+            const age = reponsesGenerales["age-group"];
+            const genre = reponsesGenerales["genre"];
+            const specDiv = document.getElementById('questions-specifiques');
+            specDiv.innerHTML = "";
+            // Par âge
+            if (questionsParAge[age]) {
+                questionsParAge[age].forEach(section => {
+                    specDiv.innerHTML += `<h2 class="section-title">${section.section}</h2>`;
+                    section.questions.forEach(q => {
+                        specDiv.innerHTML += renderQuestion(q);
+                    });
+                });
+            }
+            // Par genre
+            if (questionsParGenre[genre]) {
+                questionsParGenre[genre].forEach(section => {
+                    specDiv.innerHTML += `<h2 class="section-title">${section.section}</h2>`;
+                    section.questions.forEach(q => {
+                        specDiv.innerHTML += renderQuestion(q);
+                    });
+                });
+            }
+            // Afficher la suite
+            document.getElementById('form-generales').classList.add('hidden');
+            document.getElementById('form-specifiques').classList.remove('hidden');
+        };
+
+        // Fonction pour générer le HTML d'une question
+        function renderQuestion(q) {
+            let html = `<div class="form-group"><label>${q.label}</label><br>`;
+            if (q.type === "text") {
+                html += `<input type="text" name="${q.name}" />`;
+            } else if (q.type === "radio") {
+                html += `<div class="radio-group">`;
+                q.options.forEach(opt => {
+                    html += `<label><input type="radio" name="${q.name}" value="${opt}" required> ${opt}</label>`;
+                });
+                html += `</div>`;
+            }
+            html += `</div>`;
+            return html;
+        }
+
+        // Envoi à Formspree
+        document.getElementById('form-specifiques').onsubmit = function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const data = { ...reponsesGenerales };
+            new FormData(form).forEach((value, key) => {
+                if (data[key]) {
+                    if (!Array.isArray(data[key])) data[key] = [data[key]];
+                    data[key].push(value);
+                } else {
+                    data[key] = value;
+                }
+            });
+            fetch('https://formspree.io/f/mblopyro/', {
+                method: 'POST',
+                headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            }).then(r => {
+                if (r.ok) {
+                    form.classList.add('hidden');
+                    document.getElementById('merci').classList.remove('hidden');
+                } else {
+                    alert("Erreur lors de l'envoi. Merci de réessayer.");
+                }
+            }).catch(() => alert("Erreur réseau."));
+        };
+    </script>
+</body>
+</html>

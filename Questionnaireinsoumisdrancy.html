@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaire Dynamique</title>
+    <style>
+        :root {
+            --fi-red: #C9462C;
+            --fi-dark-red: #A6341D;
+            --fi-blue: #0098B6;
+            --fi-dark-blue: #007A91;
+            --fi-light-gray: #F2F2F2;
+            --fi-dark-gray: #333333;
+            --fi-purple: #75185B;
+        }
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--fi-light-gray);
+            color: var(--fi-dark-gray);
+        }
+        h1 {
+            text-align: center;
+            color: var(--fi-red);
+            margin-bottom: 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        h2, h3 {
+            color: var(--fi-purple);
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        select, input, button, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        button {
+            background-color: var(--fi-red);
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+            text-transform: uppercase;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+        button:hover {
+            background-color: var(--fi-dark-red);
+        }
+        button.secondary {
+            background-color: var(--fi-blue);
+        }
+        button.secondary:hover {
+            background-color: var(--fi-dark-blue);
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: var(--fi-light-gray);
+            border-radius: 4px;
+            border-left: 4px solid var(--fi-red);
+        }
+        .hidden {
+            display: none;
+        }
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: var(--fi-light-gray);
+            border-radius: 4px;
+            text-align: center;
+        }
+        .progress-container {
+            margin: 20px 0;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            height: 8px;
+        }
+        .progress-bar {
+            height: 8px;
+            border-radius: 4px;
+            background-color: var(--fi-red);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .radio-group, .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 10px;
+        }
+        .radio-option, .checkbox-option {
+            display: flex;
+            align-items: center;
+        }
+        .radio-option input, .checkbox-option input {
+            width: auto;
+            margin-right: 10px;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo img {
+            max-height: 80px;
+        }
+        .error-message {
+            color: var(--fi-red);
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        .summary-section {
+            margin-bottom: 24px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul style="display:flex; gap:20px; list-style:none; padding:0; margin-bottom:30px;">
+            <li><a href="pourquoi-questionnaire.html">Pourquoi ce questionnaire ?</a></li>
+            <li><a href="questionnaire-dynamique.html">Répondre au questionnaire</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="logo">
+            <!-- <img src="/api/placeholder/180/80" alt="Logo La France Insoumise"> -->
+        </div>
+        <h1>Questionnaire Citoyen</h1>
+        
+        <div id="initial-form">
+            <div class="form-group">
+                <label for="nom">Votre nom (facultatif) :</label>
+                <input type="text" id="nom" aria-describedby="nom-help">
+                <div id="nom-help" class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <label for="email">Votre adresse email (facultatif) :</label>
+                <input type="email" id="email" aria-describedby="email-help">
+                <div id="email-help" class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <label for="age">Votre âge :</label>
+                <select id="age" required aria-describedby="age-help">
+                    <option value="">Sélectionnez votre tranche d'âge</option>
+                    <option value="15_17">15-17 ans</option>
+                    <option value="18_25">18-25 ans</option>
+                    <option value="26_50">26-50 ans</option>
+                    <option value="51_65">51-65 ans</option>
+                    <option value="66_plus">66 ans et plus</option>
+                </select>
+                <div id="age-help" class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <label for="quartier">Votre quartier :</label>
+                <select id="quartier" required aria-describedby="quartier-help">
+                    <option value="">Sélectionnez votre quartier</option>
+                    <option value="avenir parisien">Avenir Parisien</option>
+                    <option value="centre ville">Centre Ville</option>
+                    <option value="economie">Economie</option>
+                    <option value="la mare">La Mare</option>
+                    <option value="la muette-quatre routes">La Muette-Quatre Routes</option>
+                    <option value="les oiseaux">Les Oiseaux</option>
+                    <option value="paris campagne">Paris Campagne</option>
+                    <option value="petit drancy">Petit Drancy</option>
+                    <option value="village parisien">Village Parisien</option>
+                </select>
+                <div id="quartier-help" class="error-message"></div>
+            </div>
+            <div class="form-group" style="background:#f9f9f9; border-left:4px solid #C9462C; padding:12px; margin-bottom:16px;">
+                <strong>Protection des données personnelles :</strong>
+                <p>
+                    Les informations recueillies dans ce questionnaire sont enregistrées par Drancy Insoumise pour analyse statistique et prise de contact si vous l'acceptez.<br>
+                    Elles sont conservées pendant 1 an.<br>
+                    Conformément à la loi « informatique et libertés » et au RGPD, vous pouvez exercer vos droits d'accès, de rectification ou de suppression des données vous concernant en contactant : <a href="mailto:contact@drancyinsoumise.org">contact@drancyinsoumise.org</a>.
+                </p>
+                <label>
+                    <input type="checkbox" id="rgpd-consent" required aria-describedby="rgpd-help">
+                    J'ai lu et j'accepte la politique de confidentialité et le traitement de mes données personnelles.
+                </label>
+                <div id="rgpd-help" class="error-message"></div>
+            </div>
+            <button id="start-questionnaire" aria-label="Commencer le questionnaire">Commencer le questionnaire</button>
+        </div>
+        
+        <div id="questionnaire" class="hidden">
+            <div class="progress-container">
+                <div class="progress-bar" id="progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <div id="question-container" role="region" aria-live="polite"></div>
+            <div class="form-group">
+                <button id="next-question" aria-label="Question suivante">Suivant</button>
+                <button id="prev-question" class="hidden" aria-label="Question précédente">Précédent</button>
+                <button id="submit-questionnaire" class="hidden" aria-label="Terminer le questionnaire">Terminer</button>
+            </div>
+        </div>
+        
+        <div id="result-container" class="hidden result" role="region" aria-live="polite"></div>
+    </div>
+    
+    <script>
+        // Définir les questions pour chaque catégorie
+        const questions = {
+            "15_17": [
+                { id: "genre_15_17", question: "Genre :", type: "radio", options: [
+                    "Féminin", "Masculin", "Non-binaire", "Préfère ne pas répondre"
+                ]},
+                { id: "scolarite", question: "Situation scolaire :", type: "radio", options: [
+                    "Collège", "Lycée général", "Lycée professionnel", "Apprentissage", "Décrocheur"
+                ]},
+                { id: "activites_jeunesse", question: "Participez-vous à des activités jeunesse organisées par la ville ?", type: "radio", options: [
+                    "Oui, régulièrement", "Oui, occasionnellement", "Non, mais j'aimerais", "Non, ça ne m'intéresse pas"
+                ]}
+            ],
+            "18_25": [
+                { id: "genre_18_25", question: "Genre :", type: "radio", options: [
+                    "Féminin", "Masculin", "Non-binaire", "Préfère ne pas répondre"
+                ]},
+                { id: "situation_pro", question: "Situation professionnelle :", type: "radio", options: [
+                    "Étudiant", "En emploi", "En recherche d'emploi", "En formation", "Autre"
+                ]},
+                { id: "logement_jeune", question: "Votre situation de logement :", type: "radio", options: [
+                    "Chez mes parents", "En location", "En colocation", "Propriétaire", "En foyer"
+                ]}
+            ],
+            "26_50": [
+                { id: "genre_26_50", question: "Genre :", type: "radio", options: [
+                    "Féminin", "Masculin", "Non-binaire", "Préfère ne pas répondre"
+                ]},
+                { id: "situation_familiale_26_50", question: "Situation familiale :", type: "radio", options: [
+                    "Célibataire", "En couple", "Marié(e)/Pacsé(e)", "Divorcé(e)", "Veuf/Veuve"
+                ]},
+                { id: "enfants_scolarite", question: "Avez-vous des enfants scolarisés à Drancy ?", type: "radio", options: [
+                    "Oui, en maternelle", "Oui, en élémentaire", "Oui, au collège", "Oui, au lycée", "Non"
+                ]}
+            ],
+            "51_65": [
+                { id: "genre_51_65", question: "Genre :", type: "radio", options: [
+                    "Féminin", "Masculin", "Non-binaire", "Préfère ne pas répondre"
+                ]},
+                { id: "situation_pro_51_65", question: "Situation professionnelle :", type: "radio", options: [
+                    "En activité", "En recherche d'emploi", "Retraité", "En reconversion", "Autre"
+                ]},
+                { id: "sante_prevention", question: "Fréquentez-vous les actions de prévention santé de la ville ?", type: "radio", options: [
+                    "Oui, régulièrement", "Oui, occasionnellement", "Non, mais ça m'intéresserait", "Non"
+                ]}
+            ],
+            "66_plus": [
+                { id: "genre_66_plus", question: "Genre :", type: "radio", options: [
+                    "Féminin", "Masculin", "Non-binaire", "Préfère ne pas répondre"
+                ]},
+                { id: "situation_familiale_66_plus", question: "Situation familiale :", type: "radio", options: [
+                    "Célibataire", "En couple", "Marié(e)/Pacsé(e)", "Divorcé(e)", "Veuf/Veuve"
+                ]},
+                { id: "acces_medecin", question: "Avez-vous accès facilement à un médecin généraliste ?", type: "radio", options: [
+                    "Oui, très facilement", "Oui, mais avec délai d'attente", "Difficilement", "Très difficilement", "Pas d'accès"
+                ]},
+                { id: "services_domicile", question: "1. Utilisez-vous des services à domicile ?", type: "radio", options: [
+                    "Oui, régulièrement (aide ménagère, soins...)", "Oui, occasionnellement", "Non, mais j'en aurais besoin", "Non, je n'en ai pas besoin"
+                ]},
+                { id: "droits_sante_fin_vie", question: "16. Êtes-vous informé(e) des droits en matière de santé et de fin de vie ?", type: "radio", options: [
+                    "Très bien informé(e)", "Plutôt bien informé(e)", "Plutôt mal informé(e)", "Pas du tout informé(e)"
+                ]},
+                { id: "situation_logement", question: "2. Habitez-vous seul(e) ou en famille ?", type: "radio", options: [
+                    "Seul(e) à domicile", "En couple à domicile", "Avec mes enfants/famille", "En résidence senior", "En maison de retraite/EHPAD"
+                ]},
+                { id: "adaptation_logement", question: "4. Est-ce que votre logement est adapté à votre âge ou à une éventuelle perte d'autonomie ?", type: "radio", options: [
+                    "Parfaitement adapté", "Plutôt bien adapté", "Partiellement adapté", "Pas du tout adapté", "J'ai besoin d'aide pour l'adapter"
+                ]},
+                { id: "espaces_publics", question: "5. Les espaces publics sont-ils accessibles et sécurisés ?", type: "radio", options: [
+                    "Très accessibles et sécurisés", "Plutôt accessibles et sécurisés", "Peu accessibles ou sécurisés", "Pas du tout accessibles ou sécurisés"
+                ]},
+                { id: "isolement_social", question: "3. Avez-vous déjà ressenti un isolement social ?", type: "radio", options: [
+                    "Jamais", "Rarement", "Parfois", "Souvent", "Tout le temps"
+                ]},
+                { id: "lieux_rencontre", question: "12. Souhaitez-vous des lieux de rencontre entre seniors ?", type: "radio", options: [
+                    "Oui, j'en fréquente déjà", "Oui, ça m'intéresserait beaucoup", "Oui, peut-être", "Non, ça ne m'intéresse pas"
+                ]},
+                { id: "contact_famille", question: "13. Êtes-vous en contact régulier avec votre famille ?", type: "radio", options: [
+                    "Oui, très régulièrement", "Oui, assez régulièrement", "Pas assez à mon goût", "Très peu", "Je n'ai pas de famille proche"
+                ]},
+                { id: "offre_culturelle", question: "6. Que pensez-vous de l'offre culturelle et sociale pour les seniors ?", type: "radio", options: [
+                    "Très satisfaisante", "Plutôt satisfaisante", "Plutôt insuffisante", "Très insuffisante", "Je ne la connais pas"
+                ]},
+                { id: "activite_mairie", question: "7. Avez-vous participé à une activité organisée par la mairie ?", type: "radio", options: [
+                    "Oui, régulièrement", "Oui, occasionnellement", "Non, mais ça m'intéresserait", "Non, ça ne m'intéresse pas", "Je ne connais pas les activités proposées"
+                ]},
+                { id: "clubs_associations", question: "14. Participez-vous à des clubs ou associations ?", type: "radio", options: [
+                    "Oui, j'en anime un/une", "Oui, j'y participe activement", "Oui, de temps en temps", "Non, mais j'aimerais", "Non, ça ne m'intéresse pas"
+                ]},
+                { id: "aides_municipales", question: "8. Connaissez-vous les aides municipales pour les personnes âgées ?", type: "radio", options: [
+                    "Oui, et j'en bénéficie", "Oui, mais je n'en bénéficie pas", "Je les connais un peu", "Non, pas du tout"
+                ]},
+                { id: "accompagnement_demarche", question: "9. Bénéficiez-vous d'un accompagnement pour les démarches administratives ?", type: "radio", options: [
+                    "Oui, et c'est suffisant", "Oui, mais c'est insuffisant", "Non, mais j'en aurais besoin", "Non, je me débrouille seul(e)"
+                ]},
+                { id: "qualite_accompagnement", question: "15. Que pensez-vous de la qualité de l'accompagnement en maison de retraite ?", type: "radio", options: [
+                    "Très bonne qualité", "Plutôt bonne qualité", "Plutôt mauvaise qualité", "Très mauvaise qualité", "Je ne connais pas/ne suis pas concerné(e)"
+                ]},
+                { id: "revenus_suffisants", question: "10. Est-ce que vos revenus suffisent à couvrir vos besoins ?", type: "radio", options: [
+                    "Oui, largement", "Oui, juste ce qu'il faut", "Non, c'est juste", "Non, c'est insuffisant"
+                ]},
+                { id: "arnaque_abus", question: "11. Avez-vous déjà été victime d'une arnaque ou abus de faiblesse ?", type: "radio", options: [
+                    "Oui, plusieurs fois", "Oui, une fois", "Non, mais j'ai été approché(e)", "Non, jamais"
+                ]},
+                { id: "numerique_barriere", question: "17. Le numérique est-il une barrière pour vous ?", type: "radio", options: [
+                    "Non, je maîtrise bien", "Non, je me débrouille", "Oui, c'est parfois compliqué", "Oui, c'est un gros problème", "Je refuse d'utiliser le numérique"
+                ]},
+                { id: "respect_societe", question: "18. Vous sentez-vous respecté(e) dans la société actuelle ?", type: "radio", options: [
+                    "Tout à fait respecté(e)", "Plutôt respecté(e)", "Plutôt pas respecté(e)", "Pas du tout respecté(e)"
+                ]},
+                { id: "role_vie_locale", question: "19. Quel rôle souhaitez-vous encore jouer dans la vie locale ?", type: "radio", options: [
+                    "Un rôle très actif", "Un rôle modéré", "Un petit rôle selon mes possibilités", "Aucun rôle particulier", "Je souhaite me reposer"
+                ]},
+                { id: "attentes_commune", question: "Quelles sont vos principales préoccupations ou attentes vis-à-vis de votre commune ?\n*Question ouverte - Exprimez-vous librement :*", type: "textarea" }
+            ]
+        };
+        
+        // Éléments DOM
+        const DOM = {
+            initialForm: document.getElementById('initial-form'),
+            questionnaire: document.getElementById('questionnaire'),
+            resultContainer: document.getElementById('result-container'),
+            questionContainer: document.getElementById('question-container'),
+            progressBar: document.getElementById('progress'),
+            startBtn: document.getElementById('start-questionnaire'),
+            nextBtn: document.getElementById('next-question'),
+            prevBtn: document.getElementById('prev-question'),
+            submitBtn: document.getElementById('submit-questionnaire'),
+            ageInput: document.getElementById('age'),
+            rgpdConsent: document.getElementById('rgpd-consent')
+        };
+        
+        let currentStep = 0;
+        let currentCategory = "";
+        let userResponses = {};
+        
+        // Initialisation des événements
+        function initEvents() {
+            DOM.startBtn.addEventListener('click', startQuestionnaire);
+            DOM.nextBtn.addEventListener('click', nextQuestion);
+            DOM.prevBtn.addEventListener('click', prevQuestion);
+            DOM.submitBtn.addEventListener('click', submitQuestionnaire);
+        }
+        
+        // Démarrer le questionnaire
+        function startQuestionnaire() {
+            if (!validateInitialForm()) {
+                return;
+            }
+            
+            currentCategory = DOM.ageInput.value;
+            DOM.initialForm.classList.add('hidden');
+            DOM.questionnaire.classList.remove('hidden');
+            currentStep = 0;
+            userResponses = {
+                nom: document.getElementById('nom').value,
+                email: document.getElementById('email').value,
+                age: DOM.ageInput.options[DOM.ageInput.selectedIndex].text,
+                quartier: document.getElementById('quartier').options[document.getElementById('quartier').selectedIndex].text
+            };
+            
+            showQuestion();
+        }
+        
+        // Valider le formulaire initial
+        function validateInitialForm() {
+            let isValid = true;
+            
+            // Réinitialiser les messages d'erreur
+            document.querySelectorAll('.error-message').forEach(el => {
+                el.style.display = 'none';
+                el.textContent = '';
+            });
+            
+            if (!DOM.ageInput.value) {
+                showError('age-help', 'Veuillez sélectionner votre tranche d\'âge');
+                isValid = false;
+            }
+            
+            if (!document.getElementById('quartier').value) {
+                showError('quartier-help', 'Veuillez sélectionner votre quartier');
+                isValid = false;
+            }
+            
+            if (!DOM.rgpdConsent.checked) {
+                showError('rgpd-help', 'Vous devez accepter la politique de confidentialité');
+                isValid = false;
+            }
+            
+            return isValid;
+        }
+        
+        // Afficher un message d'erreur
+        function showError(id, message) {
+            const errorElement = document.getElementById(id);
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+        
+        // Question suivante
+        function nextQuestion() {
+            if (!validateQuestion()) {
+                return;
+            }
+            saveResponse();
+            currentStep++;
+            showQuestion();
+        }
+        
+        // Question précédente
+        function prevQuestion() {
+            currentStep--;
+            showQuestion();
+        }
+        
+        // Soumettre le questionnaire
+        function submitQuestionnaire() {
+            if (!validateQuestion()) {
+                return;
+            }
+            saveResponse();
+            showSummary();
+        }
+        
+        // Afficher la question actuelle
+        function showQuestion() {
+            const categoryQuestions = questions[currentCategory];
+            if (currentStep < categoryQuestions.length) {
+                const questionData = categoryQuestions[currentStep];
+                DOM.questionContainer.innerHTML = '';
+                
+                // Création de l'élément question
+                const questionElement = document.createElement('div');
+                questionElement.className = 'question';
+                questionElement.setAttribute('role', 'group');
+                questionElement.setAttribute('aria-labelledby', `${questionData.id}-label`);
+                
+                // Label de la question
+                const questionLabel = document.createElement('h3');
+                questionLabel.id = `${questionData.id}-label`;
+                questionLabel.textContent = questionData.question;
+                questionElement.appendChild(questionLabel);
+                
+                // Gestion des différents types de questions
+                if (questionData.type === 'radio' || questionData.type === 'checkbox') {
+                    const groupClass = questionData.type === 'radio' ? 'radio-group' : 'checkbox-group';
+                    const groupDiv = document.createElement('div');
+                    groupDiv.className = groupClass;
+                    
+                    questionData.options.forEach((option, idx) => {
+                        const inputId = `${questionData.id}_${idx}`;
+                        const optionDiv = document.createElement('div');
+                        optionDiv.className = questionData.type === 'radio' ? 'radio-option' : 'checkbox-option';
+                        
+                        const input = document.createElement('input');
+                        input.type = questionData.type;
+                        input.id = inputId;
+                        input.name = questionData.id;
+                        input.value = escapeHtml(option);
+                        
+                        // Restaurer la réponse précédente si elle existe
+                        if (questionData.type === 'radio' && userResponses[questionData.id] === option) {
+                            input.checked = true;
+                        } else if (
+                            questionData.type === 'checkbox' &&
+                            Array.isArray(userResponses[questionData.id]) &&
+                            userResponses[questionData.id].includes(option)
+                        ) {
+                            input.checked = true;
+                        }
+                        
+                        const label = document.createElement('label');
+                        label.htmlFor = inputId;
+                        label.textContent = escapeHtml(option);
+                        
+                        optionDiv.appendChild(input);
+                        optionDiv.appendChild(label);
+                        groupDiv.appendChild(optionDiv);
+                    });
+                    
+                    questionElement.appendChild(groupDiv);
+                } else if (questionData.type === 'textarea') {
+                    const textarea = document.createElement('textarea');
+                    textarea.id = questionData.id;
+                    textarea.placeholder = "Votre réponse...";
+                    
+                    // Restaurer la réponse précédente si elle existe
+                    if (userResponses[questionData.id]) {
+                        textarea.value = userResponses[questionData.id];
+                    }
+                    
+                    questionElement.appendChild(textarea);
+                }
+                
+                DOM.questionContainer.appendChild(questionElement);
+                
+                // Gestion du focus pour l'accessibilité
+                setTimeout(() => {
+                    const firstInput = DOM.questionContainer.querySelector('input, textarea, select');
+                    if (firstInput) firstInput.focus();
+                }, 0);
+                
+                // Gestion des boutons de navigation
+                DOM.prevBtn.classList.toggle('hidden', currentStep === 0);
+                DOM.nextBtn.classList.toggle('hidden', currentStep === categoryQuestions.length - 1);
+                DOM.submitBtn.classList.toggle('hidden', currentStep !== categoryQuestions.length - 1);
+                
+                updateProgress();
+            } else {
+                showSummary();
+            }
+        }
+        
+        // Valider la question actuelle
+        function validateQuestion() {
+            const categoryQuestions = questions[currentCategory];
+            const questionData = categoryQuestions[currentStep];
+            let isValid = true;
+            
+            // Réinitialiser les messages d'erreur
+            const existingError = DOM.questionContainer.querySelector('.error-message');
+            if (existingError) {
+                existingError.remove();
+            }
+            
+            if (questionData.type === 'radio') {
+                const checkedOption = DOM.questionContainer.querySelector(`input[name="${questionData.id}"]:checked`);
+                if (!checkedOption) {
+                    isValid = false;
+                }
+            } else if (questionData.type === 'checkbox') {
+                const checkedOptions = DOM.questionContainer.querySelectorAll(`input[name="${questionData.id}"]:checked`);
+                if (checkedOptions.length === 0) {
+                    isValid = false;
+                }
+            } else if (questionData.type === 'textarea') {
+                const textarea = document.getElementById(questionData.id);
+                if (!textarea || textarea.value.trim() === '') {
+                    isValid = false;
+                }
+            }
+            
+            if (!isValid) {
+                const errorElement = document.createElement('div');
+                errorElement.className = 'error-message';
+                errorElement.textContent = 'Veuillez répondre à cette question';
+                DOM.questionContainer.appendChild(errorElement);
+            }
+            
+            return isValid;
+        }
+        
+        // Sauvegarder la réponse
+        function saveResponse() {
+            const categoryQuestions = questions[currentCategory];
+            const questionData = categoryQuestions[currentStep];
+            
+            if (questionData.type === 'radio') {
+                const checkedOption = DOM.questionContainer.querySelector(`input[name="${questionData.id}"]:checked`);
+                userResponses[questionData.id] = checkedOption ? checkedOption.value : "";
+            } else if (questionData.type === 'checkbox') {
+                const checkedOptions = DOM.questionContainer.querySelectorAll(`input[name="${questionData.id}"]:checked`);
+                userResponses[questionData.id] = Array.from(checkedOptions).map(option => option.value);
+            } else if (questionData.type === 'textarea') {
+                const textarea = document.getElementById(questionData.id);
+                userResponses[questionData.id] = textarea ? textarea.value.trim() : "";
+            }
+        }
+        
+        // Mettre à jour la barre de progression
+        function updateProgress() {
+            const categoryQuestions = questions[currentCategory];
+            const progressPercentage = ((currentStep + 1) / categoryQuestions.length) * 100;
+            DOM.progressBar.style.width = `${progressPercentage}%`;
+            DOM.progressBar.setAttribute('aria-valuenow', progressPercentage);
+        }
+        
+        // Afficher le résumé
+        function showSummary() {
+            DOM.initialForm.classList.add('hidden');
+            DOM.questionnaire.classList.add('hidden');
+            DOM.resultContainer.classList.remove('hidden');
+            
+            // Création du résumé
+            let summaryHtml = `
+                <h2>Merci d'avoir complété le questionnaire !</h2>
+                <p>Vos réponses ont été enregistrées.</p>
+                <div class="summary-section">
+                    <h3>Vos informations</h3>
+                    <p><strong>Nom :</strong> ${escapeHtml(userResponses.nom || 'Non renseigné')}</p>
+                    <p><strong>Email :</strong> ${escapeHtml(userResponses.email || 'Non renseigné')}</p>
+                    <p><strong>Âge :</strong> ${escapeHtml(userResponses.age)}</p>
+                    <p><strong>Quartier :</strong> ${escapeHtml(userResponses.quartier)}</p>
+                </div>
+                <div class="summary-section">
+                    <h3>Vos réponses</h3>
+            `;
+            
+            // Ajout des réponses aux questions
+            Object.keys(userResponses).forEach(key => {
+                if (!['nom', 'email', 'age', 'quartier'].includes(key)) {
+                    const questionData = questions[currentCategory].find(q => q.id === key);
+                    if (questionData) {
+                        const value = Array.isArray(userResponses[key])
+                            ? userResponses[key].map(escapeHtml).join(', ')
+                            : escapeHtml(userResponses[key]);
+                        summaryHtml += `<p><strong>${escapeHtml(questionData.question)}</strong><br>${value || 'Non renseigné'}</p>`;
+                    }
+                }
+            });
+            
+            summaryHtml += `</div>`;
+            DOM.resultContainer.innerHTML = summaryHtml;
+            
+            // Ajout du bouton pour recommencer
+            const restartBtn = document.createElement('button');
+            restartBtn.id = "restart";
+            restartBtn.textContent = "Recommencer";
+            restartBtn.className = "secondary";
+            restartBtn.setAttribute('aria-label', 'Recommencer le questionnaire');
+            restartBtn.addEventListener('click', restartQuestionnaire);
+            DOM.resultContainer.appendChild(restartBtn);
+        }
+        
+        // Redémarrer le questionnaire
+        function restartQuestionnaire() {
+            currentStep = 0;
+            userResponses = {};
+            DOM.initialForm.classList.remove('hidden');
+            DOM.questionnaire.classList.add('hidden');
+            DOM.resultContainer.classList.add('hidden');
+            DOM.resultContainer.innerHTML = "";
+            // Réinitialiser le formulaire (manuel car <div> et non <form>)
+            document.getElementById('nom').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('age').value = '';
+            document.getElementById('quartier').value = '';
+            document.getElementById('rgpd-consent').checked = false;
+        }
+        
+        // Échapper les caractères HTML pour la sécurité
+        function escapeHtml(text) {
+            if (!text) return '';
+            return String(text)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+        
+        // Initialiser l'application
+        initEvents();
+    </script>
+</body>
+</html>
