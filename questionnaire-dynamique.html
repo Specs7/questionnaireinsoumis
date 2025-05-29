@@ -778,6 +778,19 @@
 
             resultContainer.insertAdjacentHTML('beforeend', summaryHtml);
 
+            // Envoi des données au serveur
+            fetch('https://insoumis.pythonanywhere.com/enregistrer', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    nom: document.getElementById('nom').value,
+                    email: document.getElementById('email').value,
+                    age: document.getElementById('age').value,
+                    quartier: document.getElementById('quartier').value,
+                    reponses: userResponses
+                })
+            });
+
             // Ajoute un bouton pour recommencer
             const restartBtn = document.createElement('button');
             restartBtn.id = "restart";
