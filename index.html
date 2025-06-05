@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Questionnaire Drancy Demain</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f6f6f6;
+            color: #222;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 540px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            padding: 32px 24px 24px 24px;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .logo img {
+            max-height: 80px;
+        }
+        h1 {
+            color: #e2007a;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        h2 {
+            color: #009ee0;
+            margin-top: 24px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 0 0;
+            font-size: 1.08em;
+        }
+        input[type="radio"], input[type="checkbox"] {
+            accent-color: #e2007a;
+            margin-right: 8px;
+        }
+        .btn-group {
+            margin-top: 18px;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        button {
+            background: #e2007a;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 22px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #009ee0;
+        }
+        .question {
+            display: none;
+        }
+        .question.active {
+            display: block;
+        }
+        .privacy {
+            background: #f0e6f7;
+            border-left: 4px solid #e2007a;
+            padding: 10px 14px;
+            margin-bottom: 18px;
+            font-size: 0.98em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="logo.png" alt="Logo La France Insoumise">
+        </div>
+        <h1>Questionnaire Drancy Demain</h1>
+        <div class="privacy">
+            <p>
+                Le questionnaire « Drancy Demain » est proposé par <b>La France Insoumise de Drancy</b>, dans le but de construire un programme municipal avec les habitant·es.<br>
+                <b>Protection des données personnelles :</b> Les informations recueillies dans ce questionnaire sont enregistrées par La France Insoumise de Drancy pour analyse statistique et prise de contact si vous l'acceptez. Elles sont conservées pendant 1 an maximum. Conformément à la loi « informatique et libertés » et au RGPD, vous pouvez exercer vos droits d'accès, de rectification ou de suppression des données vous concernant en contactant : <a href="mailto:drancy.franceinsoumise@gmail.com">drancy.franceinsoumise@gmail.com</a>
+            </p>
+            <label><input type="checkbox" id="accept-privacy"> J'ai lu et j'accepte la politique de confidentialité et le traitement de mes données personnelles.</label>
+        </div>
+
+        <form id="questionnaire-form" autocomplete="off">
+            <!-- PAGE 1 -->
+            <div class="question active">
+                <h2>1. Vous habitez Drancy et souhaitez répondre au questionnaire :</h2>
+                <label><input type="radio" name="location" value="yes"> Commencer</label>
+                <div class="btn-group">
+                    <span></span>
+                    <button type="button" onclick="showNextQuestion()">Suivant</button>
+                </div>
+            </div>
+
+            <!-- PAGE 2 : Genre -->
+            <div class="question">
+                <h2 style="color:#e2007a;text-transform:uppercase;font-size:1.1em;margin-bottom:18px;">INFORMATIONS GÉNÉRALES</h2>
+                <h2>2. Vous êtes :</h2>
+                <label><input type="radio" name="gender" value="female"> Une femme</label>
+                <label><input type="radio" name="gender" value="male"> Un homme</label>
+                <label><input type="radio" name="gender" value="other"> Autre / Je préfère ne pas répondre</label>
+                <div class="btn-group">
+                    <button type="button" onclick="showPrevQuestion()">Précédent</button>
+                    <button type="button" onclick="showNextQuestion()">Suivant</button>
+                </div>
+            </div>
+
+            <!-- PAGE 3 : Quartier -->
+            <div class="question">
+                <h2>3. Dans quel quartier habitez-vous ?</h2>
+                <label><input type="radio" name="neighborhood" value="avenir-parisien"> Avenir Parisien</label>
+                <label><input type="radio" name="neighborhood" value="centre-ville"> Centre-ville</label>
+                <label><input type="radio" name="neighborhood" value="economie"> Économie</label>
+                <label><input type="radio" name="neighborhood" value="la-mare"> La Mare</label>
+                <label><input type="radio" name="neighborhood" value="la-muette"> La Muette</label>
+                <label><input type="radio" name="neighborhood" value="les-oiseaux"> Les Oiseaux</label>
+                <label><input type="radio" name="neighborhood" value="paris-campagne"> Paris Campagne</label>
+                <label><input type="radio" name="neighborhood" value="petit-drancy"> Petit Drancy</label>
+                <label><input type="radio" name="neighborhood" value="village-parisien"> Village Parisien</label>
+                <div class="btn-group">
+                    <button type="button" onclick="showPrevQuestion()">Précédent</button>
+                    <button type="button" onclick="showNextQuestion()">Suivant</button>
+                </div>
+            </div>
+
+            <!-- PAGE 4 : Âge -->
+            <div class="question">
+                <h2>4. Quel est votre âge ?</h2>
+                <label><input type="radio" name="age" value="15-17"> 15–17 ans</label>
+                <label><input type="radio" name="age" value="18-25"> 18–25 ans</label>
+                <label><input type="radio" name="age" value="26-40"> 26–40 ans</label>
+                <label><input type="radio" name="age" value="41-65"> 41–65 ans</label>
+                <label><input type="radio" name="age" value="66+"> 66 ans et plus</label>
+                <div class="btn-group">
+                    <button type="button" onclick="showPrevQuestion()">Précédent</button>
+                    <button type="button" onclick="showNextQuestion()">Suivant</button>
+                </div>
+            </div>
+
+            <!-- PAGE 5 : Statut logement -->
+            <div class="question">
+                <h2>5. Vous êtes :</h2>
+                <label><input type="radio" name="statut" value="locataire"> Locataire</label>
+                <label><input type="radio" name="statut" value="proprietaire"> Propriétaire</label>
+                <div class="btn-group">
+                    <button type="button" onclick="showPrevQuestion()">Précédent</button>
+                    <button type="button" onclick="showNextQuestion()">Suivant</button>
+                </div>
+            </div>
+
+            <!-- PAGE 6 : Domaines prioritaires -->
+            <div class="question">
+                <h2 style="color:#e2007a;text-transform:uppercase;font-size:1.1em;margin-bottom:18px;">QUESTIONS THÉMATIQUES ET PAR ÂGES</h2>
+                <h2>6. Quels sont, selon vous, les domaines prioritaires pour améliorer la vie à Drancy ?<br>
+                    <span style="font-size:0.95em;font-weight:normal;">(Cochez autant de cases que vous le souhaitez)</span>
+                </h2>
+                <label><input type="checkbox" name="domaines" value="services-publics"> Accès aux services publics</label>
+                <label><input type="checkbox" name="domaines" value="cadre-vie"> Cadre de vie</label>
+                <label><input type="checkbox" name="domaines" value="commerces"> Commerces de proximité</label>
+                <label><input type="checkbox" name="domaines" value="culture-sports-loisirs"> Culture / Sports / Loisirs</label>
+                <label><input type="checkbox" name="domaines" value="democratie-locale"> Démocratie locale</label>
+                <label><input type="checkbox" name="domaines" value="developpement-emploi"> Développement économique et emploi</label>
+                <label><input type="checkbox" name="domaines" value="ecologie-environnement"> Écologie et environnement</label>
+                <label><input type="checkbox" name="domaines" value="education-jeunesse"> Éducation / Enfance / Jeunesse</label>
+                <label><input type="checkbox" name="domaines" value="finances-publiques"> Finances publiques</label>
+                <label><input type="checkbox" name="domaines" value="logement-urbanisme"> Logement / Habitat / Urbanisme</label>
+                <label><input type="checkbox" name="domaines" value="lutte-discriminations"> Lutte contre le racisme et les discriminations</label>
+                <label><input type="checkbox" name="domaines" value="prevention-securite"> Prévention et sécurité</label>
+                <label><input type="checkbox" name="domaines" value="proprete"> Propreté</label>
+                <label><input type="checkbox" name="domaines" value="sante"> Santé</label>
+                <label><input type="checkbox" name="domaines" value="solidarite-internationale"> Solidarité internationale</label>
+                <label><input type="checkbox" name="domaines" value="transports"> Transports</label>
+                <label><input type="checkbox" name="domaines" value="vie-associative"> Vie associative</label>
+                <div class="btn-group">
+                    <button type="button" onclick="showPrevQuestion()">Précédent</button>
+                    <button type="button" onclick="showNextQuestion()">Suivant</button>
+                </div>
+            </div>
+
+            <!-- PAGE 7 : Email -->
+            <div class="question">
+                <h2>7. Votre adresse e-mail (facultatif) :</h2>
+                <input type="email" name="email" placeholder="votre@email.com" style="width:100%;padding:8px;">
+                <div class="btn-group">
+                    <button type="button" onclick="showPrevQuestion()">Précédent</button>
+                    <button type="button" onclick="showNextQuestion()">Suivant</button>
+                </div>
+            </div>
+
+            <!-- PAGE 8 : Fin -->
+            <div class="question">
+                <h2>Merci d'avoir répondu !</h2>
+                <p>Vos réponses ont été enregistrées.</p>
+                <div class="btn-group">
+                    <button type="button" onclick="showPrevQuestion()">Précédent</button>
+                    <button type="submit">Envoyer</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        // Navigation entre questions
+        let current = 0;
+        const questions = document.querySelectorAll('.question');
+        function showNextQuestion() {
+            if (current < questions.length - 1) {
+                questions[current].classList.remove('active');
+                current++;
+                questions[current].classList.add('active');
+            }
+        }
+        function showPrevQuestion() {
+            if (current > 0) {
+                questions[current].classList.remove('active');
+                current--;
+                questions[current].classList.add('active');
+            }
+        }
+        // Empêche l'envoi si la case RGPD n'est pas cochée
+        document.getElementById('questionnaire-form').addEventListener('submit', function(e) {
+            if (!document.getElementById('accept-privacy').checked) {
+                alert("Merci de cocher la case de confidentialité pour valider votre participation.");
+                e.preventDefault();
+            } else {
+                alert("Merci pour votre participation !");
+            }
+        });
+    </script>
+</body>
+</html>
+
