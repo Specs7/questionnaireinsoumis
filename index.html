@@ -211,16 +211,20 @@
         </form>
     </div>
     <script>
-        // Navigation entre questions
         let current = 0;
         const questions = document.querySelectorAll('.question');
+
         function showNextQuestion() {
+            if (!validateCurrentQuestion()) {
+                return;
+            }
             if (current < questions.length - 1) {
                 questions[current].classList.remove('active');
                 current++;
                 questions[current].classList.add('active');
             }
         }
+
         function showPrevQuestion() {
             if (current > 0) {
                 questions[current].classList.remove('active');
@@ -228,6 +232,38 @@
                 questions[current].classList.add('active');
             }
         }
+
+        function validateCurrentQuestion() {
+            const q = questions[current];
+            // Vérifie les radios
+            const radios = q.querySelectorAll('input[type="radio"]');
+            if (radios.length > 0) {
+                let checked = false;
+                radios.forEach(r => { if (r.checked) checked = true; });
+                if (!checked) {
+                    alert("Merci de répondre à la question avant de continuer.");
+                    return false;
+                }
+            }
+            // Vérifie les checkboxes (uniquement pour la page domaines)
+            const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+            if (checkboxes.length > 0 && q.querySelector('h2') && q.querySelector('h2').textContent.includes("domaines prioritaires")) {
+                let checked = false;
+                checkboxes.forEach(c => { if (c.checked) checked = true; });
+                if (!checked) {
+                    alert("Merci de cocher au moins une case.");
+                    return false;
+                }
+            }
+            // Vérifie l'email si présent (mais facultatif)
+            const email = q.querySelector('input[type="email"]');
+            if (email && email.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+                alert("Merci de saisir une adresse e-mail valide ou de laisser vide.");
+                return false;
+            }
+            return true;
+        }
+
         // Empêche l'envoi si la case RGPD n'est pas cochée
         document.getElementById('questionnaire-form').addEventListener('submit', function(e) {
             if (!document.getElementById('accept-privacy').checked) {
