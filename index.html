@@ -276,152 +276,6 @@
         </form>
     </div>
     <script>
-        let current = 0;
-        const questions = document.querySelectorAll('.question');
-
-        function updatePrivacyBlock() {
-            const privacy = document.getElementById('privacy-block');
-            if (privacy) {
-                privacy.style.display = (current === 0) ? 'block' : 'none';
-            }
-        }
-
-        function showNextQuestion() {
-            if (!validateCurrentQuestion()) {
-                return;
-            }
-            if (current < questions.length - 1) {
-                questions[current].classList.remove('active');
-                current++;
-                questions[current].classList.add('active');
-                updatePrivacyBlock();
-            }
-        }
-
-        function showPrevQuestion() {
-            if (current > 0) {
-                questions[current].classList.remove('active');
-                current--;
-                questions[current].classList.add('active');
-                updatePrivacyBlock();
-            }
-        }
-
-        function validateCurrentQuestion() {
-            const q = questions[current];
-            // RGPD obligatoire sur la première page
-            if (current === 0) {
-                const rgpd = document.getElementById('accept-privacy');
-                if (!rgpd.checked) {
-                    alert("Merci de cocher la case de confidentialité pour continuer.");
-                    return false;
-                }
-            }
-            // Vérifie les radios
-            const radios = q.querySelectorAll('input[type="radio"]');
-            if (radios.length > 0) {
-                let checked = false;
-                radios.forEach(r => { if (r.checked) checked = true; });
-                if (!checked) {
-                    alert("Merci de répondre à la question avant de continuer.");
-                    return false;
-                }
-            }
-            // Vérifie les checkboxes (uniquement pour la page domaines)
-            const checkboxes = q.querySelectorAll('input[type="checkbox"]');
-            if (checkboxes.length > 0 && q.querySelector('h2') && q.querySelector('h2').textContent.includes("domaines prioritaires")) {
-                let checked = false;
-                checkboxes.forEach(c => { if (c.checked) checked = true; });
-                if (!checked) {
-                    alert("Merci de cocher au moins une case.");
-                    return false;
-                }
-            }
-            // Vérifie l'email si présent (mais facultatif)
-            const email = q.querySelector('input[type="email"]');
-            if (email && email.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
-                alert("Merci de saisir une adresse e-mail valide ou de laisser vide.");
-                return false;
-            }
-            return true;
-        }
-
-        // Empêche l'envoi si la case RGPD n'est pas cochée
-        document.getElementById('questionnaire-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const form = e.target;
-            const data = {};
-
-            // Collecte des réponses principales
-            data.gender = form.gender ? form.gender.value : '';
-            data.neighborhood = form.neighborhood ? form.neighborhood.value : '';
-            data.age = form.age ? form.age.value : '';
-            data.statut = form.statut ? form.statut.value : '';
-
-            // Domaines prioritaires cochés
-            data.domaines = Array.from(form.querySelectorAll('input[name="domaines"]:checked')).map(cb => cb.value);
-
-            // Thématiques dynamiques
-            data.thematiques = {};
-            Object.keys(THEMATIC_QUESTIONS).forEach(key => {
-                data.thematiques[key] = [];
-                form.querySelectorAll(`input[name="thema-${key}"]:checked`).forEach(cb => {
-                    if (cb.value === "autre") {
-                        const autre = form[`thema-${key}-autre`];
-                        if (autre && autre.value.trim()) {
-                            data.thematiques[key].push(autre.value.trim());
-                        }
-                    } else {
-                        data.thematiques[key].push(cb.value);
-                    }
-                });
-            });
-
-            // Attentes envers le maire
-            data.attentes = Array.from(form.querySelectorAll('input[name="attentes"]:checked')).map(cb => cb.value);
-            data.attentes_autre = form['attentes-autre'] ? form['attentes-autre'].value : '';
-
-            // Contact & Engagement
-            data.atelier = form.atelier ? form.atelier.value : '';
-            data.contact_nom = form['contact-nom'] ? form['contact-nom'].value : '';
-            data.contact_prenom = form['contact-prenom'] ? form['contact-prenom'].value : '';
-            data.contact_email = form['contact-email'] ? form['contact-email'].value : '';
-
-            // Email final (facultatif)
-            data.email = form.email ? form.email.value : '';
-
-            // Envoi AJAX vers le serveur Flask
-            fetch('/enregistrer', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(data)
-            })
-            .then(resp => resp.json())
-            .then(resp => {
-                alert("Merci, vos réponses ont bien été enregistrées !");
-                // Optionnel : réinitialiser ou rediriger
-                // form.reset();
-            })
-            .catch(() => {
-                alert("Erreur lors de l'envoi. Merci de réessayer.");
-            });
-        });
-
-        // Appel initial au chargement
-        updatePrivacyBlock();
-
-        document.querySelectorAll('.radio-rect input[type="radio"]').forEach(function(radio) {
-            radio.addEventListener('change', function() {
-                document.querySelectorAll('.radio-rect').forEach(function(label) {
-                    label.classList.remove('selected');
-                });
-                if (radio.checked) {
-                    radio.parentElement.classList.add('selected');
-                }
-            });
-        });
-
         // --- Partie dynamique thématiques ---
         const THEMATIC_QUESTIONS = {
             "commerces": {
@@ -603,6 +457,76 @@
             }
         };
 
+        let current = 0;
+        const questions = document.querySelectorAll('.question');
+
+        function updatePrivacyBlock() {
+            const privacy = document.getElementById('privacy-block');
+            if (privacy) {
+                privacy.style.display = (current === 0) ? 'block' : 'none';
+            }
+        }
+
+        function showNextQuestion() {
+            if (!validateCurrentQuestion()) {
+                return;
+            }
+            if (current < questions.length - 1) {
+                questions[current].classList.remove('active');
+                current++;
+                questions[current].classList.add('active');
+                updatePrivacyBlock();
+            }
+        }
+
+        function showPrevQuestion() {
+            if (current > 0) {
+                questions[current].classList.remove('active');
+                current--;
+                questions[current].classList.add('active');
+                updatePrivacyBlock();
+            }
+        }
+
+        function validateCurrentQuestion() {
+            const q = questions[current];
+            // RGPD obligatoire sur la première page
+            if (current === 0) {
+                const rgpd = document.getElementById('accept-privacy');
+                if (!rgpd.checked) {
+                    alert("Merci de cocher la case de confidentialité pour continuer.");
+                    return false;
+                }
+            }
+            // Vérifie les radios
+            const radios = q.querySelectorAll('input[type="radio"]');
+            if (radios.length > 0) {
+                let checked = false;
+                radios.forEach(r => { if (r.checked) checked = true; });
+                if (!checked) {
+                    alert("Merci de répondre à la question avant de continuer.");
+                    return false;
+                }
+            }
+            // Vérifie les checkboxes (uniquement pour la page domaines)
+            const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+            if (checkboxes.length > 0 && q.querySelector('h2') && q.querySelector('h2').textContent.includes("domaines prioritaires")) {
+                let checked = false;
+                checkboxes.forEach(c => { if (c.checked) checked = true; });
+                if (!checked) {
+                    alert("Merci de cocher au moins une case.");
+                    return false;
+                }
+            }
+            // Vérifie l'email si présent (mais facultatif)
+            const email = q.querySelector('input[type="email"]');
+            if (email && email.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+                alert("Merci de saisir une adresse e-mail valide ou de laisser vide.");
+                return false;
+            }
+            return true;
+        }
+
         function showThematicQuestions() {
             // Vérifie qu'au moins une case est cochée
             const checked = Array.from(document.querySelectorAll('input[name="domaines"]:checked')).map(cb => cb.value);
@@ -650,6 +574,83 @@
                 fields.style.display = 'none';
             }
         }
+
+        // Sélection radio rectangle
+        document.querySelectorAll('.radio-rect input[type="radio"]').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                document.querySelectorAll('.radio-rect').forEach(function(label) {
+                    label.classList.remove('selected');
+                });
+                if (radio.checked) {
+                    radio.parentElement.classList.add('selected');
+                }
+            });
+        });
+
+        // Appel initial au chargement
+        updatePrivacyBlock();
+
+        // Empêche l'envoi si la case RGPD n'est pas cochée et collecte les données
+        document.getElementById('questionnaire-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const form = e.target;
+            const data = {};
+
+            // Collecte des réponses principales
+            data.gender = form.gender ? form.gender.value : '';
+            data.neighborhood = form.neighborhood ? form.neighborhood.value : '';
+            data.age = form.age ? form.age.value : '';
+            data.statut = form.statut ? form.statut.value : '';
+
+            // Domaines prioritaires cochés
+            data.domaines = Array.from(form.querySelectorAll('input[name="domaines"]:checked')).map(cb => cb.value);
+
+            // Thématiques dynamiques
+            data.thematiques = {};
+            Object.keys(THEMATIC_QUESTIONS).forEach(key => {
+                data.thematiques[key] = [];
+                form.querySelectorAll(`input[name="thema-${key}"]:checked`).forEach(cb => {
+                    if (cb.value === "autre") {
+                        const autre = form[`thema-${key}-autre`];
+                        if (autre && autre.value.trim()) {
+                            data.thematiques[key].push(autre.value.trim());
+                        }
+                    } else {
+                        data.thematiques[key].push(cb.value);
+                    }
+                });
+            });
+
+            // Attentes envers le maire
+            data.attentes = Array.from(form.querySelectorAll('input[name="attentes"]:checked')).map(cb => cb.value);
+            data.attentes_autre = form['attentes-autre'] ? form['attentes-autre'].value : '';
+
+            // Contact & Engagement
+            data.atelier = form.atelier ? form.atelier.value : '';
+            data.contact_nom = form['contact-nom'] ? form['contact-nom'].value : '';
+            data.contact_prenom = form['contact-prenom'] ? form['contact-prenom'].value : '';
+            data.contact_email = form['contact-email'] ? form['contact-email'].value : '';
+
+            // Email final (facultatif)
+            data.email = form.email ? form.email.value : '';
+
+            // Envoi AJAX vers le serveur Flask
+            fetch('https://insoumis.pythonanywhere.com/enregistrer', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data)
+            })
+            .then(resp => resp.json())
+            .then(resp => {
+                alert("Merci, vos réponses ont bien été enregistrées !");
+                // Optionnel : réinitialiser ou rediriger
+                // form.reset();
+            })
+            .catch(() => {
+                alert("Erreur lors de l'envoi. Merci de réessayer.");
+            });
+        });
     </script>
 </body>
 </html>
