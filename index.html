@@ -77,15 +77,48 @@
             margin-bottom: 18px;
             font-size: 0.98em;
         }
+        .radio-rect {
+            display: inline-block;
+            background: #009ee0;
+            color: #fff;
+            padding: 14px 24px;
+            border-radius: 8px;
+            margin: 10px 10px 0 0;
+            cursor: pointer;
+            font-size: 1.08em;
+            transition: background 0.2s, color 0.2s;
+            position: relative;
+            min-width: 160px;
+            text-align: center;
+            border: 2px solid transparent;
+        }
+        .radio-rect input[type="radio"] {
+            display: none;
+        }
+        .radio-rect.selected {
+            background: #e2007a;
+            color: #fff;
+            border: 2px solid #e2007a;
+        }
+        .thematic-bloc {
+            margin-bottom: 32px;
+            padding: 18px 14px;
+            background: #f6f6fa;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        .thematic-bloc h3 {
+            margin-top: 0;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="logo">
-            <img src="logo.png" alt="Logo La France Insoumise">
+            <img src="logo-couleur-vertical.png" alt="Logo La France Insoumise">
         </div>
         <h1>Questionnaire Drancy Demain</h1>
-        <div class="privacy">
+        <div class="privacy" id="privacy-block">
             <p>
                 Le questionnaire « Drancy Demain » est proposé par <b>La France Insoumise de Drancy</b>, dans le but de construire un programme municipal avec les habitant·es.<br>
                 <b>Protection des données personnelles :</b> Les informations recueillies dans ce questionnaire sont enregistrées par La France Insoumise de Drancy pour analyse statistique et prise de contact si vous l'acceptez. Elles sont conservées pendant 1 an maximum. Conformément à la loi « informatique et libertés » et au RGPD, vous pouvez exercer vos droits d'accès, de rectification ou de suppression des données vous concernant en contactant : <a href="mailto:drancy.franceinsoumise@gmail.com">drancy.franceinsoumise@gmail.com</a>
@@ -97,10 +130,9 @@
             <!-- PAGE 1 -->
             <div class="question active">
                 <h2>1. Vous habitez Drancy et souhaitez répondre au questionnaire :</h2>
-                <label><input type="radio" name="location" value="yes"> Commencer</label>
                 <div class="btn-group">
                     <span></span>
-                    <button type="button" onclick="showNextQuestion()">Suivant</button>
+                    <button type="button" onclick="showNextQuestion()">Commencer</button>
                 </div>
             </div>
 
@@ -108,9 +140,9 @@
             <div class="question">
                 <h2 style="color:#e2007a;text-transform:uppercase;font-size:1.1em;margin-bottom:18px;">INFORMATIONS GÉNÉRALES</h2>
                 <h2>2. Vous êtes :</h2>
-                <label><input type="radio" name="gender" value="female"> Une femme</label>
-                <label><input type="radio" name="gender" value="male"> Un homme</label>
-                <label><input type="radio" name="gender" value="other"> Autre / Je préfère ne pas répondre</label>
+                <label class="radio-rect"><input type="radio" name="gender" value="female"> Une femme</label>
+                <label class="radio-rect"><input type="radio" name="gender" value="male"> Un homme</label>
+                <label class="radio-rect"><input type="radio" name="gender" value="other"> Autre / Je préfère ne pas répondre</label>
                 <div class="btn-group">
                     <button type="button" onclick="showPrevQuestion()">Précédent</button>
                     <button type="button" onclick="showNextQuestion()">Suivant</button>
@@ -166,40 +198,73 @@
                 <h2>6. Quels sont, selon vous, les domaines prioritaires pour améliorer la vie à Drancy ?<br>
                     <span style="font-size:0.95em;font-weight:normal;">(Cochez autant de cases que vous le souhaitez)</span>
                 </h2>
-                <label><input type="checkbox" name="domaines" value="services-publics"> Accès aux services publics</label>
-                <label><input type="checkbox" name="domaines" value="cadre-vie"> Cadre de vie</label>
                 <label><input type="checkbox" name="domaines" value="commerces"> Commerces de proximité</label>
-                <label><input type="checkbox" name="domaines" value="culture-sports-loisirs"> Culture / Sports / Loisirs</label>
+                <label><input type="checkbox" name="domaines" value="culture-loisirs"> Culture / Loisirs</label>
                 <label><input type="checkbox" name="domaines" value="democratie-locale"> Démocratie locale</label>
-                <label><input type="checkbox" name="domaines" value="developpement-emploi"> Développement économique et emploi</label>
-                <label><input type="checkbox" name="domaines" value="ecologie-environnement"> Écologie et environnement</label>
                 <label><input type="checkbox" name="domaines" value="education-jeunesse"> Éducation / Enfance / Jeunesse</label>
-                <label><input type="checkbox" name="domaines" value="finances-publiques"> Finances publiques</label>
+                <label><input type="checkbox" name="domaines" value="environnement-transports"> Environnement et transports</label>
                 <label><input type="checkbox" name="domaines" value="logement-urbanisme"> Logement / Habitat / Urbanisme</label>
-                <label><input type="checkbox" name="domaines" value="lutte-discriminations"> Lutte contre le racisme et les discriminations</label>
-                <label><input type="checkbox" name="domaines" value="prevention-securite"> Prévention et sécurité</label>
-                <label><input type="checkbox" name="domaines" value="proprete"> Propreté</label>
+                <label><input type="checkbox" name="domaines" value="proprete-securite"> Propreté, incivilités et Sécurité</label>
                 <label><input type="checkbox" name="domaines" value="sante"> Santé</label>
+                <label><input type="checkbox" name="domaines" value="services-publics"> Accès aux services publics locaux</label>
                 <label><input type="checkbox" name="domaines" value="solidarite-internationale"> Solidarité internationale</label>
-                <label><input type="checkbox" name="domaines" value="transports"> Transports</label>
+                <label><input type="checkbox" name="domaines" value="sports"> Sports</label>
+                <label><input type="checkbox" name="domaines" value="urbanisme"> Urbanisme</label>
                 <label><input type="checkbox" name="domaines" value="vie-associative"> Vie associative</label>
                 <div class="btn-group">
                     <button type="button" onclick="showPrevQuestion()">Précédent</button>
+                    <button type="button" onclick="showThematicQuestions()">Suivant</button>
+                </div>
+            </div>
+
+            <!-- PAGE 7 : Questions thématiques dynamiques -->
+            <div class="question">
+                <div id="thematic-questions"></div>
+                <div class="btn-group">
+                    <button type="button" onclick="showPrevThematic()">Précédent</button>
                     <button type="button" onclick="showNextQuestion()">Suivant</button>
                 </div>
             </div>
 
-            <!-- PAGE 7 : Email -->
+            <!-- PAGE 8 : Attentes envers le maire et l'équipe municipale -->
             <div class="question">
-                <h2>7. Votre adresse e-mail (facultatif) :</h2>
-                <input type="email" name="email" placeholder="votre@email.com" style="width:100%;padding:8px;">
+                <h2 style="color:#e2007a;text-transform:uppercase;font-size:1.1em;margin-bottom:18px;">PARTIE 3 – Qu'attendez-vous d'un maire et de son équipe municipale ?</h2>
+                <label><input type="checkbox" name="attentes" value="terrain-ecoute"> Être présents sur le terrain et à l'écoute</label>
+                <label><input type="checkbox" name="attentes" value="concerter-projets"> Concerter sur les projets de grande envergure</label>
+                <label><input type="checkbox" name="attentes" value="tenir-promesses"> Tenir ses promesses et être transparents</label>
+                <label><input type="checkbox" name="attentes" value="lutter-discriminations"> Lutter contre le racisme et les discriminations</label>
+                <label><input type="checkbox" name="attentes" value="defendre-ecoles"> Défendre les écoles publiques en y inscrivant leurs enfants</label>
+                <label><input type="checkbox" name="attentes" value="defendre-quartiers"> Défendre les intérêts des quartiers populaires</label>
+                <label><input type="checkbox" name="attentes" value="lutter-gentrification"> Lutter contre la gentrification</label>
+                <label><input type="checkbox" name="attentes" value="pas-condamne"> Ne pas être condamné dans des affaires publiques</label>
+                <label><input type="checkbox" name="attentes" value="pas-mis-en-examen"> Ne pas être mis en examen</label>
+                <label><input type="checkbox" name="attentes" value="pas-clientelisme"> Ne pas avoir de pratiques clientélistes</label>
+                <label><input type="checkbox" name="attentes" value="autre"> Autre : <input type="text" name="attentes-autre" style="width:60%"></label>
                 <div class="btn-group">
                     <button type="button" onclick="showPrevQuestion()">Précédent</button>
                     <button type="button" onclick="showNextQuestion()">Suivant</button>
                 </div>
             </div>
 
-            <!-- PAGE 8 : Fin -->
+            <!-- PAGE 9 : Contact & Engagement -->
+            <div class="question">
+                <h2 style="color:#e2007a;text-transform:uppercase;font-size:1.1em;margin-bottom:18px;">CONTACT & ENGAGEMENT</h2>
+                <h2>9. Souhaitez-vous être recontacté·e pour participer à des ateliers citoyens ?</h2>
+                <label><input type="radio" name="atelier" value="oui" onchange="toggleContactFields()"> Oui</label>
+                <label><input type="radio" name="atelier" value="non" onchange="toggleContactFields()"> Non</label>
+                <div id="contact-fields" style="display:none; margin-top:18px;">
+                    <h3 style="margin-bottom:8px;">9b. Si oui, veuillez laisser vos coordonnées (facultatif, conforme RGPD) :</h3>
+                    <label>Nom : <input type="text" name="contact-nom" style="width:60%"></label>
+                    <label>Prénom : <input type="text" name="contact-prenom" style="width:60%"></label>
+                    <label>Email : <input type="email" name="contact-email" style="width:60%"></label>
+                </div>
+                <div class="btn-group">
+                    <button type="button" onclick="showPrevQuestion()">Précédent</button>
+                    <button type="button" onclick="showNextQuestion()">Suivant</button>
+                </div>
+            </div>
+
+            <!-- PAGE 10 : Fin -->
             <div class="question">
                 <h2>Merci d'avoir répondu !</h2>
                 <p>Vos réponses ont été enregistrées.</p>
@@ -214,6 +279,13 @@
         let current = 0;
         const questions = document.querySelectorAll('.question');
 
+        function updatePrivacyBlock() {
+            const privacy = document.getElementById('privacy-block');
+            if (privacy) {
+                privacy.style.display = (current === 0) ? 'block' : 'none';
+            }
+        }
+
         function showNextQuestion() {
             if (!validateCurrentQuestion()) {
                 return;
@@ -222,6 +294,7 @@
                 questions[current].classList.remove('active');
                 current++;
                 questions[current].classList.add('active');
+                updatePrivacyBlock();
             }
         }
 
@@ -230,11 +303,20 @@
                 questions[current].classList.remove('active');
                 current--;
                 questions[current].classList.add('active');
+                updatePrivacyBlock();
             }
         }
 
         function validateCurrentQuestion() {
             const q = questions[current];
+            // RGPD obligatoire sur la première page
+            if (current === 0) {
+                const rgpd = document.getElementById('accept-privacy');
+                if (!rgpd.checked) {
+                    alert("Merci de cocher la case de confidentialité pour continuer.");
+                    return false;
+                }
+            }
             // Vérifie les radios
             const radios = q.querySelectorAll('input[type="radio"]');
             if (radios.length > 0) {
@@ -266,13 +348,308 @@
 
         // Empêche l'envoi si la case RGPD n'est pas cochée
         document.getElementById('questionnaire-form').addEventListener('submit', function(e) {
-            if (!document.getElementById('accept-privacy').checked) {
-                alert("Merci de cocher la case de confidentialité pour valider votre participation.");
-                e.preventDefault();
-            } else {
-                alert("Merci pour votre participation !");
-            }
+            e.preventDefault();
+
+            const form = e.target;
+            const data = {};
+
+            // Collecte des réponses principales
+            data.gender = form.gender ? form.gender.value : '';
+            data.neighborhood = form.neighborhood ? form.neighborhood.value : '';
+            data.age = form.age ? form.age.value : '';
+            data.statut = form.statut ? form.statut.value : '';
+
+            // Domaines prioritaires cochés
+            data.domaines = Array.from(form.querySelectorAll('input[name="domaines"]:checked')).map(cb => cb.value);
+
+            // Thématiques dynamiques
+            data.thematiques = {};
+            Object.keys(THEMATIC_QUESTIONS).forEach(key => {
+                data.thematiques[key] = [];
+                form.querySelectorAll(`input[name="thema-${key}"]:checked`).forEach(cb => {
+                    if (cb.value === "autre") {
+                        const autre = form[`thema-${key}-autre`];
+                        if (autre && autre.value.trim()) {
+                            data.thematiques[key].push(autre.value.trim());
+                        }
+                    } else {
+                        data.thematiques[key].push(cb.value);
+                    }
+                });
+            });
+
+            // Attentes envers le maire
+            data.attentes = Array.from(form.querySelectorAll('input[name="attentes"]:checked')).map(cb => cb.value);
+            data.attentes_autre = form['attentes-autre'] ? form['attentes-autre'].value : '';
+
+            // Contact & Engagement
+            data.atelier = form.atelier ? form.atelier.value : '';
+            data.contact_nom = form['contact-nom'] ? form['contact-nom'].value : '';
+            data.contact_prenom = form['contact-prenom'] ? form['contact-prenom'].value : '';
+            data.contact_email = form['contact-email'] ? form['contact-email'].value : '';
+
+            // Email final (facultatif)
+            data.email = form.email ? form.email.value : '';
+
+            // Envoi AJAX vers le serveur Flask
+            fetch('/enregistrer', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data)
+            })
+            .then(resp => resp.json())
+            .then(resp => {
+                alert("Merci, vos réponses ont bien été enregistrées !");
+                // Optionnel : réinitialiser ou rediriger
+                // form.reset();
+            })
+            .catch(() => {
+                alert("Erreur lors de l'envoi. Merci de réessayer.");
+            });
         });
+
+        // Appel initial au chargement
+        updatePrivacyBlock();
+
+        document.querySelectorAll('.radio-rect input[type="radio"]').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                document.querySelectorAll('.radio-rect').forEach(function(label) {
+                    label.classList.remove('selected');
+                });
+                if (radio.checked) {
+                    radio.parentElement.classList.add('selected');
+                }
+            });
+        });
+
+        // --- Partie dynamique thématiques ---
+        const THEMATIC_QUESTIONS = {
+            "commerces": {
+                title: "Quelles priorités pour les commerces de proximité ?",
+                questions: [
+                    "Soutenir l'installation de petits commerces et artisans",
+                    "Encourager l'économie sociale et solidaire",
+                    "Favoriser les commerces responsables",
+                    "Diversifier les commerces des avenues Barbusse et Marceau",
+                    "Instauration d'une charte esthétique des enseignes commerciales",
+                    "Aménager des placettes accueillant restaurants et cafés",
+                    "Créer un pôle d'innovation ou coworking",
+                    "Autre :"
+                ]
+            },
+            "culture-loisirs": {
+                title: "Quelles priorités pour la culture et les loisirs ?",
+                questions: [
+                    "Création d'un Pass Culture",
+                    "Réhabilitation de l'Espace Culturel",
+                    "Valoriser le street art dans la ville",
+                    "Préserver le patrimoine culturel et les lieux de mémoire",
+                    "Créer un festival \"made in 93\"",
+                    "Une fête de la ville sur tout le week-end",
+                    "Autre :"
+                ]
+            },
+            "democratie-locale": {
+                title: "Quelles priorités pour renforcer la démocratie locale ?",
+                questions: [
+                    "Organiser plus de consultations publiques (référendum, etc.)",
+                    "Donner plus de pouvoirs aux conseils de quartier",
+                    "Promouvoir la transparence des décisions municipales",
+                    "Informer la population des activités de l'intercommunalité",
+                    "Possibilité de révocation des élus",
+                    "Créer un budget participatif",
+                    "Permanences d'élus dans tous les quartiers",
+                    "Créer une assemblée des associations",
+                    "Autre :"
+                ]
+            },
+            "environnement-transports": {
+                title: "Quelles priorités pour l'environnement et les transports ?",
+                questions: [
+                    "Création d'une coulée verte le long des délaissés ferroviaires",
+                    "Planifier la création d'un second parc municipal",
+                    "Débitumer et végétaliser les espaces publics",
+                    "Végétaliser les cours d'école",
+                    "Aménager des jardins partagés et urbains",
+                    "Instaurer des bornes Velib et plus de pistes cyclables sécurisées",
+                    "Instaurer une navette municipale gratuite",
+                    "Le Métro 7 et/ou 5 à Drancy",
+                    "Augmenter la fréquence des lignes de bus",
+                    "Augmenter les places de parking",
+                    "Autre :"
+                ]
+            },
+            "education-jeunesse": {
+                title: "Quelles priorités pour l'éducation, l'enfance et la jeunesse ?",
+                questions: [
+                    "Augmenter le nombre de crèches municipales",
+                    "Rénover les écoles et créer des cours végétalisés",
+                    "Piétonniser les abords des écoles",
+                    "Établir la gratuité totale de l'école (petit-déj, cantine, fournitures scolaires)",
+                    "Mettre une prime de salaire pour les AESH",
+                    "Proposer plus d'espaces de jeux et loisirs",
+                    "Établir un plan de lutte contre le décrochage scolaire",
+                    "Développer une maison de la jeunesse",
+                    "Créer le Journal municipal des jeunes",
+                    "Autre :"
+                ]
+            },
+            "logement-urbanisme": {
+                title: "Quelles priorités pour le logement et l'habitat ?",
+                questions: [
+                    "Construire plus de logements sociaux",
+                    "Lutter contre les logements insalubres",
+                    "Lutter contre les marchands de sommeil",
+                    "Rénover les bâtiments anciens HLM",
+                    "Soutenir les copropriétés privées dégradées",
+                    "Encadrer les loyers",
+                    "Freiner la toute-puissance des promoteurs",
+                    "Favoriser l'accession à la propriété",
+                    "Autre :"
+                ]
+            },
+            "proprete-securite": {
+                title: "Quelles priorités pour la propreté, les incivilités et la sécurité ?",
+                questions: [
+                    "Augmenter le nombre de poubelles publiques",
+                    "Lutter contre le jet des mégots par terre",
+                    "Développer les espaces sans-fumeurs",
+                    "Améliorer l'éclairage dans les rues et parcs",
+                    "Lutter contre les vendeurs de cigarettes / drogues",
+                    "Renforcer la lutte contre les dépôts sauvages",
+                    "Renforcer la présence de médiateurs",
+                    "Renforcer la présence policière de proximité",
+                    "Autre :"
+                ]
+            },
+            "sante": {
+                title: "Quelles priorités pour la santé ?",
+                questions: [
+                    "Faciliter l'accès aux médecins généralistes",
+                    "Développer les actions de prévention santé",
+                    "Améliorer l'offre de soins en santé mentale",
+                    "Réinstaller des spécialistes au sein des CMS",
+                    "Renforcer la mutuelle communale",
+                    "Promouvoir une nutrition et une alimentation saine",
+                    "Sensibiliser aux addictions et troubles",
+                    "Faciliter l'accès aux soins des personnes âgées",
+                    "Autre :"
+                ]
+            },
+            "services-publics": {
+                title: "Quelles priorités pour améliorer les services publics à Drancy ?",
+                questions: [
+                    "Ouvrir une Poste annexe",
+                    "Améliorer l'accueil et l'écoute des usagers",
+                    "Proposer plus de démarches en ligne",
+                    "Accompagner les personnes éloignées du numérique",
+                    "Créer une Maison des services publics dans chaque quartier",
+                    "Améliorer l'accompagnement aux droits sociaux (RSA, CAF, APA…)",
+                    "Autre :"
+                ]
+            },
+            "solidarite-internationale": {
+                title: "Quelles priorités pour la solidarité internationale ?",
+                questions: [
+                    "Soutenir les actions d'aide humanitaire",
+                    "Créer des jumelages mémoriels (shoah, apartheid, colonisation)",
+                    "Favoriser l'engagement des jeunes dans la solidarité",
+                    "Engager des projets de coopération décentralisée",
+                    "Promouvoir la paix et la justice (Palestine, Congo, Soudan...)",
+                    "Accueillir des réfugiés (de guerre, climatiques, politiques)",
+                    "Autre :"
+                ]
+            },
+            "sports": {
+                title: "Quelles priorités pour le sport ?",
+                questions: [
+                    "Rendre les équipements sportifs plus accessibles",
+                    "Favoriser de nouveaux sports (futsal, escalade, paddle...)",
+                    "Améliorer l'accueil des spectateurs (tribunes, restauration...)",
+                    "Favoriser le sport féminin",
+                    "Favoriser la pratique du sport intergénérationnel",
+                    "Augmenter l'offre d'équipements sportifs",
+                    "Augmenter les enseignes de sports en ville (Basic Fit, Décathlon)",
+                    "Créer des espaces de pratique libre du sport (footing, musculation …)",
+                    "Organiser des grands évènements (marathon, tournoi …)",
+                    "Autre :"
+                ]
+            },
+            "urbanisme": {
+                title: "Quelles priorités pour l'Urbanisme ?",
+                questions: [
+                    "Continuer de construire de manière intensive",
+                    "Arrêter de construire et densifier la ville",
+                    "Construire de manière raisonnée, en concertation",
+                    "Imposer une charte urbaine et architecturale",
+                    "Réfléchir la ville pour l'horizon 2040",
+                    "Préserver le patrimoine bâti remarquable",
+                    "Garder l'esprit village de la ville",
+                    "Augmenter les espaces arborés de la ville",
+                    "Autre :"
+                ]
+            },
+            "vie-associative": {
+                title: "Quelles priorités pour la vie associative ?",
+                questions: [
+                    "Augmenter le nombre de locaux associatifs",
+                    "Créer un conseil municipal de la vie associative",
+                    "Mettre en place un journal des associations",
+                    "Créer un café-restaurant associatif",
+                    "Transparence dans les subventions",
+                    "Créer une maison des associations",
+                    "Autre :"
+                ]
+            }
+        };
+
+        function showThematicQuestions() {
+            // Vérifie qu'au moins une case est cochée
+            const checked = Array.from(document.querySelectorAll('input[name="domaines"]:checked')).map(cb => cb.value);
+            if (checked.length === 0) {
+                alert("Merci de cocher au moins une case.");
+                return;
+            }
+            // Génère dynamiquement les blocs thématiques
+            const container = document.getElementById('thematic-questions');
+            container.innerHTML = '';
+            checked.forEach(key => {
+                if (THEMATIC_QUESTIONS[key]) {
+                    const bloc = document.createElement('div');
+                    bloc.className = "thematic-bloc";
+                    bloc.innerHTML = `<h3 style="color:#009ee0;">${THEMATIC_QUESTIONS[key].title}</h3>` +
+                        THEMATIC_QUESTIONS[key].questions.map(q =>
+                            q === "Autre :" ?
+                                `<label><input type="checkbox" name="thema-${key}" value="autre"> Autre : <input type="text" name="thema-${key}-autre" style="width:60%"></label>`
+                                : `<label><input type="checkbox" name="thema-${key}" value="${q}"> ${q}</label>`
+                        ).join('');
+                    container.appendChild(bloc);
+                }
+            });
+            // Affiche la page thématique, cache la page domaines
+            questions[current].classList.remove('active');
+            current++;
+            questions[current].classList.add('active');
+            updatePrivacyBlock && updatePrivacyBlock();
+        }
+
+        function showPrevThematic() {
+            // Retour à la page domaines
+            questions[current].classList.remove('active');
+            current--;
+            questions[current].classList.add('active');
+            updatePrivacyBlock && updatePrivacyBlock();
+        }
+
+        function toggleContactFields() {
+            const oui = document.querySelector('input[name="atelier"][value="oui"]');
+            const fields = document.getElementById('contact-fields');
+            if (oui && oui.checked) {
+                fields.style.display = 'block';
+            } else {
+                fields.style.display = 'none';
+            }
+        }
     </script>
 </body>
 </html>
