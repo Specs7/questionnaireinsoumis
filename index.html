@@ -644,8 +644,12 @@
             .then(resp => resp.json())
             .then(resp => {
                 alert("Merci, vos réponses ont bien été enregistrées !");
-                // Optionnel : réinitialiser ou rediriger
-                // form.reset();
+                form.reset();
+                // Revenir à la première page
+                questions[current].classList.remove('active');
+                current = 0;
+                questions[current].classList.add('active');
+                updatePrivacyBlock();
             })
             .catch(() => {
                 alert("Erreur lors de l'envoi. Merci de réessayer.");
