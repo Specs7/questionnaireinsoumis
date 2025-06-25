@@ -249,7 +249,7 @@
             <!-- PAGE 9 : Contact & Engagement -->
             <div class="question">
                 <h2 style="color:#e2007a;text-transform:uppercase;font-size:1.1em;margin-bottom:18px;">CONTACT & ENGAGEMENT</h2>
-                <h2>9. Souhaitez-vous être recontacté·e pour participer à des ateliers citoyens ?</h2>
+                <h2>9. Souhaitez-vous être recontacté·e pour participer à des ateliers citoyens et à l'élaboration du programme municipal&nbsp;?</h2>
                 <label><input type="radio" name="atelier" value="oui" onchange="toggleContactFields()"> Oui</label>
                 <label><input type="radio" name="atelier" value="non" onchange="toggleContactFields()"> Non</label>
                 <div id="contact-fields" style="display:none; margin-top:18px;">
@@ -257,6 +257,7 @@
                     <label>Nom : <input type="text" name="contact-nom" style="width:60%"></label>
                     <label>Prénom : <input type="text" name="contact-prenom" style="width:60%"></label>
                     <label>Email : <input type="email" name="contact-email" style="width:60%"></label>
+                    <label>Téléphone : <input type="tel" name="contact-telephone" style="width:60%"></label>
                 </div>
                 <div class="btn-group">
                     <button type="button" onclick="showPrevQuestion()">Précédent</button>
@@ -631,6 +632,7 @@
             data.contact_nom = form['contact-nom'] ? form['contact-nom'].value : '';
             data.contact_prenom = form['contact-prenom'] ? form['contact-prenom'].value : '';
             data.contact_email = form['contact-email'] ? form['contact-email'].value : '';
+            data.contact_telephone = form['contact-telephone'] ? form['contact-telephone'].value : '';
 
             // Email final (facultatif)
             data.email = form.email ? form.email.value : '';
